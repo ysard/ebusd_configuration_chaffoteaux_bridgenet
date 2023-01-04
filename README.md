@@ -15,6 +15,20 @@ Some links to understand the interest of these data and their organization.
 - [Builtin-data-types](https://github.com/john30/ebusd/wiki/4.3.-Builtin-data-types)
 - [Field-templates](https://github.com/john30/ebusd/wiki/4.4.-Field-templates)
 
+# How to use it ?
+
+Put the `.csv` file into a directory, then launch `ebusd` with `--configpath` argument.
+
+Example of command used to launch ebusd daemon:
+
+    ebusd -d 192.168.1.65:3333 --latency=200000 --configpath=/path_to_your_config_files/ --enablehex --receivetimeout=100 --sendretries=2
+
+Logs will be generated into `/var/log/ebusd.log`.
+
+Monitor unknown messages:
+
+    watch -n 3 -d ./build/src/tools/ebusctl grab result
+
 
 # Protocol description
 
