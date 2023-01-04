@@ -54,24 +54,24 @@ Note: In case of multiple values, there is 1 value per zone (z1, z2, etc.).
 | heat night temp                   | `6371,6372,6373,6374,6375,6376,6377`  |                               |
 | heat offset                       | `6471,6472,6473,6467,6465,6466,6467`  |                               | 423
 | heat setpoint temp                | `6571,6572,6573,6574,6575,6576,6577`  |                               | 402
-|                                   | `6671,6672,6673,6667,6665,6666,6667`  |                               |
-|                                   | `6771,6772,6773,6774,6775,6776,6777`  |                               |
-|                                   | `6971,6972,6973,6974,6975,6976,6977`  |                               |
+| ?                                 | `6671,6672,6673,6667,6665,6666,6667`  |                               |
+| ?                                 | `6771,6772,6773,6774,6775,6776,6777`  |                               |
+| ?                                 | `6971,6972,6973,6974,6975,6976,6977`  |                               |
 | heat slope                        | `6a71,6a72,6a73,6a67,6a65,6a66,6a67`  |                               |
-|                                   | `6b71,6b72,6b73,6b74,6b75,6b76,6b77`  |                               | 422
-|                                   | `6c71,6c72,6c73,6c67,6c65,6c66,6c67`  |                               |
+| ?                                 | `6b71,6b72,6b73,6b74,6b75,6b76,6b77`  |                               | 422
+| ?                                 | `6c71,6c72,6c73,6c67,6c65,6c66,6c67`  |                               |
 | boiler status                     | `c04b`                                | 0x65,0x23,0x06 values unknown |
 | heat thermoregulation selection   | `c079,c07a,c07b,c07c,c07d,c07e,c07f`  |                               | 421
 | heat room temp influence          | `c279,c27a,c27b,c27c,c27d,c27e,c27f`  |                               | 424
-|                                   | `c679,c67a,c67b,c67c,c67d,c67e,c67f`  |                               |
-|                                   | `c979,c97a,c97b,c97c,c97d,c97e,c97f`  |                               |
+| ?                                 | `c679,c67a,c67b,c67c,c67d,c67e,c67f`  |                               |
+| ?                                 | `c979,c97a,c97b,c97c,c97d,c97e,c97f`  |                               |
 | **Domestic Hot Water (DHW) related commands**
 | DHW comfort mode            	    | `c028`                                |                               |250
 | DHW water target temp             | `6147`                                |                               |200
 | DHW comfort zones                 | `d746`                                |                               |250
-|                                   | `da46`                                |                               |
-|                                   | `dc46`                                |                               |
-|                                   | `de46`                                |                               |
+| ?                                 | `da46`                                |                               |
+| ?                                 | `dc46`                                |                               |
+| ?                                 | `de46`                                |                               |
 | DHW cleansing function ??         | `0b20`                                |                               |
 | DHW Celectic status               | `0f20`                                |                               |256
 | **Face panel related commands**
@@ -87,3 +87,27 @@ Note: In case of multiple values, there is 1 value per zone (z1, z2, etc.).
 |                                   | `6126,6226,6426`                      |                               |
 |                                   | `7426`                                |                               |
 |                                   | `c679,c67a,c67b`                      |                               |
+|                                   | `7118,7218,7318,7418,7518,7618,7718`
+
+
+# Help request
+
+- Handshake study of new device on the bus in order to emulate it with a custom one.
+- Packet dissections for missing ids. For example:
+
+```
+37fe2020 0c c079 01 c07a 01 c07b 01 c07c 01
+            z1 heat thermoregulation selection
+37fe2020 0c c07d 01 c07e 01 c07f 01 c279 0a
+            ^z5     ^z6     ^z7     ^z1 heat room temp influence
+37fe2020 0c c27a 0a c27b 0a c27c 0a c27d 0a
+            ^z2     ^z3     ^z4     ^z5 heat room temp influence
+37fe2020 0c c27e 0a c27f 0a c679 03 c67a 03
+            ^z6     ^z7     ^z1 ??  ^z2 ??
+37fe2020 0c c67b 03 c67c 03 c67d 03 c67e 03
+            ^z3     ^z4     ^z5 ??  ^z6 ??
+37fe2020 0c c67f 03 c979 06 c97a 06 c97b 06
+            ^z7     ^z1     ^z2 ??  ^z3 ??
+37fe2020 0c c97c 06 c97d 06 c97e 06 c97f 06
+            ^z4     ^z5     ^z6 ??  ^z7 ??
+```
