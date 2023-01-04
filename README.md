@@ -6,6 +6,16 @@ Note: The messages supported are for the moment only those **broadcast** by the 
 Any help in filling in the gaps is **VERY** welcome.
 
 
+# Official documentation
+
+Some links to understand the interest of these data and their organization.
+
+- [Message-definition](https://github.com/john30/ebusd/wiki/4.1.-Message-definition)
+- [Defaults](https://github.com/john30/ebusd/wiki/4.2.-Defaults)
+- [Builtin-data-types](https://github.com/john30/ebusd/wiki/4.3.-Builtin-data-types)
+- [Field-templates](https://github.com/john30/ebusd/wiki/4.4.-Field-templates)
+
+
 # Protocol description
 
 ## Primary & secondary command bytes (PBSB)
