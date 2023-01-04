@@ -46,6 +46,7 @@ Monitor unknown messages:
 | 2036  | early boot                                | x
 | 2038  |                                           |
 | 203a  | request slave device                      | x
+| 203b  |                                           |
 | 2050  |                                           |
 | 2051  |                                           |
 | 2070  | broadcast date                            |
@@ -56,7 +57,7 @@ Monitor unknown messages:
 Note: Naming is subject to change.
 Note: In case of multiple values, there is 1 value per zone (z1, z2, etc.).
 
-| 	              	                | Observed commands                     | Uncertain observed values     | Corresponding boiler menu
+| 	              	                | Observed commands (max 7 zones)       | Uncertain observed values     | Corresponding boiler menu
 |:--- |:--- |:--- |:--- |
 | **Heat related commands**
 | heat request                      | `0191,0291,0391,0491,0591,0691,0791`  |                               | 434
@@ -80,18 +81,18 @@ Note: In case of multiple values, there is 1 value per zone (z1, z2, etc.).
 | ?                                 | `c679,c67a,c67b,c67c,c67d,c67e,c67f`  |                               |
 | ?                                 | `c979,c97a,c97b,c97c,c97d,c97e,c97f`  |                               |
 | **Domestic Hot Water (DHW) related commands**
-| DHW comfort mode            	    | `c028`                                |                               |250
-| DHW water target temp             | `6147`                                |                               |200
-| DHW comfort zones                 | `d746`                                |                               |250
+| DHW comfort mode            	    | `c028`                                |                               | 250
+| DHW water target temp             | `6147`                                |                               | 200
+| DHW comfort zones                 | `d746`                                |                               | 250
 | ?                                 | `da46`                                |                               |
 | ?                                 | `dc46`                                |                               |
 | ?                                 | `de46`                                |                               |
 | DHW cleansing function ??         | `0b20`                                |                               |
-| DHW Celectic status               | `0f20`                                |                               |256
+| DHW Celectic status               | `0f20`                                |                               | 256
 | **Face panel related commands**
 | heating status                    | `0120`                                |                               |
 | DHW status                        | `0220`                                |                               |
-| SRA status                        | `0520`                                |                               |224
+| SRA status                        | `0520`                                |                               | 224
 | **Unknown**
 |                                   | `d140`                                |                               |
 |                                   | `6047`                                |                               |
