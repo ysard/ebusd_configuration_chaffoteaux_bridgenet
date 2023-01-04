@@ -67,7 +67,7 @@ Monitor unknown messages:
 Note: Naming is subject to change.
 Note: In case of multiple values, there is 1 value per zone (z1, z2, etc.).
 
-| 	              	                | Observed commands (max 7 zones)       | Uncertain observed values     | Corresponding boiler menu
+| 	              	                | Observed commands (max 7 zones)       | Uncertain observed values     | Tech menu entry
 |:--- |:--- |:--- |:--- |
 | **Heat related commands**
 | heat request                      | `0191,0291,0391,0491,0591,0691,0791`  |                               | 434
