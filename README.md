@@ -6,6 +6,16 @@ Note: The messages supported are for the moment only those **broadcast** by the 
 Any help in filling in the gaps is **VERY** welcome.
 
 
+# Foreword
+
+In an ethical world we wouldn't have to spend so much time trying to reverse this kind of proprietary protocols.
+If you don't think it's appropriate, if you don't have the energy to do this tedious/time-consuming/<insert anything here> work,
+or if you don't want to buy the overpriced devices sold by these companies, then you should consider
+to go with manufacturers who respect your right to repair/modify what you own without ruining yourself.
+
+And you would be wise to do so.
+
+
 # Official documentation
 
 Some links to understand the interest of these data and their organization.
