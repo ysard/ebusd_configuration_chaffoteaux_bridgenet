@@ -125,3 +125,10 @@ Note: In case of multiple values, there is 1 value per zone (z1, z2, etc.).
 37fe2020 0c c97c 06 c97d 06 c97e 06 c97f 06
             ^z4     ^z5     ^z6 ??  ^z7 ??
 ```
+
+# Other repositories & inspirations
+
+https://github.com/wrongisthenewright/ebusd-configuration-ariston-bridgenet
+https://github.com/komw/ariston-bus-bridgenet-ebusd
+https://github.com/john30/ebusd-configuration/issues/103
+https://github.com/john30/ebusd-configuration/issues/27
