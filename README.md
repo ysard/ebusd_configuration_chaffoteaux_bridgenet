@@ -78,7 +78,7 @@ Note: In case of multiple values, there is 1 value per zone (z1, z2, etc.).
 | heating status                    | `0120`                                |                               |
 | DHW status                        | `0220`                                |                               |
 | SRA status                        | `0520`                                |                               |224
-| **Unknown**                         `    `
+| **Unknown**
 |                                   | `d140`                                |                               |
 |                                   | `6047`                                |                               |
 |                                   | `6d26`                                |                               |
@@ -87,4 +87,3 @@ Note: In case of multiple values, there is 1 value per zone (z1, z2, etc.).
 |                                   | `6126,6226,6426`                      |                               |
 |                                   | `7426`                                |                               |
 |                                   | `c679,c67a,c67b`                      |                               |
-
