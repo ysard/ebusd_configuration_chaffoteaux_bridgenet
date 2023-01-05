@@ -56,7 +56,7 @@ Monitor unknown messages:
 | 2036  | early boot                                | x
 | 2038  |                                           |
 | 203a  | request slave device                      | x
-| 203b  |                                           |
+| 203b  | cast slave addr                           |
 | 2050  |                                           |
 | 2051  | cast comfort timer programs*              |
 | 2070  | broadcast date                            |
@@ -108,13 +108,14 @@ Note: In case of multiple values, there is 1 value per zone (z1, z2, etc.).
 | SRA status                        | `0520`                                |                               | 224
 | **Misc**
 | settings change counter           | `d140`                                |                               |
+| room temp                         | `7118,7218,7318,7418,7518,7618,7718`  |                               |
 | **Unknown**
 |                                   | `6047`                                |                               |
 |                                   | `6d26`                                |                               |
 |                                   | `7f97`                                |                               |
 |                                   | `6126,6226,6426`                      |                               |
 |                                   | `7426`                                |                               |
-|                                   | `7118,7218,7318,7418,7518,7618,7718`
+
 
 ## Protocol of Timer programs
 
