@@ -50,7 +50,7 @@ r,boiler,ee_water_temp,Extended Extended Water temp target,37,fe,2010,6797,z7_ta
 r,dhw,dhw_hot_water_temp,Domestic hot water temp,37,fe,2010,6147,dhw_hot_water_temp,s,U3N,10,°C,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 # Conflict with domestic_hot_water_temp,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #r,dhw,dhw_hot_water_temp_boiler_status,Domestic hot water temp and boiler status,37,fe,2010,6147,dhw_hot_water_temp_boiler_status,s,U3N,10,°C,,c04b,s,IGN:2,,,Boiler Status,boilerstatus,s,PIN,1=standby;2=heating;3=heating hot water;4=water tank;5=circulating;24=comfort;51=low water pressure;52=no flame,,,,,,,,,,,,,,,,,,,,,,,,,
-r,dhw,dhw_comfort_zones,Domestic hot water comfort function by zones,37,fe,2010,d746,z1_dhw_comfort,s,BCD:2,0=off;2=on,,,da46,s,IGN:2,,,,unknown,s,PIN,150=UKN,,,dc46,s,IGN:2,,,,unknown,s,PIN,75=UKN,,,de46,s,IGN:2,,,,unknown,s,PIN,75=UKN,
+r,dhw,dhw_comfort_zones,Domestic hot water comfort function by zones,37,fe,2010,d746,z1_dhw_comfort,s,BCD:2,0=off;2=on,,,da46,s,IGN:2,,,,unknown,s,UIN,150=UKN,,,dc46,s,IGN:2,,,,unknown,s,UIN,75=UKN,,,de46,s,IGN:2,,,,unknown,s,UIN,75=UKN,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 # conflict dump_zone_8,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 w,boiler,z1_heat_offset,Z1 Heat Thermoreg Offset,,fe,2020,6471,,s,SIN,10,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
