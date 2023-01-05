@@ -85,10 +85,11 @@ Note: In case of multiple values, there is 1 value per zone (z1, z2, etc.).
 | heat slope                        | `6a71,6a72,6a73,6a67,6a65,6a66,6a67`  |                               |
 | ?                                 | `6b71,6b72,6b73,6b74,6b75,6b76,6b77`  |                               | 422
 | ?                                 | `6c71,6c72,6c73,6c67,6c65,6c66,6c67`  |                               |
-| boiler status                     | `c04b`                                | 0x65,0x23,0x06 values unknown |
+| external temp                     | `7647`                                |                               | 835
+| boiler status                     | `c04b`                                | 0x65,0x64,0x23,0x06 unknown   |
 | heat thermoregulation selection   | `c079,c07a,c07b,c07c,c07d,c07e,c07f`  |                               | 421
 | heat room temp influence          | `c279,c27a,c27b,c27c,c27d,c27e,c27f`  |                               | 424
-| ?                                 | `c679,c67a,c67b,c67c,c67d,c67e,c67f`  |                               |
+| heat request mode                 | `c679,c67a,c67b,c67c,c67d,c67e,c67f`  |                               |
 | ?                                 | `c979,c97a,c97b,c97c,c97d,c97e,c97f`  |                               |
 | **Domestic Hot Water (DHW) related commands**
 | DHW comfort mode            	    | `c028`                                |                               | 250
@@ -103,15 +104,14 @@ Note: In case of multiple values, there is 1 value per zone (z1, z2, etc.).
 | heating status                    | `0120`                                |                               |
 | DHW status                        | `0220`                                |                               |
 | SRA status                        | `0520`                                |                               | 224
+| **Misc**
+| settings change counter           | `d140`                                |                               |
 | **Unknown**
-|                                   | `d140`                                |                               |
 |                                   | `6047`                                |                               |
 |                                   | `6d26`                                |                               |
-|                                   | `7647`                                |                               |
 |                                   | `7f97`                                |                               |
 |                                   | `6126,6226,6426`                      |                               |
 |                                   | `7426`                                |                               |
-|                                   | `c679,c67a,c67b`                      |                               |
 |                                   | `7118,7218,7318,7418,7518,7618,7718`
 
 
