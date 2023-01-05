@@ -34,7 +34,7 @@ r,broadcast,accept_telegrams_z3_heat_offset_2010,2000 redundant msg,,fe,2010,647
 r,broadcast,accept_telegrams_z1_heat_setpoint_temp_set_2010,2000 redundant msg,,fe,2010,6571,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 r,broadcast,accept_telegrams_z2_heat_setpoint_temp_set_2010,2000 redundant msg,,fe,2010,6572,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 r,broadcast,accept_telegrams_z3_heat_setpoint_temp_set_2010,2000 redundant msg,,fe,2010,6573,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-r,broadcast,uptime,Uptime,,fe,2010,d140,,s,UIN,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+r,broadcast,settings_change_counter,Settings change counter,,fe,2010,d140,,s,UIN,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 r,boiler,boiler_status,Boiler Status,,fe,2010,c04b,boilerstatus,s,PIN,1=standby;2=heating;3=heating hot water;4=water tank;5=circulating;24=comfort;51=low water pressure;52=no flame,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
