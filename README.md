@@ -53,7 +53,7 @@ Monitor unknown messages:
 | 2020  | cast manual changes, dump registers       |
 | 2031  | master device identificator broadcasts    |
 | 2034  | bus reset                                 |
-| 2036  | early boot                                | x
+| 2036  | handshake                                 | x
 | 2038  |                                           |
 | 203a  | request slave device                      | x
 | 203b  | cast slave addr                           |
@@ -127,7 +127,7 @@ Note: In case of multiple values, there is 1 value per zone (z1, z2, etc.).
 - the rotation of packets occurs every 14 minutes
 - the usable field is alternated every minute
 - there are 2 different fields per program
-- each usable field is composed of 24 nibbles/quartet, so 12 bytes, it covers 12 hours with a precisionof 30 min
+- each usable field is composed of 24 nibbles/quartet, so 12 bytes, it covers 12 hours with a precision of 30 min
 
 Packets dump (packets are ordered by reception time):
 
