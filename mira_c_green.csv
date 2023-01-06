@@ -3,7 +3,7 @@
 w,broadcast,ebus_reset,Reset ebus,,fe,2034,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 # Sent every 4 minutes by boiler,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 # Sent every minute by Easy Control Bus,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-r,broadcast,cast_slave_addr,Cast slave address,37,fe,203b,,,m,HEX,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+r,broadcast,cast_slave_addr,Cast slave address,,fe,203b,,,m,HEX,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 r,broadcast,cast_date,Cast Date,,fe,2070,,time,s,VTM,,,,date,s,HDA,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
