@@ -1,6 +1,6 @@
 # type (r[1-9];w;u),circuit,name,comment,QQ,ZZ,PBSB,ID,field,part (m/s),type / templates,divider / values,unit,comment,field,part (m/s),type / templates,divider / values,unit,comment,field,part (m/s),type / templates,divider / values,unit,comment,field,part (m/s),type / templates,divider / values,unit,comment,AG,AH,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-#w,boiler,ebus_reset,Reset ebus,37,fe,2034,,,m,IGN,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+w,broadcast,ebus_reset,Reset ebus,,fe,2034,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 # Sent every 4 minutes by boiler,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 # Sent every minute by Easy Control Bus,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 r,broadcast,cast_slave_addr,Cast slave address,37,fe,203b,,,m,HEX,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
