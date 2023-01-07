@@ -46,9 +46,10 @@ Monitor unknown messages:
 
 | PBSB  | Signification                             | Uncertain
 |:--- |:--- |:--- |
-| 2000  | signal ability to receive a kind of data  |
+| 2000  | signal ability to receive a kind of data  | x
 | 2001  | cast supported features                   |
-| 2004  | error detection/disappearance             | x
+| 2004  | error detection/disappearance             |
+| 200f  |                                           |
 | 2010  | cast supported features                   | x
 | 2020  | cast manual changes, dump registers       |
 | 2031  | master device identificator broadcasts    |
@@ -94,7 +95,8 @@ Note: In case of multiple values, there is 1 value per zone (z1, z2, etc.).
 | ?                                 | `c979,c97a,c97b,c97c,c97d,c97e,c97f`  |                               |
 | **Domestic Hot Water (DHW) related commands**
 | DHW comfort mode            	    | `c028`                                |                               | 250
-| DHW water target temp             | `6147`                                |                               | 200
+| DHW water target temp             | `6126`                                |                               | 200
+| DHW water real temp               | `6147`                                |                               |
 | DHW comfort zones                 | `d746`                                |                               | 250
 | ?                                 | `da46`                                |                               |
 | ?                                 | `dc46`                                |                               |
@@ -113,7 +115,7 @@ Note: In case of multiple values, there is 1 value per zone (z1, z2, etc.).
 |                                   | `6047`                                |                               |
 |                                   | `6d26`                                |                               |
 |                                   | `7f97`                                |                               |
-|                                   | `6126,6226,6426`                      |                               |
+|                                   | `6226,6426`                           |                               |
 |                                   | `7426`                                |                               |
 |                                   | `6997,6a97,6b97,6c97,6d97,6e97,6f97`  |                               |
 |                                   | `7997,7a97,7b97,7c97,7d97,7e97,7f97`  |                               |
