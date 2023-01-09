@@ -46,8 +46,8 @@ Monitor unknown messages:
 
 | PBSB  | Signification                             | Uncertain
 |:--- |:--- |:--- |
-| 2000  | signal ability to receive a kind of data  | x
-| 2001  | cast supported features                   |
+| 2000  | cast features/read values                 |
+| 2001  | cast features                             |
 | 2004  | error detection/disappearance             |
 | 200f  |                                           |
 | 2010  | cast supported features                   | x
@@ -73,7 +73,8 @@ Note: In case of multiple values, there is 1 value per zone (z1, z2, etc.).
 | 	              	                | Observed commands (max 7 zones)       | Uncertain observed values     | Tech menu entry
 |:--- |:--- |:--- |:--- |
 | **Heat related commands**
-| heat request                      | `0191,0291,0391,0491,0591,0691,0791`  |                               | 434
+| heat request status               | `0191,0291,0391,0491,0591,0691,0791`  |                               | 434
+| heat activation                   | `1919,...??`                          |                               |
 | heat temp range                   | `0081,0082,0083,0084,0085,0086,0087`  |                               | 420
 | heat water target temp            | `6197,6297,6397,6497,6597,6697,6797`  |                               |
 | heat water max temp               | `6071,6072,6073,6074,6075,6076,6077`  |                               | 425
@@ -81,7 +82,7 @@ Note: In case of multiple values, there is 1 value per zone (z1, z2, etc.).
 | heat day temp                     | `6271,6272,6273,6267,6265,6266,6267`  |                               |
 | heat night temp                   | `6371,6372,6373,6374,6375,6376,6377`  |                               |
 | heat offset                       | `6471,6472,6473,6467,6465,6466,6467`  |                               | 423
-| heat setpoint temp                | `6571,6572,6573,6574,6575,6576,6577`  |                               | 402
+| heat fixed temp                   | `6571,6572,6573,6574,6575,6576,6577`  |                               | 402
 | ?                                 | `6671,6672,6673,6667,6665,6666,6667`  |                               |
 | ?                                 | `6771,6772,6773,6774,6775,6776,6777`  |                               |
 | ?                                 | `6971,6972,6973,6974,6975,6976,6977`  |                               |
