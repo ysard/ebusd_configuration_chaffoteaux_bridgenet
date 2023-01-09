@@ -113,13 +113,13 @@ Note: In case of multiple values, there is 1 value per zone (z1, z2, etc.).
 | **Misc**
 | settings change counter           | `d140`                                |                               |
 | external temp                     | `7647`                                |                               | 835
+| external temp offset              | `7426`                                |                               | 249
 | room temp                         | `7118,7218,7318,7418,7518,7618,7718`  |                               |
 | **Unknown**
 |                                   | `6047`                                |                               |
 |                                   | `6d26`                                |                               |
 |                                   | `7f97`                                |                               |
 |                                   | `6226,6426`                           |                               |
-|                                   | `7426`                                |                               |
 |                                   | `6997,6a97,6b97,6c97,6d97,6e97,6f97`  |                               |
 |                                   | `7997,7a97,7b97,7c97,7d97,7e97,7f97`  |                               |
 |                                   | `0119,0219,0319,0419,0519,0619,0719`  |                               |
