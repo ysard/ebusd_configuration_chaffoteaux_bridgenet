@@ -47,6 +47,6 @@ Only capacitors values are unknown.
 The firmware was flashed without protecting fuses. It's easy to dump it via the SPI interface.
 *BUT* it will be very frustrating to study, because there is no debugging information.
 
-BTW, the firmware dump is posted on the current directory.
+BTW, the firmware dump is posted on the current directory [here](./flash+eeprom.bin.tar.gz).
 
 Anyway an alternative firmware could be written from scratch.
