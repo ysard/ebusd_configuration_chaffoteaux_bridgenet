@@ -105,8 +105,8 @@ r,boiler,thermoregulation_5,Heating request mode z3-z6,37,fe,2020,c67b,z3_heat_r
 #r,boiler,thermoregulation_7,Z4,37,fe,2020,c97c,,s,UCH,,,,c97d,s,IGN:2,,,Z5,,s,UCH,,,,c97e,s,IGN:2,,,Z6,,s,UCH,,,,c97f,s,IGN:2,,,Z7,,s,UCH,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-r,boiler,heat_temp_ranges,Temp range z1-z4,37,fe,2020,0081,z1_heat_temp_range,s,BCD,0=high;1=low,,,0082,s,IGN:2,,,Z2 Temp range,z2_heat_temp_range,s,BCD,0=high;1=low,,,0083,s,IGN:2,,,Z3 Temp range,z3_heat_temp_range,s,BCD,0=high;1=low,,,0084,s,IGN:2,,,Z4 Temp range,z4_heat_temp_range,s,BCD,0=high;1=low,
-r,boiler,e_heat_temp_ranges,Temp range z5-z7,37,fe,2020,0085,z5_heat_temp_range,s,BCD,0=high;1=low,,,0086,s,IGN:2,,,Z6 Temp range,z6_heat_temp_range,s,BCD,0=high;1=low,,,0087,s,IGN:2,,,Z7 Temp range,z7_heat_temp_range,s,BCD,0=high;1=low,,,,,,,,,,,,,
+r,boiler,heat_temp_ranges_1,Temp range z1-z4,37,fe,2020,0081,z1_heat_temp_range,s,BCD,0=high;1=low,,,0082,s,IGN:2,,,Z2 Temp range,z2_heat_temp_range,s,BCD,0=high;1=low,,,0083,s,IGN:2,,,Z3 Temp range,z3_heat_temp_range,s,BCD,0=high;1=low,,,0084,s,IGN:2,,,Z4 Temp range,z4_heat_temp_range,s,BCD,0=high;1=low,
+r,boiler,heat_temp_ranges_2,Temp range z5-z7,37,fe,2020,0085,z5_heat_temp_range,s,BCD,0=high;1=low,,,0086,s,IGN:2,,,Z6 Temp range,z6_heat_temp_range,s,BCD,0=high;1=low,,,0087,s,IGN:2,,,Z7 Temp range,z7_heat_temp_range,s,BCD,0=high;1=low,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 r,boiler,dump_zones_1,Max water temp z1-z4,37,fe,2020,6071,z1_water_max_temp,s,SIN,10,°C,,6072,s,IGN:2,,,Z2 Max water temp,z2_water_max_temp,s,SIN,10,°C,,6073,s,IGN:2,,,Z3 Max water temp,z3_water_max_temp,s,SIN,10,°C,,6074,s,IGN:2,,,Z4 Max water temp,z4_water_max_temp,s,SIN,10,°C
