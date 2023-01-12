@@ -76,7 +76,7 @@ Note: In case of multiple values, there is 1 value per zone (z1, z2, etc.).
 | heat request status               | `0191,0291,0391,0491,0591,0691,0791`  |                               | 434
 | heat activation                   | `1919,...??`                          |                               |
 | heat temp range                   | `0081,0082,0083,0084,0085,0086,0087`  |                               | 420
-| heat water target temp            | `6197,6297,6397,6497,6597,6697,6797`  |                               |
+| heat water computed target temp   | `6197,6297,6397,6497,6597,6697,6797`  |                               |
 | heat water max temp               | `6071,6072,6073,6074,6075,6076,6077`  |                               | 425
 | heat water min temp               | `6171,6172,6173,6174,6175,6176,6177`  |                               | 426
 | heat day temp                     | `6271,6272,6273,6267,6265,6266,6267`  |                               |
