@@ -2,6 +2,7 @@
 Here you will find a configuration for the ebusd demon adapted to the boiler Chaffoteaux Mira C Green.
 
 ~Note: The messages supported are for the moment only those **broadcast** by the boiler.~
+
 Update: The messages supported are explicit read/write & those broadcast by the boiler.
 
 Any help in filling in the gaps is **VERY** welcome.
@@ -113,6 +114,7 @@ Note: In case of multiple values, there is 1 value per zone (z1, z2, etc.).
 | SRA status                        | `0520`                                |                               | 224
 | **Misc**
 | settings change counter           | `d140`                                |                               |
+| ignition cycles                   | `42d8`                                |                               |
 | external temp                     | `7647`                                |                               | 835
 | external temp offset              | `7426`                                |                               | 249
 | room temp                         | `7118,7218,7318,7418,7518,7618,7718`  |                               |
