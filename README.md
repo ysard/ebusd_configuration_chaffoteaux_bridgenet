@@ -27,7 +27,8 @@ Some links to understand the interest of these data and their organization.
 - [Builtin-data-types](https://github.com/john30/ebusd/wiki/4.3.-Builtin-data-types)
 - [Field-templates](https://github.com/john30/ebusd/wiki/4.4.-Field-templates)
 
-# How to use it ?
+
+# How to install it ?
 
 Put the `.csv` file into a directory, then launch `ebusd` with `--configpath` argument.
 
@@ -40,6 +41,33 @@ Logs will be generated into `/var/log/ebusd.log`.
 Monitor unknown messages:
 
     watch -n 3 -d ./build/src/tools/ebusctl grab result
+
+
+# How to use it ?
+
+Here is a quick usage example.
+
+Turn on the heating (winter mode/ability to heat water in heaters if you prefer):
+
+    $ ebusctl write -c boiler heating_status on
+
+Activate the heating of the water (command sent by thermostat for example):
+
+    $ ebusctl write -c boiler z1_heating_activation on
+
+In SRA mode with an external temp probe, read the computed temp for the first 3 zones:
+
+    $ ebusctl read -c boiler hot_water_target_temp_1
+    43.4;58.0;58.0
+
+Now, increase the offset of temp starting the computed temp:
+
+    $ ebusctl write -c boiler z1_thermoreg_offset 6
+
+Check the modification:
+
+    $ ebusctl read -c boiler hot_water_target_temp_1
+    49.4;58.0;58.0
 
 
 # Protocol description
