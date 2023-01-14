@@ -81,7 +81,7 @@ Check the modification:
 | 2004  | error detection/disappearance             |
 | 200f  |                                           |
 | 2010  | cast supported features                   | x
-| 2020  | cast manual changes, dump registers       |
+| 2020  | cast manual changes/dump registers/set values       |
 | 2031  | master device identificator broadcasts    |
 | 2034  | bus reset                                 |
 | 2036  | handshake                                 | x
