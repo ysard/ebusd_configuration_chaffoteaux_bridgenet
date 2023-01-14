@@ -45,20 +45,27 @@ Monitor unknown messages:
 
 # How to use it ?
 
-Here is a quick usage example.
+Here is a quick usage example. Keep in mind that `read` queries return cached values by default (see `-m` setting of ebusctl).
+Raw hex queries are not concerned by caching issues.
 
 Turn on the heating (winter mode/ability to heat water in heaters if you prefer):
 
     $ ebusctl write -c boiler heating_status on
+    # or
+    $ ebusctl hex 3c 2020 03 0120 01
 
 Activate the heating of the water (command sent by thermostat for example):
 
     $ ebusctl write -c boiler z1_heating_activation on
+    # or
+    $ ebusctl hex 3c 2020 03 1919 01
 
 In SRA mode with an external temp probe, read the computed temp for the first 3 zones:
 
     $ ebusctl read -c boiler hot_water_target_temp_1
     43.4;58.0;58.0
+    # or
+    $ ebusctl hex 3c 2000 02 6197
 
 Now, increase the offset of temp starting the computed temp:
 
