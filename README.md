@@ -149,7 +149,7 @@ Note: In case of multiple values, there is 1 value per zone (z1, z2, etc.).
 | SRA status                        | `0520`                                |                               | 224
 | **Misc**
 | settings change counter           | `d140`                                |                               |
-| boiler life time (minutes)        | `50d9`                                |                               |
+| boiler life time (minutes)*       | `50d9`                                |                               |
 | ignition cycles                   | `42d8`                                |                               | 813
 | external temp                     | `7647`                                |                               | 835
 | external temp offset              | `7426`                                |                               | 249
@@ -163,6 +163,9 @@ Note: In case of multiple values, there is 1 value per zone (z1, z2, etc.).
 |                                   | `7997,7a97,7b97,7c97,7d97,7e97,7f97`  |                               |
 |                                   | `0119,0219,0319,0419,0519,0619,0719`  |                               |
 |                                   | `0990,0a90,0b90,0c90,0d90,0e90,0f90`  |                               |
+
+
+*: Yes, the boiler life time value is accessible in read AND write modes...
 
 ## Protocol of Timer programs
 
