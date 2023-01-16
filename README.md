@@ -7,6 +7,7 @@ Update: The messages supported are explicit read/write & those broadcast by the 
 
 Any help in filling in the gaps is **VERY** welcome.
 
+Hardware related information is at: [./hardware_reversing/](./hardware_reversing/).
 
 # Foreword
 
