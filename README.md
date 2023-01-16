@@ -133,6 +133,7 @@ Note: In case of multiple values, there is 1 value per zone (z1, z2, etc.).
 | ?                                 | `c979,c97a,c97b,c97c,c97d,c97e,c97f`  |                               |
 | heat water temp out               | `6810`                                |                               | 831
 | heat water temp in                | `6910`                                |                               | 832
+| heat boost time (s)               | `602b`                                |                               | 244
 | **Domestic Hot Water (DHW) related commands**
 | DHW comfort mode            	    | `c028`                                |                               | 250
 | DHW water target temp             | `6126`                                |                               | 200
