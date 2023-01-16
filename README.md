@@ -155,6 +155,7 @@ Note: In case of multiple values, there is 1 value per zone (z1, z2, etc.).
 | external temp                     | `7647`                                |                               | 835
 | external temp offset              | `7426`                                |                               | 249
 | room temp                         | `7118,7218,7318,7418,7518,7618,7718`  |                               |
+| heating in progress               | `0c19`                                |                               |
 | **Unknown**
 |                                   | `6047`                                |                               |
 |                                   | `6d26`                                |                               |
