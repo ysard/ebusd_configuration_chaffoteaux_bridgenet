@@ -1,0 +1,118 @@
+# This file contains additional widgets for the integration of ebusd widgets in HomeAssistant.
+# Copyright (C) 2023 ysard <ysard@users.noreply.github.com>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+input_select:
+  thermoreg_type:
+    name: Thermoregulation type
+    options:
+      - "Fixed temp"
+      - "Basic On/Off"
+      - "Room temp only"
+      - "Outdoor temp only"
+      - "Outdour and room temp"
+    icon: mdi:target
+
+  dhw_comfort_mode:
+    name: DHW comfort mode
+    options:
+      - "Off"
+      - "Delayed"
+      - "Always on"
+    icon: mdi:shower-head
+
+automation thermoreg_type:
+  # This automation script runs when a value is received via MQTT on retained topic: thermostatMode
+  # It sets the value selector on the GUI. This selector also had its own automation when the value
+  # is changed.
+  - alias: "Set Thermoregulation type selector"
+    trigger:
+      platform: mqtt
+      topic: "ebusd/boiler/z1_thermoreg_type"
+     # entity_id: input_select.thermoreg_type
+    action:
+      service: input_select.select_option
+      target:
+        entity_id: input_select.thermoreg_type
+      data:
+        option: >
+          {% set thermoreg_types_map = {
+            'fixed_temp': 'Fixed temp',
+            'basic_on_off': 'Basic On/Off',
+            'room_temp_only': 'Room temp only',
+            'outdoor_temp_only': 'Outdoor temp only',
+            'outdoor_and_room': 'Outdour and room temp'
+          } %}
+          {{ thermoreg_types_map.get(trigger.payload_json.thermoreg_types.value, 'basic_on_off') }}
+
+  # This automation script runs when the selector is changed.
+  # It publishes its value to the same MQTT topic it is also subscribed to.
+  - alias: "Set Thermoregulation type"
+    trigger:
+      platform: state
+      entity_id: input_select.thermoreg_type
+    action:
+      service: mqtt.publish
+      data:
+        topic: "ebusd/boiler/z1_thermoreg_type/set"
+        payload: >
+          {% set thermoreg_types_map = {
+            'Fixed temp': 'fixed_temp',
+            'Basic On/Off': 'basic_on_off',
+            'Room temp only': 'room_temp_only',
+            'Outdoor temp only': 'outdoor_temp_only',
+            'Outdour and room temp': 'outdoor_and_room'
+          } %}
+          {{ thermoreg_types_map.get(states.input_select.thermoreg_type.state, 'basic_on_off') }}
+
+automation dhw_comfort_mode::
+  # This automation script runs when a value is received via MQTT on retained topic
+  # It sets the value selector on the GUI. This selector also had its own automation when the value
+  # is changed.
+  - alias: "Set DHW comfort mode selector"
+    trigger:
+      platform: mqtt
+      topic: "ebusd/dhw/dhw_comfort_mode_status_w"
+     # entity_id: input_select.dhw_comfort_mode
+    action:
+      service: input_select.select_option
+      target:
+        entity_id: input_select.dhw_comfort_mode
+      data:
+        option: >
+          {% set opt_to_display_map = {
+            'off': 'Off',
+            'delayed_on': 'Delayed',
+            'always_on': 'Always on'
+          } %}
+          {{ opt_to_display_map.get(trigger.payload_json.comfort_modes.value, 'off') }}
+
+  # This automation script runs when the selector is changed.
+  # It publishes its value to the same MQTT topic it is also subscribed to.
+  - alias: "Set DHW comfort mode"
+    trigger:
+      platform: state
+      entity_id: input_select.dhw_comfort_mode
+    action:
+      service: mqtt.publish
+      data:
+        topic: "ebusd/dhw/dhw_comfort_mode_status_w/set"
+        payload: >
+          {% set display_to_opt_map = {
+            'Off': 'off',
+            'Delayed': 'delayed_on',
+            'Always on': 'always_on'
+          } %}
+          {{ display_to_opt_map.get(states.input_select.dhw_comfort_mode.state, 'off') }}
