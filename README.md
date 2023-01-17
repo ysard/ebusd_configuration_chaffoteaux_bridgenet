@@ -1,13 +1,16 @@
 
 Here you will find a configuration for the ebusd demon adapted to the boiler Chaffoteaux Mira C Green.
 
-~Note: The messages supported are for the moment only those **broadcast** by the boiler.~
-
+~Note: The messages supported are for the moment only those **broadcast** by the boiler.~<br>
 Update: The messages supported are explicit read/write & those broadcast by the boiler.
 
 Any help in filling in the gaps is **VERY** welcome.
 
 Hardware related information is at: [./hardware_reversing/](./hardware_reversing/).
+
+The goal is to achieve complete control of the device on solutions like Home Assistant:
+![](./home_assistant_integration/ha_global_screenshot.webp).
+
 
 # Foreword
 
@@ -42,6 +45,11 @@ Logs will be generated into `/var/log/ebusd.log`.
 Monitor unknown messages:
 
     watch -n 3 -d ./build/src/tools/ebusctl grab result
+
+
+# How to install Home Assistant integration ?
+
+See the Readme here: [./home_assistant_integration/](./home_assistant_integration/).
 
 
 # How to use it ?
