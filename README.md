@@ -1,4 +1,3 @@
-
 Here you will find a configuration for the ebusd demon adapted to the boiler Chaffoteaux Mira C Green.
 
 ~Note: The messages supported are for the moment only those **broadcast** by the boiler.~<br>
@@ -9,7 +8,8 @@ Any help in filling in the gaps is **VERY** welcome.
 Hardware related information is at: [./hardware_reversing/](./hardware_reversing/).
 
 The goal is to achieve complete control of the device on solutions like Home Assistant:
-![](./home_assistant_integration/ha_global_screenshot.webp).
+
+![](./home_assistant_integration/ha_global_screenshot.webp)
 
 
 # Foreword
@@ -34,7 +34,7 @@ Some links to understand the interest of these data and their organization.
 
 # How to install it ?
 
-Put the `.csv` file into a directory, then launch `ebusd` with `--configpath` argument.
+Put the `.csv` files into a directory, then launch `ebusd` with `--configpath` argument.
 
 Example of command used to launch ebusd daemon:
 
@@ -168,8 +168,8 @@ Note: In case of multiple values, there is 1 value per zone (z1, z2, etc.).
 | **Unknown**
 |                                   | `6047`                                |                               |
 |                                   | `6d26`                                |                               |
-|                                   | `7f97`                                |                               |
 |                                   | `6226,6426`                           |                               |
+|                                   | `6bc0,2b70`                           |                               |
 |                                   | `6997,6a97,6b97,6c97,6d97,6e97,6f97`  |                               |
 |                                   | `7997,7a97,7b97,7c97,7d97,7e97,7f97`  |                               |
 |                                   | `0119,0219,0319,0419,0519,0619,0719`  |                               |
