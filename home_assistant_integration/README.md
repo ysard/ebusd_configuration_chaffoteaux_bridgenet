@@ -32,7 +32,8 @@ This file supports some specific rules created for this particular brand of boil
 ## Specific widgets
 
 For multiple choice inputs such as `z1_thermoreg_type` and `dhw_comfort_mode_status_w`,
-you will need to add to the `~/.homeassistant/configuration.yaml` file (or in separate files to include) the code proposed in the file `./home_assistant_integration/widgets_and_automations.yaml`.
+you will need to add to the `~/.homeassistant/configuration.yaml` file (or in separate files to include)
+the code proposed in the file `./home_assistant_integration/widgets_and_automations.yaml`.
 
 Result:
-![](./dhw_comfort_widget_screenshot_small.webp)
+![](./assets/dhw_comfort_widget_screenshot_small.webp)

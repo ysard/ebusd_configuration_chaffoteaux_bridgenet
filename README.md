@@ -9,7 +9,7 @@ Hardware related information is at: [./hardware_reversing/](./hardware_reversing
 
 The goal is to achieve complete control of the device on solutions like Home Assistant:
 
-![](./home_assistant_integration/ha_global_screenshot.webp)
+![](./home_assistant_integration/assets/ha_global_screenshot.webp)
 
 
 # Foreword
