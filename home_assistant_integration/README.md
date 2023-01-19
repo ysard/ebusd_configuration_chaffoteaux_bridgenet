@@ -25,9 +25,25 @@ Command to enable MQTT integration of ebusd:
 
 The default `.cfg` should be at `/etc/ebusd/mqtt-hassio.cfg`.
 
-Put the file `mqtt-hassio.cfg` of this repository at the place you have chosen.
+> **Note**
+>
+> Since I don't want to maintain it, it is not planned to publish my full version of the `mqtt-hassio.cfg` file.
+>
+> So **I only publish a patch** to apply to the file you have.
+>
+> To find out what this patch contains and the reason for the changes, I **strongly suggest** to study
+> the commits of this repository with the tag `[ebusd_HA]`.
+
 This file supports some specific rules created for this particular brand of boiler
 (the filtering of the entities to be published on the MQTT server is based on regexes).
+
+Grab the `mqtt-hassio.cfg` and `mqtt-hassio.cfg.patch` files and apply the following command:
+
+    $ patch mqtt-hassio.cfg < mqtt-hassio.cfg.patch
+
+To reverse the patch:
+
+    $ patch --reverse mqtt-hassio.cfg < mqtt-hassio.cfg.patch
 
 ## Specific widgets
 
