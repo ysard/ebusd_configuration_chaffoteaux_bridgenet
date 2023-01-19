@@ -1,0 +1,23 @@
+diff --git a/contrib/etc/ebusd/mqtt-hassio.cfg b/contrib/etc/ebusd/mqtt-hassio.cfg
+index 824e9df9..ac05f276 100644
+--- a/contrib/etc/ebusd/mqtt-hassio.cfg
++++ b/contrib/etc/ebusd/mqtt-hassio.cfg
+@@ -100,14 +100,15 @@ filter-seen = 5
+ # include only messages having a priority less than or equal to the specified value.
+ #filter-priority =
+ # include only messages having the specified circuit (partial match, alternatives and wildcard supported).
+-#filter-circuit =
++filter-circuit = boiler|dhw
+ # exclude messages having the specified circuit (partial match, alternatives and wildcard supported).
+ #filter-non-circuit =
+ # include only messages having the specified name (partial match, alternatives and wildcard supported).
+ # HA integration: filter to some useful names for monitoring the heating circuit
+-filter-name = status|temp|yield|count|energy|power|runtime|hours|starts|mode|curve|^load$|^party$|sensor
++#filter-name = status|temp|yield|count|energy|power|runtime|hours|starts|mode|curve|^load$|^party$|sensor
++filter-name = status|temp|count|mode|curve|z1|dhw|heat|time
+ # exclude messages having the specified name (partial match, alternatives and wildcard supported).
+-#filter-non-name =
++filter-non-name = ^heat_request_|^hot_water_target_temp_|^thermoregulation_|^heat_temp_ranges_|^dump_zones_|^timer_prog_|^boiler_life_time$
+ # include only messages having the specified level (partial match, alternatives and wildcard supported).
+ # Note: This is a filter on top of the messages already filtered implicitly for the ebusd "mqtt" user (if any).
+ # Note: Since the empty string matches all levels, an explicit check for empty string (with "^$") needs to be used for
