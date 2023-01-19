@@ -53,3 +53,63 @@ index 824e9df9..ac05f276 100644
      sensor,pressure,measurement = bar$
      sensor,gas,measurement = gas*/min$
      sensor,humidity,measurement = humid*%%$
+@@ -199,11 +205,15 @@ type_switch-number =
+ type_switch-w-list =
+     switch,, = onoff
+     switch,,,yesno = yesno
++    switch,,,comfort_modes = comfort_modes
++    switch,,,thermoreg_types = thermoreg_types
+
+ # HA integration: the mapping list for rather binary sensor entities by field type, name, message, and unit.
+ type_switch-list =
+     binary_sensor,,measurement = onoff
+     binary_sensor,,measurement,yesno = yesno
++    binary_sensor,,measurement,comfort_modes = comfort_modes
++    binary_sensor,,measurement,thermoreg_types = thermoreg_types
+     sensor,, =
+
+ # HA integration: currently unused mapping lists for non-numeric/non-binary entities.
+@@ -268,6 +278,20 @@ type_part-switchyesno = ,
+   "payload_on":"yes",
+   "payload_off":"no"%state_class
+
++type_part-switchcomfort_modes = ,
++  "command_topic":"%topic/set",
++  "payload_always_on":"always_on",
++  "payload_delayed_on":"delayed_on",
++  "payload_off":"off"%state_class
++
++type_part-switchthermoreg_types = ,
++  "command_topic":"%topic/set",
++  "payload_fixed_temp":"fixed_temp",
++  "payload_basic_on_off":"basic_on_off",
++  "payload_room_temp_only":"room_temp_only",
++  "payload_outdoor_temp_only":"outdoor_temp_only",
++  "payload_outdoor_and_room":"outdoor_and_room"%state_class
++
+ # HA integration: %type_part variable for binary_sensor %type_topic
+ type_part-binary_sensor = ,
+   "payload_on":"on",
+@@ -277,6 +301,22 @@ type_part-binary_sensoryesno = ,
+   "payload_on":"yes",
+   "payload_off":"no"%state_class
+
++type_part-binary_sensorcomfort_modes = ,
++  "command_topic":"%topic/set",
++  "payload_always_on":"always_on",
++  "payload_delayed_on":"delayed_on",
++  "payload_off":"off"%state_class
++
++type_part-binary_sensorthermoreg_types = ,
++  "command_topic":"%topic/set",
++  "payload_fixed_temp":"fixed_temp",
++  "payload_basic_on_off":"basic_on_off",
++  "payload_room_temp_only":"room_temp_only",
++  "payload_outdoor_temp_only":"outdoor_temp_only",
++  "payload_outdoor_and_room":"outdoor_and_room"%state_class
++
++
++
+ # the field specific part (evaluated after the message specific part).
+ # HA integration: set to the mapped %type_part from above
+ field_payload = %type_part
