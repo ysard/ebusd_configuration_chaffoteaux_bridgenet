@@ -43,3 +43,13 @@ index 824e9df9..ac05f276 100644
 
  # HA integration: the mapping list for numeric sensor entities by field type, name, message, and unit.
  type_switch-number =
+@@ -190,6 +193,9 @@ type_switch-number =
+     sensor,yield,total_increasing = total*,Wh$
+     sensor,,total_increasing = hours|,h$
+     sensor,,total_increasing = starts*,$
++    sensor,,total_increasing = count*,$
++    sensor,time,total_increasing = life_time|,min$
++    sensor,,measurement = boost_time|,s$
+     sensor,pressure,measurement = bar$
+     sensor,gas,measurement = gas*/min$
+     sensor,humidity,measurement = humid*%%$
