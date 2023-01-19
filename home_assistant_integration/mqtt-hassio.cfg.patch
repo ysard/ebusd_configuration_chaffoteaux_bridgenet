@@ -113,3 +113,12 @@ index 824e9df9..ac05f276 100644
  # the field specific part (evaluated after the message specific part).
  # HA integration: set to the mapped %type_part from above
  field_payload = %type_part
+@@ -289,7 +329,7 @@ definition-topic ?= %haprefix/%type_topic/%{TOPIC}_%FIELD/config
+ # HA integration: this is the config topic payload for HA's MQTT discovery.
+ definition-payload = {
+   "unique_id":"%{TOPIC}_%FIELD",
+-  "name":"%prefixn %circuit %name %fieldname",
++  "name":"%messagecomment %comment",
+   "device":%circuit_part,
+   "value_template":"{{value_json[\"%field\"].value}}",
+   "state_topic":"%topic"%field_payload
