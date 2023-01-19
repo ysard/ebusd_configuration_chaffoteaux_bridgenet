@@ -21,3 +21,15 @@ index 824e9df9..ac05f276 100644
  # include only messages having the specified level (partial match, alternatives and wildcard supported).
  # Note: This is a filter on top of the messages already filtered implicitly for the ebusd "mqtt" user (if any).
  # Note: Since the empty string matches all levels, an explicit check for empty string (with "^$") needs to be used for
+@@ -115,9 +116,9 @@ filter-name = status|temp|yield|count|energy|power|runtime|hours|starts|mode|cur
+ filter-level = ^$
+ # include only messages having the specified direction ("r", "w", "u", or "uw". partial match, alternatives and wildcard supported).
+ # HA integration: writable messages excluded for now
+-filter-direction = r|u
++#filter-direction = r|u
+ # HA integration: for including writable messages, use this line or overwrite with '--mqttvar=filter-direction=r|u|^w'.
+-#filter-direction = r|u|^w
++filter-direction = r|u|^w
+ # include only fields having the specified name (partial match, alternatives and wildcard supported).
+ #filter-field =
+ # exclude fields having the specified name (partial match, alternatives and wildcard supported).
