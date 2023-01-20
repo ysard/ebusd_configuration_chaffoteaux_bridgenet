@@ -63,22 +63,27 @@ Available line attributes:
 
 > **Note**
 >
+> For high temp range regulation:<br>
 > y-intercept = slope*20°C + 30°C<br>
 > Since the heat stops at an external temp of 20°C, and the water temp target is always 30°C at this point.
+>
+> For low temp range regulation:<br>
+> y-intercept = slope*20°C + 20°C<br>
+> Since the heat stops at an external temp of 20°C, and the water temp target is always 20°C at this point.
 
-slope | y-intercept
-:--- | :---
-0,2 | 34
-0,4 | 38
-0,6 | 42
-0,8 | 46
-1   | 50
-1,2 | 54
-1,5 | 60
-2   | 70
-2,5 | 80
-3   | 90
-3,5 | 100
+slope | y-intercept | temp range
+:--- | :--- | :---
+0,2 | 24    | low
+0,4 | 28    | low
+0,6 | 32    | low
+0,8 | 36    | low
+1   | 50    | high
+1,2 | 54    | high
+1,5 | 60    | high
+2   | 70    | high
+2,5 | 80    | high
+3   | 90    | high
+3,5 | 100   | high
 
 ### Room temp only
 
