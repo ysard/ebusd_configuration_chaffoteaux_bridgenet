@@ -26,7 +26,7 @@ Measurements with fixed resistors:
 | :--- | :---   | :---      | :---
 61.2K  | -14°C  | 4.68V     | 0,076 mA
 44.3K  | -7°C   | ?         | ?
-20.1k  | 8.6°C  | 4.16v     | 0,206 mA
+20.1K  | 8.6°C  | 4.16v     | 0,206 mA
 14.68K | 16°C   | 3.94V     | 0,268 mA
 9.84K  | 25 °C  | 3.6V      | 0,365 mA
 7.48K  | 30°C   | ?         | ?
@@ -44,14 +44,14 @@ So the current is not constant, it's not a constant current generator ???
 
 ### Outdoor sensor only mode
 
-Ohms | ext temp | theoric temp | measured temp | delta
+Ohms | ext temp (°C )| theoric temp (°C )| measured temp (°C ) | delta
 :--- | :--- | :--- | :--- | :---
-| 15K | 16.2 |    34.56°C |     35°C |        -0.44 (unreliable because water can't be set below 35°C)
-|       | 8.6 |    43.68°C |     43.6°C |      0.08
-|        | -7.6 |    63.12°C |     ? |
-|48.5K |  -8.8 |    64.56 |       64.4 |        0.16
-|51.85K |  -9.2 |    65.04 |       64.9 |        0.14
-|69.5K |  -14.8 |   71.76 |       71.6 |        0.16
+|15K    | 16.2  | 34.56 | 35   | -0.44 (unreliable because water can't be set below 35°C)
+|20.1K  | 8.6   | 43.68 | 43.6 | 0.08
+|44.3K  | -7.6  | 63.12 | ?    |
+|48.5K  | -8.8  | 64.56 | 64.4 | 0.16
+|51.85K | -9.2  | 65.04 | 64.9 | 0.14
+|69.5K  | -14.8 | 71.76 | 71.6 | 0.16
 
 This gives the following formula:
 
