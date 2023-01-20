@@ -39,6 +39,9 @@ So the current is not constant, it's not a constant current generator ???
 
 ## Water compensation formulas
 
+![](./water_compensation.png)
+*Water compensation curves from the constructor doc*
+
 ### Outdoor sensor only mode
 
 Ohms | ext temp | theoric temp | measured temp | delta
