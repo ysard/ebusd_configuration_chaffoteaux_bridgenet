@@ -1,7 +1,6 @@
 # How to install Home Assistant integration ?
 
-The goal is to have a complete control of the device on solutions like Home Asssitant.
-I assume that you have a working installation of an MQTT server like Mosquitto
+The goal is to have a complete control of the device on solutions like Home Asssitant.I assume that you have a working installation of an MQTT server like Mosquitto
 or have it installed as an addon to Home Assistant.
 
 eBusd will take care of publishing most of the sensors with their respective read/write status.
