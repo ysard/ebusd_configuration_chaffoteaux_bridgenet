@@ -26,7 +26,7 @@ Measurements with fixed resistors:
 | :--- | :---   | :---      | :---
 61.2K  | -14°C  | 4.68V     | 0,076 mA
 44.3K  | -7°C   | ?         | ?
-20.1k  | 8°C    | 4.16v     | 0,206 mA
+20.1k  | 8.6°C  | 4.16v     | 0,206 mA
 14.68K | 16°C   | 3.94V     | 0,268 mA
 9.84K  | 25 °C  | 3.6V      | 0,365 mA
 7.48K  | 30°C   | ?         | ?
@@ -36,6 +36,50 @@ Measurements with fixed resistors:
 1.5K   | -      | -         | -
 
 So the current is not constant, it's not a constant current generator ???
+
+## Water compensation formulas
+
+### Outdoor sensor only mode
+
+Ohms | ext temp | theoric temp | measured temp | delta
+:--- | :--- | :--- | :--- | :---
+| 15K | 16.2 |    34.56°C |     35°C |        -0.44 (unreliable because water can't be set below 35°C)
+|       | 8.6 |    43.68°C |     43.6°C |      0.08
+|        | -7.6 |    63.12°C |     ? |
+|48.5K |  -8.8 |    64.56 |       64.4 |        0.16
+|51.85K |  -9.2 |    65.04 |       64.9 |        0.14
+|69.5K |  -14.8 |   71.76 |       71.6 |        0.16
+
+This gives the following formula:
+
+`f(ext_temp) = (-slope*ext_temp+y-intercept) + zone_temp_offset`
+
+With for example a slope of 1.2, the y-intercept is 54.
+
+Available line attributes:
+
+slope | y-intercept
+:--- | :---
+0,2 | 34
+0,4 | 38
+0,6 | 42
+0,8 | 46
+1   | 50
+1,2 | 54
+1,5 | 60
+2   | 70
+2,5 | 80
+3   | 90
+3,5 | 100
+
+### Room temp only
+
+TODO, help is welcome
+
+### Outdoor + Room sensors
+
+TODO, help is welcome
+
 
 ## Thermostat
 
