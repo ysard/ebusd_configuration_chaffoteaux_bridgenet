@@ -59,7 +59,8 @@ With for example a slope of 1.2, the y-intercept is 54.
 Available line attributes:
 
 > **Note**
-> y-intercept = slope*20°C + 30°C
+>
+> y-intercept = slope*20°C + 30°C<br>
 > Since the heat stops at an external temp of 20°C, and the water temp target is always 30°C at this point.
 
 slope | y-intercept
