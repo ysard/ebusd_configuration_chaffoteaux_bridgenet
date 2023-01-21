@@ -1,4 +1,6 @@
 Here you will find a configuration for the ebusd demon adapted to the boiler Chaffoteaux Mira C Green.
+This configuration should also be comaptible with other brands of the Ariston company
+using the BridgeNet/eBus2 protocol (Elco, Ariston, etc.).
 
 ~Note: The messages supported are for the moment only those **broadcast** by the boiler.~<br>
 Update: The messages supported are explicit read/write & those broadcast by the boiler.
