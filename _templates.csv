@@ -1,5 +1,4 @@
 # template name,type / templates,divider / values,unit,comment
-status,UCH,,,Status
 onoff,UCH,0=off;1=on,,
 yesno,UCH,0=no;1=yes,,
 dhw_comfort_modes,UCH,0=off;1=delayed_on;2=always_on,,
