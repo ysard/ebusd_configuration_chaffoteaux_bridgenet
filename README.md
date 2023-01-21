@@ -171,6 +171,9 @@ Note: In case of multiple values, there is 1 value per zone (z1, z2, etc.).
 | **Unknown**
 |                                   | `6047`                                |                               |
 |                                   | `6d26`                                |                               |
+|                                   | `6f10`                                |                               |
+|                                   | `7526`                                |                               |
+|                                   | `c528`                                |                               |
 |                                   | `6226,6426`                           |                               |
 |                                   | `6bc0,2b70`                           |                               |
 |                                   | `6997,6a97,6b97,6c97,6d97,6e97,6f97`  |                               |
