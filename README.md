@@ -95,10 +95,10 @@ Check the modification:
 | PBSB  | Signification                             | Uncertain
 |:--- |:--- |:--- |
 | 2000  | cast features/read values                 |
-| 2001  | cast features                             |
+| 2001  | cast features/read values with additional data (allowed range of values?) | x
 | 2004  | error detection/disappearance             |
 | 200f  |                                           |
-| 2010  | cast supported features                   | x
+| 2010  | cast supported features/cast data                   | x
 | 2020  | cast manual changes/dump registers/set values       |
 | 2031  | master device identificator broadcasts    |
 | 2034  | bus reset                                 |
@@ -106,7 +106,7 @@ Check the modification:
 | 2038  |                                           |
 | 203a  | request slave device                      | x
 | 203b  | cast slave addr                           |
-| 2050  |                                           |
+| 2050  | time related data                         |
 | 2051  | cast comfort timer programs*              |
 | 2070  | broadcast date                            |
 
@@ -167,6 +167,7 @@ Note: In case of multiple values, there is 1 value per zone (z1, z2, etc.).
 | external temp offset              | `7426`                                |                               | 249
 | room temp                         | `7118,7218,7318,7418,7518,7618,7718`  |                               |
 | heating in progress               | `0c19`                                |                               |
+| burner heat life time             | `4bd1`                                |                               | 810
 | **Unknown**
 |                                   | `6047`                                |                               |
 |                                   | `6d26`                                |                               |
