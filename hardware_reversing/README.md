@@ -95,6 +95,15 @@ slope | y-intercept | temp range
 3   | 90    | high
 3,5 | 100   | high
 
+> **Note**
+>
+> The water temp can't be set below 35°C. But the curves show that they are calibrated for
+> a minimalvalue of 30°C. This minimal temp is called water_min_temp in the following formulas.
+
+A generic variant of the formula above, taking into account the setpoint temperature can be used:
+
+`f(ext_temp) = slope * (room_temp_setpoint - ext_temp) + water_min_temp + zone_temp_offset`
+
 ### Room temp only
 
 TODO, help is welcome
