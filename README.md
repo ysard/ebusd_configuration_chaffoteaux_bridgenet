@@ -98,20 +98,25 @@ Check the modification:
 | 2001  | cast features/read values with additional data (allowed range of values?) | x
 | 2004  | error detection/disappearance             |
 | 200f  |                                           |
-| 2010  | cast supported features/cast data                   | x
-| 2020  | cast manual changes/dump registers/set values       |
+| 2010  | cast features/cast data read-only values/set values* |
+| 2020  | cast manual changes/dump registers/set values* |
 | 2031  | master device identificator broadcasts    |
 | 2034  | bus reset                                 |
 | 2036  | handshake                                 | x
 | 2038  |                                           |
 | 203a  | request slave device                      | x
 | 203b  | cast slave addr                           |
-| 2050  | time related data                         |
-| 2051  | cast comfort timer programs*              |
+| 2050  | time related data                         | x
+| 2051  | cast comfort timer programs**             |
 | 2070  | broadcast date                            |
 
+*: 2010 command may be for values that should not be modified by a device and that
+should be accepted by another.
+i.e calculated/measured/status values (current temp measured, boiler status,
+settings change counter, computed target temp, heat request status).
+2020 commands may be for values that can be modified on the device and accepted by another.
 
-*: Timer programs protocol is described below
+**: Timer programs protocol is described below
 
 ## Command IDs
 
