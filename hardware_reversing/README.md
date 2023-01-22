@@ -114,9 +114,9 @@ This is a merge of the regulation based on outdoor sensor + room temp only.
 
 It's the "most advanced" in use with costly ambient sensor. The geater the difference with the setpoint,
 the higher the water target temp, until the setpoint is reached.
-Once reached the curve will almost turn off the boiler by setting a very low water temp.
+Once reached the formula will almost turn off the boiler by setting a very low water temp.
 
-For example at 8.6°C ext, with a difference of 1°C between setpoint and real temp,
+For example at 8.6°C ext, with a difference of 1°C between a setpoint of 20°C and real temp (19°C),
 and a slope of 1.2 the target will be 67.7°C vs 43.6°C...
 
 ```
