@@ -42,6 +42,8 @@ So the current is not constant, it's not a constant current generator ???
 ![](./water_compensation.png)
 *Water compensation curves from the constructor doc*
 
+Formulas are from official technical "leaked" documentation of Chaffoteaux.
+
 ### Outdoor sensor only mode
 
 Ohms | ext temp (°C )| theoric temp (°C )| measured temp (°C ) | delta
@@ -53,9 +55,13 @@ Ohms | ext temp (°C )| theoric temp (°C )| measured temp (°C ) | delta
 |51.85K | -9.2  | 65.04 | 64.9 | 0.14
 |69.5K  | -14.8 | 71.76 | 71.6 | 0.16
 
+The general formula is:
+
+`f(x) = -ax + b + offset`
+
 This gives the following formula:
 
-`f(ext_temp) = (-slope*ext_temp+y-intercept) + zone_temp_offset`
+`f(ext_temp) = (-slope * ext_temp + y-intercept) + zone_temp_offset`
 
 With for example a slope of 1.2, the y-intercept is 54.
 
@@ -66,10 +72,14 @@ Available line attributes:
 > For high temp range regulation:<br>
 > y-intercept = slope*20°C + 30°C<br>
 > Since the heat stops at an external temp of 20°C, and the water temp target is always 30°C at this point.
+> This gives the final formula:<br>
+> `f(ext_temp) = slope * (20 - ext_temp) + 30 + zone_temp_offset`
 >
 > For low temp range regulation:<br>
 > y-intercept = slope*20°C + 20°C<br>
 > Since the heat stops at an external temp of 20°C, and the water temp target is always 20°C at this point.
+> This gives the final formula:<br>
+> `f(ext_temp) = slope * (20 - ext_temp) + 20 + zone_temp_offset`
 
 slope | y-intercept | temp range
 :--- | :--- | :---
