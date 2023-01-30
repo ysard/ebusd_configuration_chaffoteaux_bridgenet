@@ -150,6 +150,7 @@ Note: In case of multiple values, there is 1 value per zone (z1, z2, etc.).
 | heat water temp out               | `6810`                                |                               | 831
 | heat water temp in                | `6910`                                |                               | 832
 | heat boost time (s)               | `602b`                                |                               | 244
+| fan speed (x100 rpm)              | `4013`                                |                               | 244
 | **Domestic Hot Water (DHW) related commands**
 | DHW comfort mode            	    | `c028`                                |                               | 250
 | DHW water target temp             | `6126`                                |                               | 200
