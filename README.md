@@ -13,6 +13,8 @@ The goal is to achieve complete control of the device on solutions like Home Ass
 
 ![](./home_assistant_integration/assets/ha_global_screenshot.webp)
 
+If you are interested in more/other details, do not hesitate to consult this series of blog articles (french)
+[Domotiser son chauffage avec Home Assistant](https://pro-domo.ddns.net/blog/domotiser-son-chauffage-avec-home-assistant-partie-1.html).
 
 # Foreword
 
