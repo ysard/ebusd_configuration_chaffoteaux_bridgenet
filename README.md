@@ -1,13 +1,8 @@
-Here you will find a configuration for the ebusd demon adapted to the boiler Chaffoteaux Mira C Green.
-This configuration should also be comaptible with other brands of the Ariston company
+Here you will find a configuration for the ebusd demon adapted to the Chaffoteaux boilers Mira C Green and Serelia.
+This configuration should also be compatible with other brands of the Ariston company
 using the BridgeNet/eBus2 protocol (Elco, Ariston, etc.).
 
-~Note: The messages supported are for the moment only those **broadcast** by the boiler.~<br>
-Update: The messages supported are explicit read/write & those broadcast by the boiler.
-
-Any help in filling in the gaps is **VERY** welcome.
-
-Hardware related information is at: [./hardware_reversing/](./hardware_reversing/).
+The messages supported are explicit read/write & those broadcast by the boiler.
 
 The goal is to achieve complete control of the device on solutions like Home Assistant:
 
@@ -15,6 +10,11 @@ The goal is to achieve complete control of the device on solutions like Home Ass
 
 If you are interested in more/other details, do not hesitate to consult this series of blog articles (french)
 [Domotiser son chauffage avec Home Assistant](https://pro-domo.ddns.net/blog/domotiser-son-chauffage-avec-home-assistant-partie-1.html).
+
+Hardware related information is at: [./hardware_reversing/](./hardware_reversing/).
+
+Any help in filling in the gaps is **VERY** welcome.
+
 
 # Foreword
 
