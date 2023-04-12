@@ -120,3 +120,63 @@ automation dhw_comfort_mode:
             'Always on': 'always_on'
            } %}
            {{ display_to_opt_map.get(states.input_select.dhw_comfort_mode.state, 'off') }}
+
+
+homeassistant:
+  # Set min/max intervals of entities sent by ebusd daemon through MQTT Discovery
+  customize:
+    number.ebusd_dhw_dhw_target_temp:
+      # Setting 200
+      min: 36
+      max: 60
+
+    number.ebusd_boiler_ext_temp_offset:
+      # Setting 249
+      min: -3
+      max: +3
+
+    number.ebusd_boiler_z1_fixed_temp:
+      # Setting 402
+      # According to heat temp range (setting 420)
+      # 0: low temperatures (20;45°C)
+      # 1: high temperatures (35;82°C)
+      min: 35
+      max: 82
+
+    number.z1_thermoregulation_slope:
+      # Setting 422
+      # According to heat temp range (setting 420)
+      # 0: low temperatures (0.2;0.8)
+      # 1: high temperatures (1.0;3.5)
+      min: 1.0
+      max: 3.5
+
+    number.ebusd_boiler_z1_thermoreg_offset:
+      # Setting 423
+      # According to heat temp range (setting 420)
+      # 0: low temperatures (-7;+7)
+      # 1: high temperatures (-14;+14)
+      min: -14
+      max: +14
+
+    number.ebusd_boiler_z1_room_temp_infl:
+      # Setting 424
+      min: 0
+      max: 20
+
+    # Disabled due to conflict with dump_zones_1 setting
+    number.ebusd_boiler_z1_water_max_temp:
+      # Setting 425
+      # According to heat temp range (setting 420)
+      # 0: low temperatures (20;45°C)
+      # 1: high temperatures (35;82°C)
+      min: 35
+      max: 82
+
+    number.ebusd_boiler_z1_water_min_temp:
+      # Setting 426
+      # According to heat temp range (setting 420)
+      # 0: low temperatures (20;45°C)
+      # 1: high temperatures (35;82°C)
+      min: 35
+      max: 82
