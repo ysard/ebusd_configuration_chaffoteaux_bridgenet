@@ -5,12 +5,12 @@ or have it installed as an addon to Home Assistant.
 
 eBusd will take care of publishing most of the sensors with their respective read/write status.
 
-Some bugs remain (01/2023):
+Some bugs remain (04/2023):
 
-- impossible to specify a range for a value other than the range deduced from its type (-32767;32767 for the SIN type)<br>
-  => not fixable unless you do without the [MQTT Discovery function](https://www.home-assistant.io/integrations/mqtt/#mqtt-discovery).
+- impossible to specify a range for a value other than the range deduced from its type
+  => fixed with specific yaml statements (see above)
 - impossible to automatically represent multiple choice inputs (ex: thermoregulation type).<br>
-  => corrected by specific yaml statements
+  => fixed with specific yaml statements (see above)
 - hazardous naming of entities displayed in Home Assistant.<br>
   => essentially corrected by the `mqtt-hassio.cfg` file of this repository.
 
@@ -25,6 +25,7 @@ Command to enable MQTT integration of ebusd:
 
 The default `.cfg` should be at `/etc/ebusd/mqtt-hassio.cfg`.
 
+
 > **Note**
 >
 > Since I don't want to maintain it, it is not planned to publish my full version of the `mqtt-hassio.cfg` file.
@@ -33,6 +34,7 @@ The default `.cfg` should be at `/etc/ebusd/mqtt-hassio.cfg`.
 >
 > To find out what this patch contains and the reason for the changes, I **strongly suggest** to study
 > the commits of this repository with the tag `[ebusd_HA]`.
+
 
 This file supports some specific rules created for this particular brand of boiler
 (the filtering of the entities to be published on the MQTT server is based on regexes).
@@ -44,6 +46,18 @@ Grab the `mqtt-hassio.cfg` and `mqtt-hassio.cfg.patch` files and apply the follo
 To reverse the patch:
 
     $ patch --reverse mqtt-hassio.cfg < mqtt-hassio.cfg.patch
+
+
+## Range (min/max/step) issues of MQTT Discovery
+
+The ebusd daemon and its config file doesn't allow to set range & step values for an entity.
+While the [MQTT Discovery function](https://www.home-assistant.io/integrations/mqtt/#mqtt-discovery)
+feature would support these data we have to specify them separately in the home assistant config.
+Without this, the range is deduced from the type of data (-32767;32767 for the SIN type).
+
+**This is done** for most entities (generic and for the zone 1 of the boiler) in the file
+`widgets_and_automations.yaml` of this repository, at the section `homeassistant/customize`.
+
 
 ## Specific widgets
 
