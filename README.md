@@ -235,6 +235,11 @@ Default prog
 000000000000000000000000    => no heating
 ```
 
+# Handshake procedure
+
+TODO: help needed
+
+
 # Help request
 
 - Handshake study of new device on the bus in order to emulate it with a custom one.
