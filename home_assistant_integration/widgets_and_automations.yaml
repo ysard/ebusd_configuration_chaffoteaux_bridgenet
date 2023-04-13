@@ -129,11 +129,13 @@ homeassistant:
       # Setting 200
       min: 36
       max: 60
+      step: 0.1
 
     number.ebusd_boiler_ext_temp_offset:
       # Setting 249
       min: -3
       max: +3
+      step: 0.1
 
     number.ebusd_boiler_z1_fixed_temp:
       # Setting 402
@@ -142,6 +144,7 @@ homeassistant:
       # 1: high temperatures (35;82°C)
       min: 35
       max: 82
+      step: 0.1
 
     number.z1_thermoregulation_slope:
       # Setting 422
@@ -150,6 +153,7 @@ homeassistant:
       # 1: high temperatures (1.0;3.5)
       min: 1.0
       max: 3.5
+      step: 0.1
 
     number.ebusd_boiler_z1_thermoreg_offset:
       # Setting 423
@@ -158,11 +162,13 @@ homeassistant:
       # 1: high temperatures (-14;+14)
       min: -14
       max: +14
+      step: 0.1
 
     number.ebusd_boiler_z1_room_temp_infl:
       # Setting 424
       min: 0
       max: 20
+      step: 1
 
     # Disabled due to conflict with dump_zones_1 setting
     number.ebusd_boiler_z1_water_max_temp:
@@ -172,6 +178,7 @@ homeassistant:
       # 1: high temperatures (35;82°C)
       min: 35
       max: 82
+      step: 0.1
 
     number.ebusd_boiler_z1_water_min_temp:
       # Setting 426
@@ -180,3 +187,4 @@ homeassistant:
       # 1: high temperatures (35;82°C)
       min: 35
       max: 82
+      step: 0.1
