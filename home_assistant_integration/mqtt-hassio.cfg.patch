@@ -1,5 +1,5 @@
 diff --git a/contrib/etc/ebusd/mqtt-hassio.cfg b/contrib/etc/ebusd/mqtt-hassio.cfg
-index 824e9df9..ac05f276 100644
+index 824e9df9..2be300ba 100644
 --- a/contrib/etc/ebusd/mqtt-hassio.cfg
 +++ b/contrib/etc/ebusd/mqtt-hassio.cfg
 @@ -100,14 +100,15 @@ filter-seen = 5
@@ -49,7 +49,7 @@ index 824e9df9..ac05f276 100644
      sensor,,total_increasing = starts*,$
 +    sensor,,total_increasing = count*,$
 +    sensor,time,total_increasing = life_time|,min$
-+    sensor,,measurement = boost_time|,s$
++    sensor,time,measurement = boost_time|,s$
      sensor,pressure,measurement = bar$
      sensor,gas,measurement = gas*/min$
      sensor,humidity,measurement = humid*%%$
