@@ -143,7 +143,7 @@ Note: In case of multiple values, there is 1 value per zone (z1, z2, etc.).
 | ?                                 | `6971,6972,6973,6974,6975,6976,6977`  |                               |
 | heat slope                        | `6a71,6a72,6a73,6a74,6a75,6a76,6a77`  |                               | 422
 | ?                                 | `6b71,6b72,6b73,6b74,6b75,6b76,6b77`  |                               |
-| ?                                 | `6c71,6c72,6c73,6c67,6c65,6c66,6c67`  |                               |
+| ?                                 | `6c71,6c72,6c73,6c74,6c75,6c76,6c77`  |                               |
 | boiler status                     | `c04b`                                | 0x65,0x06,0x12 (pump circ??) unknown             |
 | heat thermoregulation selection   | `c079,c07a,c07b,c07c,c07d,c07e,c07f`  |                               | 421
 | heat room temp influence          | `c279,c27a,c27b,c27c,c27d,c27e,c27f`  |                               | 424
