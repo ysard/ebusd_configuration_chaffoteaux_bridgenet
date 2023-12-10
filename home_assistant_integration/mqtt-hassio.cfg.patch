@@ -37,7 +37,7 @@ index 824e9df9..ac05f276 100644
      number,pressure, = bar$
      number,gas, = gas*/min$
      number,humidity, = humid*%%$
-+    number,time, = s|min$
++    number,, = s|min$
      number,, = curve,
 +    number,, = slope
 
