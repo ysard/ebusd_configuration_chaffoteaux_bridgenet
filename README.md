@@ -134,7 +134,7 @@ Note: In case of multiple values, there is 1 value per zone (z1, z2, etc.).
 | heat water computed target temp   | `6197,6297,6397,6497,6597,6697,6797`  |                               | 830
 | heat water max temp               | `6071,6072,6073,6074,6075,6076,6077`  |                               | 425
 | heat water min temp               | `6171,6172,6173,6174,6175,6176,6177`  |                               | 426
-| heat day temp                     | `6271,6272,6273,6267,6265,6266,6267`  |                               |
+| heat day temp                     | `6271,6272,6273,6274,6275,6276,6277`  |                               |
 | heat night temp                   | `6371,6372,6373,6374,6375,6376,6377`  |                               |
 | heat offset                       | `6471,6472,6473,6474,6475,6476,6477`  |                               | 423
 | heat fixed temp                   | `6571,6572,6573,6574,6575,6576,6577`  |                               | 402
