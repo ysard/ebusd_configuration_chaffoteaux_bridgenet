@@ -1,5 +1,5 @@
 diff --git a/contrib/etc/ebusd/mqtt-hassio.cfg b/contrib/etc/ebusd/mqtt-hassio.cfg
-index 824e9df9..2be300ba 100644
+index 824e9df9..99c92044 100644
 --- a/contrib/etc/ebusd/mqtt-hassio.cfg
 +++ b/contrib/etc/ebusd/mqtt-hassio.cfg
 @@ -100,14 +100,15 @@ filter-seen = 5
@@ -132,7 +132,20 @@ index 824e9df9..2be300ba 100644
 
  # HA integration: boolean suffix for global parts
  global_boolean_suffix = ,
-@@ -367,7 +408,7 @@ def_global_updatecheck_device-payload =  {
+@@ -337,6 +378,12 @@ def_global-payload = %global_prefix,
+ #def_global-retain = 0
+
+ # individual global running, version, signal, uptime, updatecheck, and scan config topic, payload, and retain setting.
++# Force expected value to be a string & strip quotes
++# expected values : finished, running, OK
++def_global_scan-payload = %global_prefix,
++  "value_template":"{{ value_json|replace('\"', '') }}"
++ }
++
+ def_global_running-topic = %haprefix/binary_sensor/%TOPIC/config
+ def_global_running-payload = %global_prefix,
+   "device_class":"running"%global_boolean_suffix
+@@ -367,7 +414,7 @@ def_global_updatecheck_device-payload =  {
      "suggested_area":"%area"
    },
    "state_topic":"%topic",
