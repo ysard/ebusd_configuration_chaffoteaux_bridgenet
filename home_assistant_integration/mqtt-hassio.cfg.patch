@@ -1,5 +1,5 @@
 diff --git a/contrib/etc/ebusd/mqtt-hassio.cfg b/contrib/etc/ebusd/mqtt-hassio.cfg
-index 824e9df9..99c92044 100644
+index 46d770ef..4187f84c 100644
 --- a/contrib/etc/ebusd/mqtt-hassio.cfg
 +++ b/contrib/etc/ebusd/mqtt-hassio.cfg
 @@ -100,14 +100,15 @@ filter-seen = 5
@@ -12,8 +12,8 @@ index 824e9df9..99c92044 100644
  #filter-non-circuit =
  # include only messages having the specified name (partial match, alternatives and wildcard supported).
  # HA integration: filter to some useful names for monitoring the heating circuit
--filter-name = status|temp|yield|count|energy|power|runtime|hours|starts|mode|curve|^load$|^party$|sensor
-+#filter-name = status|temp|yield|count|energy|power|runtime|hours|starts|mode|curve|^load$|^party$|sensor
+-filter-name = status|temp|yield|count|energy|power|runtime|hours|starts|mode|curve|^load$|^party$|sensor|timer
++#filter-name = status|temp|yield|count|energy|power|runtime|hours|starts|mode|curve|^load$|^party$|sensor|timer
 +filter-name = status|temp|count|mode|curve|z1|dhw|heat|time
  # exclude messages having the specified name (partial match, alternatives and wildcard supported).
 -#filter-non-name =
@@ -33,17 +33,17 @@ index 824e9df9..99c92044 100644
  # include only fields having the specified name (partial match, alternatives and wildcard supported).
  #filter-field =
  # exclude fields having the specified name (partial match, alternatives and wildcard supported).
-@@ -177,7 +178,9 @@ type_switch-w-number =
+@@ -179,7 +180,9 @@ type_switch-w-number =
      number,pressure, = bar$
      number,gas, = gas*/min$
      number,humidity, = humid*%%$
 +    number,, = s|min$
      number,, = curve,
 +    number,, = slope
-
+ 
  # HA integration: the mapping list for numeric sensor entities by field type, name, message, and unit.
  type_switch-number =
-@@ -190,6 +193,9 @@ type_switch-number =
+@@ -195,6 +198,9 @@ type_switch-number =
      sensor,yield,total_increasing = total*,Wh$
      sensor,,total_increasing = hours|,h$
      sensor,,total_increasing = starts*,$
@@ -53,26 +53,27 @@ index 824e9df9..99c92044 100644
      sensor,pressure,measurement = bar$
      sensor,gas,measurement = gas*/min$
      sensor,humidity,measurement = humid*%%$
-@@ -199,11 +205,15 @@ type_switch-number =
+@@ -204,12 +210,16 @@ type_switch-number =
  type_switch-w-list =
      switch,, = onoff
      switch,,,yesno = yesno
 +    switch,,,comfort_modes = comfort_modes
 +    switch,,,thermoreg_types = thermoreg_types
-
+     select,, =
+ 
  # HA integration: the mapping list for rather binary sensor entities by field type, name, message, and unit.
  type_switch-list =
      binary_sensor,,measurement = onoff
      binary_sensor,,measurement,yesno = yesno
 +    binary_sensor,,measurement,comfort_modes = comfort_modes
 +    binary_sensor,,measurement,thermoreg_types = thermoreg_types
-     sensor,, =
-
- # HA integration: currently unused mapping lists for non-numeric/non-binary entities.
-@@ -268,6 +278,20 @@ type_part-switchyesno = ,
+     sensor,,,list =
+ 
+ # HA integration: the mapping list for (potentially) writable string entities containing a time value by field type, name, message, and unit.
+@@ -281,6 +291,20 @@ type_part-switchyesno = ,
    "payload_on":"yes",
    "payload_off":"no"%state_class
-
+ 
 +type_part-switchcomfort_modes = ,
 +  "command_topic":"%topic/set",
 +  "payload_always_on":"always_on",
@@ -90,10 +91,10 @@ index 824e9df9..99c92044 100644
  # HA integration: %type_part variable for binary_sensor %type_topic
  type_part-binary_sensor = ,
    "payload_on":"on",
-@@ -277,6 +301,22 @@ type_part-binary_sensoryesno = ,
+@@ -290,6 +314,20 @@ type_part-binary_sensoryesno = ,
    "payload_on":"yes",
    "payload_off":"no"%state_class
-
+ 
 +type_part-binary_sensorcomfort_modes = ,
 +  "command_topic":"%topic/set",
 +  "payload_always_on":"always_on",
@@ -108,33 +109,31 @@ index 824e9df9..99c92044 100644
 +  "payload_outdoor_temp_only":"outdoor_temp_only",
 +  "payload_outdoor_and_room":"outdoor_and_room"%state_class
 +
-+
-+
- # the field specific part (evaluated after the message specific part).
- # HA integration: set to the mapped %type_part from above
- field_payload = %type_part
-@@ -289,7 +329,8 @@ definition-topic ?= %haprefix/%type_topic/%{TOPIC}_%FIELD/config
+ # HA integration: %type_part variable for text %type_topic
+ type_part-texttime = ,
+   "command_topic":"%topic/set",
+@@ -328,7 +366,8 @@ definition-topic ?= %haprefix/%type_topic/%{TOPIC}_%FIELD/config
  # HA integration: this is the config topic payload for HA's MQTT discovery.
  definition-payload = {
    "unique_id":"%{TOPIC}_%FIELD",
--  "name":"%prefixn %circuit %name %fieldname",
+-  "name":"%name %fieldname",
 +  "name":"%messagecomment %comment",
 +  "friendly_name":"%messagecomment %comment",
    "device":%circuit_part,
    "value_template":"{{value_json[\"%field\"].value}}",
    "state_topic":"%topic"%field_payload
-@@ -318,7 +359,7 @@ global_prefix = {
+@@ -357,7 +396,7 @@ global_prefix = {
    "unique_id":"%TOPIC",
    "device":%global_device,
    "state_topic":"%topic",
--  "name":"%prefixn %name"
+-  "name":"global %name"
 +  "name":"%name"
-
+ 
  # HA integration: boolean suffix for global parts
  global_boolean_suffix = ,
-@@ -337,6 +378,12 @@ def_global-payload = %global_prefix,
+@@ -374,6 +413,12 @@ def_global-payload = %global_prefix
  #def_global-retain = 0
-
+ 
  # individual global running, version, signal, uptime, updatecheck, and scan config topic, payload, and retain setting.
 +# Force expected value to be a string & strip quotes
 +# expected values : finished, running, OK
@@ -145,12 +144,3 @@ index 824e9df9..99c92044 100644
  def_global_running-topic = %haprefix/binary_sensor/%TOPIC/config
  def_global_running-payload = %global_prefix,
    "device_class":"running"%global_boolean_suffix
-@@ -367,7 +414,7 @@ def_global_updatecheck_device-payload =  {
-     "suggested_area":"%area"
-   },
-   "state_topic":"%topic",
--  "name":"%prefixn %name",
-+  "name":"%name",
-   "value_template":"{%% set my_new = value_json|truncate(255)|regex_replace(find='^[^,]*|, device firmware |,.*| available',replace='') %%}{%% set my_cur = 'old' %%}{%% if my_new == '' %%}{%% set my_new = 'current' %%}{%% set my_cur = 'current' %%}{%% endif %%}{{ {'installed_version':my_cur,'latest_version':my_new,'entity_picture':'https://adapter.ebusd.eu/favicon.ico','release_url':'https://adapter.ebusd.eu/firmware/ChangeLog'} | tojson }}"
-  }
-
