@@ -1,5 +1,5 @@
 diff --git a/contrib/etc/ebusd/mqtt-hassio.cfg b/contrib/etc/ebusd/mqtt-hassio.cfg
-index 46d770ef..4187f84c 100644
+index 46d770ef..4024bbba 100644
 --- a/contrib/etc/ebusd/mqtt-hassio.cfg
 +++ b/contrib/etc/ebusd/mqtt-hassio.cfg
 @@ -100,14 +100,15 @@ filter-seen = 5
@@ -53,66 +53,7 @@ index 46d770ef..4187f84c 100644
      sensor,pressure,measurement = bar$
      sensor,gas,measurement = gas*/min$
      sensor,humidity,measurement = humid*%%$
-@@ -204,12 +210,16 @@ type_switch-number =
- type_switch-w-list =
-     switch,, = onoff
-     switch,,,yesno = yesno
-+    switch,,,comfort_modes = comfort_modes
-+    switch,,,thermoreg_types = thermoreg_types
-     select,, =
- 
- # HA integration: the mapping list for rather binary sensor entities by field type, name, message, and unit.
- type_switch-list =
-     binary_sensor,,measurement = onoff
-     binary_sensor,,measurement,yesno = yesno
-+    binary_sensor,,measurement,comfort_modes = comfort_modes
-+    binary_sensor,,measurement,thermoreg_types = thermoreg_types
-     sensor,,,list =
- 
- # HA integration: the mapping list for (potentially) writable string entities containing a time value by field type, name, message, and unit.
-@@ -281,6 +291,20 @@ type_part-switchyesno = ,
-   "payload_on":"yes",
-   "payload_off":"no"%state_class
- 
-+type_part-switchcomfort_modes = ,
-+  "command_topic":"%topic/set",
-+  "payload_always_on":"always_on",
-+  "payload_delayed_on":"delayed_on",
-+  "payload_off":"off"%state_class
-+
-+type_part-switchthermoreg_types = ,
-+  "command_topic":"%topic/set",
-+  "payload_fixed_temp":"fixed_temp",
-+  "payload_basic_on_off":"basic_on_off",
-+  "payload_room_temp_only":"room_temp_only",
-+  "payload_outdoor_temp_only":"outdoor_temp_only",
-+  "payload_outdoor_and_room":"outdoor_and_room"%state_class
-+
- # HA integration: %type_part variable for binary_sensor %type_topic
- type_part-binary_sensor = ,
-   "payload_on":"on",
-@@ -290,6 +314,20 @@ type_part-binary_sensoryesno = ,
-   "payload_on":"yes",
-   "payload_off":"no"%state_class
- 
-+type_part-binary_sensorcomfort_modes = ,
-+  "command_topic":"%topic/set",
-+  "payload_always_on":"always_on",
-+  "payload_delayed_on":"delayed_on",
-+  "payload_off":"off"%state_class
-+
-+type_part-binary_sensorthermoreg_types = ,
-+  "command_topic":"%topic/set",
-+  "payload_fixed_temp":"fixed_temp",
-+  "payload_basic_on_off":"basic_on_off",
-+  "payload_room_temp_only":"room_temp_only",
-+  "payload_outdoor_temp_only":"outdoor_temp_only",
-+  "payload_outdoor_and_room":"outdoor_and_room"%state_class
-+
- # HA integration: %type_part variable for text %type_topic
- type_part-texttime = ,
-   "command_topic":"%topic/set",
-@@ -328,7 +366,8 @@ definition-topic ?= %haprefix/%type_topic/%{TOPIC}_%FIELD/config
+@@ -328,7 +334,8 @@ definition-topic ?= %haprefix/%type_topic/%{TOPIC}_%FIELD/config
  # HA integration: this is the config topic payload for HA's MQTT discovery.
  definition-payload = {
    "unique_id":"%{TOPIC}_%FIELD",
@@ -122,7 +63,7 @@ index 46d770ef..4187f84c 100644
    "device":%circuit_part,
    "value_template":"{{value_json[\"%field\"].value}}",
    "state_topic":"%topic"%field_payload
-@@ -357,7 +396,7 @@ global_prefix = {
+@@ -357,7 +364,7 @@ global_prefix = {
    "unique_id":"%TOPIC",
    "device":%global_device,
    "state_topic":"%topic",
@@ -131,7 +72,7 @@ index 46d770ef..4187f84c 100644
  
  # HA integration: boolean suffix for global parts
  global_boolean_suffix = ,
-@@ -374,6 +413,12 @@ def_global-payload = %global_prefix
+@@ -374,6 +381,12 @@ def_global-payload = %global_prefix
  #def_global-retain = 0
  
  # individual global running, version, signal, uptime, updatecheck, and scan config topic, payload, and retain setting.
