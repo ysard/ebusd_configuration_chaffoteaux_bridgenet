@@ -38,6 +38,7 @@ Dependencies:
 import subprocess
 import itertools as it
 from time import sleep
+
 # pylint: disable=redefined-builtin
 from sys import exit
 
@@ -64,7 +65,9 @@ def run_command_and_check_output(register, expected_value="020100"):
         return False
 
 
-def run_write_command_and_check_output(register, expected_value="00", written_value="01"):
+def run_write_command_and_check_output(
+    register, expected_value="00", written_value="01"
+):
     """Execute the write command and check the output
 
     Ex:
@@ -92,7 +95,9 @@ def show_progress(register, index, total):
     print(Fore.YELLOW + f"Progress: {progress_percentage:.2f}%" + Fore.RESET)
 
 
-def read_bruteforce(not_wanted_registers=tuple(), wanted_registers=tuple(), boiler_active=False):
+def read_bruteforce(
+    not_wanted_registers=tuple(), wanted_registers=tuple(), boiler_active=False
+):
     """Search registers for which values are dependent on boiler status
 
     :param not_wanted_registers: Already known registers
@@ -127,7 +132,9 @@ def read_bruteforce(not_wanted_registers=tuple(), wanted_registers=tuple(), boil
             continue
         if wanted_registers and current_register not in wanted_registers:
             continue
-        if run_command_and_check_output(current_register, expected_value=expected_value):
+        if run_command_and_check_output(
+            current_register, expected_value=expected_value
+        ):
             valid_registers.add(current_register)
 
             show_progress(current_register, index, total_combinations)
@@ -191,8 +198,10 @@ def write_process(registers):
         sleep(0.200)
 
     print(
-        "Expected & checked registers:", sorted(checked_registers),
-        "number:", len(checked_registers),
+        "Expected & checked registers:",
+        sorted(checked_registers),
+        "number:",
+        len(checked_registers),
     )
     failed_registers = set(registers) - checked_registers
     print("Failed registers:", sorted(failed_registers), "number;", len(failed_registers))
