@@ -45,10 +45,13 @@ from sys import exit
 from colorama import Fore
 
 
+EBUSCTL_BIN_PATH = "~/ebusd/build/src/tools/"
+
+
 def run_command_and_check_output(register, expected_value="020100"):
     """Execute the read command and check the output"""
 
-    command = f"~/ebusd/build/src/tools/ebusctl hex 3c200002{register}"
+    command = f"{EBUSCTL_BIN_PATH}ebusctl hex 3c200002{register}"
     try:
         result = subprocess.run(
             command, shell=True, capture_output=True, text=True, check=True
