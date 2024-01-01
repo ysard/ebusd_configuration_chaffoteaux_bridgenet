@@ -231,7 +231,9 @@ def write_bruteforce(registers):
 
             checked_registers = sorted(write_process(chunk))
 
-            ret = input(Fore.LIGHTGREEN_EX + "Did the boiler start ? [Y/n] " + Fore.RESET).lower()
+            ret = input(
+                Fore.LIGHTGREEN_EX + "Did the boiler start ? [Y/n] " + Fore.RESET
+            ).lower()
             # Facultative ?? No ! Beware !
             # Mandatory for next tests !
             sleep(2)
@@ -275,14 +277,14 @@ if __name__ == "__main__":
     potential_registers = read_bruteforce(
         wanted_registers=wanted_registers,
         not_wanted_registers=not_wanted_registers,
-        boiler_active=False
+        boiler_active=False,
     )
     ret = input(
-        Fore.LIGHTGREEN_EX +
-        "Continue with the write bruteforce of the registers found ?\n"
+        Fore.LIGHTGREEN_EX
+        + "Continue with the write bruteforce of the registers found ?\n"
         "If Yes, the boiler and the heating must be waiting a heating request\n"
-        "(0120 register should be active for Mira C green) [Y/n] " +
-        Fore.RESET
+        "(0120 register should be active for Mira C green) [Y/n] "
+        + Fore.RESET
     ).lower()
 
     if not ret in ("y", "o"):
