@@ -16,17 +16,40 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """Proof of concept to find heating activation register on eBus boilers
 
-TL;DR: We are searching for the register 1919 for the Mira C Green boiler
-(see the doc to learn what it is).
+TL;DR: We are searching for registers like 1919 which is used to switch the
+boiler ON/OFF from a thermostat for the Mira C Green boiler.
 
 This register seems to be sent only by an eBus thermostat.
 The boiler doesn't broadcast its status.
 
-People without "smart" thermostat (i.e ON/OFF thermostat with dry contact
-connected to the TA1 pins of the boiler's motherboard) can't guess the register
-without such a bruteforce script.
+People without "smart" thermostat (i.e thermostat with dry contact connected
+to the TA1 pins of the boiler's motherboard) can't guess the register without
+such a bruteforce script.
 
-Dependencies:
+---
+Usage:
+
+It is advisable to make several runs simply to detect the registers which are
+for example at 0 when the boiler is active (circulating or heating) AND inactive
+(the 1919 register does not change and remains at 0 as long as no eBus thermostat
+sends the heat order).
+Do not hesitate to use a shunt on the TA1 terminals to manually force the start-up.
+
+Keep these registers returned by the program and update
+The :meth:`wanted_registers` variable in the __main__ section.
+The register you are looking for is in this list.
+
+Also update the list of registers whose role is known and that you do not want
+to waste your time testing (variable `not_wanted_registers`).
+
+When you've pruned the registers enough, you can go ahead for the writing test.
+You just have to enter [Y] when the program suggests it.
+Also, read the documentation of the :meth:`write_process` & :meth:`write_bruteforce`
+functions for more information about the write test.
+
+---
+
+Script dependencies:
     - colorama
       pip3 install --user (--break-system-packages) colorama
       Use --break-system-packages if you know what you are doing
@@ -49,8 +72,11 @@ from colorama import Fore
 EBUSCTL_BIN_PATH = "~/ebusd/build/src/tools/"
 
 
-def run_command_and_check_output(register, expected_value="020100"):
-    """Execute the read command and check the output"""
+def run_command_and_check_output(register: str, expected_value="020100") -> bool:
+    """Execute the read command and check the output
+
+    :return: The status of the command ; False in case of error.
+    """
 
     command = f"{EBUSCTL_BIN_PATH}ebusctl hex 3c200002{register}"
     try:
@@ -66,12 +92,14 @@ def run_command_and_check_output(register, expected_value="020100"):
 
 
 def run_write_command_and_check_output(
-    register, expected_value="00", written_value="01"
-):
+    register: str, expected_value="00", written_value="01"
+) -> bool:
     """Execute the write command and check the output
 
     Ex:
         ebusctl hex 3c 2020 03 0120 01
+
+    :return: The status of the command ; False in case of error.
     """
 
     command = f"~/ebusd/build/src/tools/ebusctl hex 3c202003{register}{written_value}"
@@ -87,7 +115,7 @@ def run_write_command_and_check_output(
         return False
 
 
-def show_progress(register, index, total):
+def show_progress(register: str, index: int, total: int):
     """Display current register and global progression percentage"""
 
     print(f"0x{register}")
@@ -97,16 +125,17 @@ def show_progress(register, index, total):
 
 def read_bruteforce(
     not_wanted_registers=tuple(), wanted_registers=tuple(), boiler_active=False
-):
+) -> set:
     """Search registers for which values are dependent on boiler status
 
-    :param not_wanted_registers: Already known registers
-    :param wanted_registers: Search only in this iterable of registers.
-    :param boiler_active: Boolean that defines the boiler status.
+    :key not_wanted_registers: Already known registers that will NOT be tested
+    :key wanted_registers: Search registers only in this list.
+    :key boiler_active: Boolean that defines the boiler status. Default: False
         If True, registers with a value of 1 are searched.
         If False, registers with a value of 0 are searched.
-    :type not_wanted_registers: <iterable>, <set> or <list> or <tuple>
-    :type wanted_registers: <iterable>, <set> or <list> or <tuple>
+    :return: Set of valid registers for the search
+    :type not_wanted_registers: <iterable>
+    :type wanted_registers: <iterable>
     :type boiler_active: <boolean>
     """
     expected_value = "020101" if boiler_active else "020100"
@@ -147,8 +176,19 @@ def read_bruteforce(
     return valid_registers
 
 
-def write_process(registers):
-    """Write and test written values in the given registers"""
+def write_process(registers) -> set:
+    """Write and test written values in the given registers
+
+    :Process:
+
+    - Test if the given registers have the value 0 before anything else
+    - Write the value 1 in the remaining registers
+    - Test if the registers have the value 1 now
+    - Display the registers that correspond to the tests and return them
+
+    :return: Set of registers which had the value 0 before the writing
+        test and which now have the value 1.
+    """
 
     valid_registers = set()
 
@@ -182,6 +222,8 @@ def write_process(registers):
 
         sleep(0.200)
 
+    sleep(2)
+
     # Test the modifications
     print("Checking of the write process...")
 
@@ -210,7 +252,10 @@ def write_process(registers):
 
 
 def reset_values(registers, initial_value="00"):
-    """Reset previous/default value (00) of the given registers"""
+    """Reset the value of the given registers
+
+    :key initial_value: Value written in each registers. Default: "00"
+    """
 
     print("Restoring previous values...")
     for index, register in enumerate(sorted(registers), 1):
@@ -223,7 +268,24 @@ def reset_values(registers, initial_value="00"):
 
 
 def write_bruteforce(registers):
-    """Try to find activation candidates of the boiler among the given registers"""
+    """Try to find activation candidates of the boiler among the given registers
+
+    .. warnings:: The boiler should be online but in standby mode, ie. waiting for
+        a heating activation order.
+        For example the register 0120 of the Mira C Green should be enabled.
+        Whithout that, you won't detect when the heater starts.
+
+
+    :Process:
+
+    The list of registers is divided into 10 sections for which the registers
+    will be tested for write attempts.
+
+    If the boiler starts during these tests, the user is invited to mention it.
+    In this case, the list tested is in turn cut into 10 elements until the
+    registers are tested one by one.
+    Otherwise, the following section is tested and so on.
+    """
 
     def chunk_this(iterable, length):
         """Split iterable in chunks of equal sizes"""
@@ -243,9 +305,9 @@ def write_bruteforce(registers):
             ret = input(
                 Fore.LIGHTGREEN_EX + "Did the boiler start ? [Y/n] " + Fore.RESET
             ).lower()
+            sleep(2)
             # Facultative ?? No ! Beware !
             # Mandatory for next tests !
-            sleep(2)
             reset_values(checked_registers)
 
             if not ret in ("y", "o"):
