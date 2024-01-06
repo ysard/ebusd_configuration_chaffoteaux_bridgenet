@@ -144,7 +144,7 @@ Main components:
 
 The power supply is based on an LDO generating a voltage of 3.3V.
 The LM393A voltage comparator is directly powered by this source.
-The MCU ATMEGA 329 is powered by 2.95V when the EBUS power is cut via a 1F capacitor.
+The MCU ATMEGA 329 is powered by 2.95V when the EBUS power is off via a 1F capacitor.
 
 You might be tempted to connect a device such as an ESP12 to this circuit and feed it
 with the LDO, unfortunately it seems to be designed only to provide a very low current.
@@ -155,10 +155,10 @@ and incessant reboots of the boiler.
 Warnings:
 
 - On the image, an external 3.3V power supply is used for the ESP but the ground plane
-**must be common** to the 2 devices.
+**must be common** to both devices.
 - Such a connection will mute the thermostat; the TX pin of the ESP will have priority.
-- You cannot receive what you are sending on the line. To sniff out what the thermostat
-is sending you will need to put the RX pin of the ESP on the TX of the Atmega.
+- You cannot receive what you are sending on the line. **To sniff out what the thermostat
+is sending you will need to put the RX pin of the ESP on the TX of the Atmega**.
 
 ### eBUS circuit
 
