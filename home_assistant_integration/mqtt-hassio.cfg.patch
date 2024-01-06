@@ -12,8 +12,8 @@ index 46d770ef..4024bbba 100644
  #filter-non-circuit =
  # include only messages having the specified name (partial match, alternatives and wildcard supported).
  # HA integration: filter to some useful names for monitoring the heating circuit
--filter-name = status|temp|yield|count|energy|power|runtime|hours|starts|mode|curve|^load$|^party$|sensor|timer
-+#filter-name = status|temp|yield|count|energy|power|runtime|hours|starts|mode|curve|^load$|^party$|sensor|timer
+-filter-name = status|temp|humidity|yield|count|energy|power|runtime|hours|starts|mode|curve|^load$|^party$|sensor|timer
++#filter-name = status|temp|humidity|yield|count|energy|power|runtime|hours|starts|mode|curve|^load$|^party$|sensor|timer
 +filter-name = status|temp|count|mode|curve|z1|dhw|heat|time
  # exclude messages having the specified name (partial match, alternatives and wildcard supported).
 -#filter-non-name =
@@ -40,7 +40,7 @@ index 46d770ef..4024bbba 100644
 +    number,, = s|min$
      number,, = curve,
 +    number,, = slope
- 
+
  # HA integration: the mapping list for numeric sensor entities by field type, name, message, and unit.
  type_switch-number =
 @@ -195,6 +198,9 @@ type_switch-number =
@@ -69,12 +69,12 @@ index 46d770ef..4024bbba 100644
    "state_topic":"%topic",
 -  "name":"global %name"
 +  "name":"%name"
- 
+
  # HA integration: boolean suffix for global parts
  global_boolean_suffix = ,
 @@ -374,6 +381,12 @@ def_global-payload = %global_prefix
  #def_global-retain = 0
- 
+
  # individual global running, version, signal, uptime, updatecheck, and scan config topic, payload, and retain setting.
 +# Force expected value to be a string & strip quotes
 +# expected values : finished, running, OK
