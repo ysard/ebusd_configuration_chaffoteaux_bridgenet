@@ -15,13 +15,11 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
-
-
-
+Interactive script to search the mapping of the error codes sent on eBus
+with the codes displayed on the boiler.
 """
 # Standard imports
 import subprocess
-import itertools as it
 from time import sleep
 from pathlib import Path
 
@@ -104,7 +102,7 @@ def dump_results(error_code, reported_code, *args):
     :type error_code: <str>
     :type reported_code: <str>
     """
-    with open(LOG_FILE, "a") as f_d:
+    with open(LOG_FILE, "a", encoding="utf8") as f_d:
         f_d.write(f"{error_code},{reported_code}," + ",".join(args) + "\n")
 
 
@@ -117,7 +115,7 @@ def load_results():
     :return: List of tuples that contain the 2 codes
     :rtype: <list <tuple <str, str>>>
     """
-    with open(LOG_FILE, "r") as f_d:
+    with open(LOG_FILE, "r", encoding="utf8") as f_d:
         # RESET status is imported and thus, not tested
         error_codes = [
             splitted[:2]
@@ -136,9 +134,9 @@ def sort_results():
     logfile = Path(LOG_FILE)
 
     # Sort & remove duplicates
-    results = sorted(set(logfile.read_text().split()))
+    results = sorted(set(logfile.read_text(encoding="utf8").split()))
 
-    logfile.write_text("\n".join(results))
+    logfile.write_text("\n".join(results), encoding="utf8")
 
 
 def generate_errors(error_codes=tuple(), start=0, end=255, zone_commands=False):
@@ -246,7 +244,6 @@ if __name__ == "__main__":
     sort_results()
 
     compare_with_expected_errors(load_results())
-    exit()
 
     # One or both...
     # The important thing is that error codes must be reset
