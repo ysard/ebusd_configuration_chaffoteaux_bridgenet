@@ -387,15 +387,15 @@ It can be adapted with the displayed expected codes from the boiler documentatio
 | YY | Displayed code | Documented (x if yes) | Signification
 |:--- |:--- |:--- |:--- |
 | 00  | 101 | x   | Surchauffe du circuit primaire
-| 01  | 102 |     |
+| 01  | 102 |     | Anomalie capteur de pression (court-circuité ou pas de signal)
 | 02  | 1P1 | x   | Anomalie débit chauffage
 | 03  | 1P2 | x   | Anomalie débit chauffage
 | 04  | 1P3 | x   | Anomalie débit chauffage
 | 05  | 104 | x   | Anomalie débit chauffage
 | 06  | 107 | x   | Anomalie débit chauffage
-| 07  | 1P4 |     |
-| 08  | 1P4 |     |
-| 09  | 109 |     |
+| 07  | 1P4 |     | Pression insuffisante, remplissage demandé
+| 08  | 1P4 |     | Pression insuffisante, remplissage demandé
+| 09  | 109 |     | Pression excessive >= 3bars
 | 0a  | 110 | x   | Défaut sonde sortie échangeur princ.
 | 0b  | 112 | x   | Défaut sonde entrée échangeur princ
 | 0c  | 114 | x   | Anomalie sonde extérieure
@@ -411,15 +411,15 @@ It can be adapted with the displayed expected codes from the boiler documentatio
 | 16  | 1P7 |     |
 | 17  | 1P8 |     |
 | 18  | 201 | x   | Anomalie sonde sanitaire - URBIA/ SERELIA GREEN
-| 19  | 309 |     |
+| 19  | 309 |     | Dysfonctionnement du bloc Gaz
 | 1a  | 203 | x   | Anomalie sonde ballon - URBIA/ SERELIA GREEN
-| 1b  | 308 |     |
+| 1b  | 308 |     | Erreur de configuration atmosphérique
 | 1c  | 205 | x   | Anomalie sonde entrée sanitaire (solaire)
-| 1e  | 2P2 |     |
+| 1e  | 2P2 |     | Anti bactérie non complété (Urbia Green Evo Mod)
 | 1f  | 209 | x   | Surchauffe ballon - URBIA/ SERELIA GREEN
-| 20  | 301 | x   | Anomalie afficheur EEPR
+| 20  | 301 | x   | Anomalie afficheur EEPROM
 | 21  | 303 | x   | Anomalie carte principale
-| 22  | 304 | x   | Trop de reset éffectués
+| 22  | 304 | x   | Trop de reset effectués (> 5 pour < 15min)
 | 24  | 306 | x   | Anomalie carte principale
 | 26  | 120 |     |
 | 27  | 121 |     |
@@ -433,16 +433,16 @@ It can be adapted with the displayed expected codes from the boiler documentatio
 | 30  | 5P1 | x   | Echec première tentative allumage
 | 31  | 5P2 | x   | Echec seconde tentative allumage
 | 32  | 5P3 | x   | Décollement de flamme
-| 33  | 5P4 |     |
-| 34  | 601 |     |
-| 35  | 602 |     |
-| 36  | 604 |     |
-| 38  | 607 |     |
+| 33  | 5P4 |     | Anomalie ionisation brûleur en fonct.
+| 34  | 601 |     | Anomalie débordement fumée (modèle CF)
+| 35  | 602 |     | Contact de la sécurité VMC (modèle VMC)
+| 36  | 604 |     | Vitesse de l'extracteur insuffisante/Anomalie tachymètre
+| 38  | 607 |     | Contact pressostat fermé avec extracteur non alimenté
 | 39  | 421 |     |
-| 3b  | 610 | x   | Thermofusible ouvert
-| 3c  | 612 | x   | Anomalie sur ventilateur
-| 3d  | 6P1 |     |
-| 3e  | 6P2 |     |
+| 3b  | 610 | x   | Surchauffe échangeur primaire ; thermofusible ouvert
+| 3c  | 612 | x   | Anomalie sur ventilateur ; vitesse de ventilation faible pas de signal du tachymètre au démarrage
+| 3d  | 6P1 |     | Pas de fermeture contact du pressostat après 20s alimentation extracteur
+| 3e  | 6P2 |     | Défaut du pressostat lors d'un fonctionnement de l'extracteur
 | 41  | 422 |     |
 | 42  | 510 |     |
 | 47  | 511 |     |
