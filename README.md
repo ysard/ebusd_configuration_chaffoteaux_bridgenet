@@ -299,7 +299,7 @@ Here is a table with all the zone flags deducted from packet sniffing operations
 
 The XX and YY bytes, for a missing ambient probe on z1 (error 411) **and** z2 (error 412) will be :
 
-    XX: 0x69                <= code for "missing ambient probe" error
+    XX: 0x69                                       <= code for "missing ambient probe" error
     YY: zone_enable + z1 + z2 = 1 + 2 + 4 = 0x6907
 
 Thus, the minimal trigger command will be :
@@ -361,7 +361,7 @@ to a mode that require it (4) for the various zones (z1 to z6) ;
 
 Trigger missing ambient probe errors for z4 + z5 + z6 + z3 + z2 + z1 via the previously showed commands.
 
-| QQZZPBSPSS | XX | YY | 00 | ZZ            | Action | Flag formula
+| QQZZPBSPSS | XX | YY | 00 | ZZ            | Action | YY flag formula
 |:--- |:--- |:--- |:--- |:--- |:--- |:--- |
 | 37fe200404 | 69 | 11 | 00 | 64            | +z4    | 0x11-0x01 = 16
 | 37fe200405 | 69 | 31 | 00 | 6465          | +z5    | 0x31-0x11 = 32
