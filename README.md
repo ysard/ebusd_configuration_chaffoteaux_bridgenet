@@ -382,7 +382,85 @@ Trigger missing ambient probe errors for z4 + z5 + z6 + z3 + z2 + z1 via the pre
 Just use the interactive script [here](./tools/bruteforce_errors.py);
 It can be adapted with the displayed expected codes from the boiler documentation.
 
+## Full error codes for Mira C Green
 
+| YY | Displayed code | Documented (x if yes) | Signification
+|:--- |:--- |:--- |:--- |
+| 00  | 101 | x   | Surchauffe du circuit primaire
+| 01  | 102 |     |
+| 02  | 1P1 | x   | Anomalie débit chauffage
+| 03  | 1P2 | x   | Anomalie débit chauffage
+| 04  | 1P3 | x   | Anomalie débit chauffage
+| 05  | 104 | x   | Anomalie débit chauffage
+| 06  | 107 | x   | Anomalie débit chauffage
+| 07  | 1P4 |     |
+| 08  | 1P4 |     |
+| 09  | 109 |     |
+| 0a  | 110 | x   | Défaut sonde sortie échangeur princ.
+| 0b  | 112 | x   | Défaut sonde entrée échangeur princ
+| 0c  | 114 | x   | Anomalie sonde extérieure
+| 0d  | 116 | x   | Thermostat plancher ouvert
+| 0e  | 118 | x   | Anomalie sonde circuit primaire
+| 0f  | 103 | x   | Anomalie débit chauffage
+| 10  | 105 | x   | Anomalie débit chauffage
+| 11  | 106 | x   | Anomalie débit chauffage
+| 12  | 108 | x   | Remplissage circuit chauffage demandé
+| 13  | 111 |     |
+| 14  | 1P5 |     |
+| 15  | 1P6 |     |
+| 16  | 1P7 |     |
+| 17  | 1P8 |     |
+| 18  | 201 | x   | Anomalie sonde sanitaire - URBIA/ SERELIA GREEN
+| 19  | 309 |     |
+| 1a  | 203 | x   | Anomalie sonde ballon - URBIA/ SERELIA GREEN
+| 1b  | 308 |     |
+| 1c  | 205 | x   | Anomalie sonde entrée sanitaire (solaire)
+| 1e  | 2P2 |     |
+| 1f  | 209 | x   | Surchauffe ballon - URBIA/ SERELIA GREEN
+| 20  | 301 | x   | Anomalie afficheur EEPR
+| 21  | 303 | x   | Anomalie carte principale
+| 22  | 304 | x   | Trop de reset éffectués
+| 24  | 306 | x   | Anomalie carte principale
+| 26  | 120 |     |
+| 27  | 121 |     |
+| 28  | 122 |     |
+| 29  | 123 |     |
+| 2a  | 311 |     |
+| 2b  | 312 |     |
+| 2d  | 501 | x   | Absence de flamme
+| 2e  | 502 | x   | Détect. flamme vanne gaz fermée
+| 2f  | 504 | x   | Anomalie ionisation brûleur en fonct.
+| 30  | 5P1 | x   | Echec première tentative allumage
+| 31  | 5P2 | x   | Echec seconde tentative allumage
+| 32  | 5P3 | x   | Décollement de flamme
+| 33  | 5P4 |     |
+| 34  | 601 |     |
+| 35  | 602 |     |
+| 36  | 604 |     |
+| 38  | 607 |     |
+| 39  | 421 |     |
+| 3b  | 610 | x   | Thermofusible ouvert
+| 3c  | 612 | x   | Anomalie sur ventilateur
+| 3d  | 6P1 |     |
+| 3e  | 6P2 |     |
+| 41  | 422 |     |
+| 42  | 510 |     |
+| 47  | 511 |     |
+| 49  | 3P9 | x   | Prévoir entretien. Contacter SAV
+| 4b  | 620 |     |
+| 4c  | 621 |     |
+| 69  | 410 | x*  | Sonde ambiance zone (*) non dispo.
+| 69  | 411 | x   | Sonde ambiance zone z1 non dispo.
+| 69  | 412 | x   | Sonde ambiance zone z2 non dispo.
+| 69  | 413 | x   | Sonde ambiance zone z3 non dispo.
+| 69  | 414 |     | Sonde ambiance zone z4 non dispo.
+| 69  | 415 |     | Sonde ambiance zone z5 non dispo.
+| 69  | 416 |     | Sonde ambiance zone z6 non dispo.
+| ec  | --- |     | Sonde extérieure débranchée
+
+*: Zone error : variations for each zone are not displayed
+
+Missing codes for Mira C Green (not suppoted?) : '302', '305', '307'
 
 # Handshake procedure
 
