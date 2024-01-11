@@ -115,6 +115,9 @@ def load_results():
     :return: List of tuples that contain the 2 codes
     :rtype: <list <tuple <str, str>>>
     """
+    if not Path(LOG_FILE).exists():
+        return
+
     with open(LOG_FILE, "r", encoding="utf8") as f_d:
         # RESET status is imported and thus, not tested
         error_codes = [
@@ -132,6 +135,9 @@ def sort_results():
     .. todo:: Once a code is found, also remove previous attempts (skipped, error)
     """
     logfile = Path(LOG_FILE)
+
+    if not logfile.exists():
+        return
 
     # Sort & remove duplicates
     results = sorted(set(logfile.read_text(encoding="utf8").split()))
@@ -171,7 +177,7 @@ def generate_errors(error_codes=tuple(), start=0, end=255, zone_commands=False):
     reset_value = "01" if zone_commands else "00"
 
     # Get only hex codes
-    error_codes = set(list(zip(*error_codes))[0])
+    error_codes = set(list(zip(*error_codes))[0]) if error_codes else set()
 
     for error_code in range(start, end + 1):
         error_code = "{0:02x}".format(error_code)
@@ -230,7 +236,7 @@ def compare_with_expected_errors(error_codes):
         See :meth:`load_results`.
     """
     # Get only human readable codes
-    error_codes = set(list(zip(*error_codes))[1])
+    error_codes = set(list(zip(*error_codes))[1]) if error_codes else set()
 
     missing_codes = sorted(EXPECTED_ERRORS - error_codes)
     print("Missing codes:\n", missing_codes)
