@@ -235,6 +235,155 @@ Default prog
 000000000000000000000000    => no heating
 ```
 
+# Protocol for the errors
+
+- Appearance/disappearance packets always go through 3 repetitions.
+- The order of appearance plays no role since they can be deleted in any order.
+However, an error masks the previous one on the display.
+- Unknown errors (not supported by the boiler) are displayed as `---`, and cannot
+(for now?) be removed unless a bus reset command is sent.
+However, they do not prevent further testing of other errors.
+- Some errors are silent because they are not displayed. For example, disconnecting the external
+temperature sensor always triggers an error (`0xec`). On the other hand, disconnecting
+it when the control mode is 3 or 4 (external sensor required) will generate an additional
+error `0x0c`, code `114`, which is displayed this time.
+- The resolution command is made of the error code, followed by a default byte.
+- The minimal trigger command is made of the error code, followed by the default byte + a flag value.
+- You can generate/replay errors by broadcasting them, not just by touching the hardware
+(which is very useful for reversing).
+In this way, the following command will generate a `411` error (z1 missing ambient probe)
+on the boiler display :
+
+    ~/ebusd/build/src/tools/ebusctl hex fe20040469030061
+
+However, to remove it, you need to use its resolution command :
+
+    ~/ebusd/build/src/tools/ebusctl hex fe200403690100
+
+
+## Overall packet structure:
+
+Any packet error consists of:
+
+```
+QQ,ZZ,PBSB,SS,XX,YY,00,ZZ
+```
+
+- QQ: src address
+- ZZ: dest address
+- PBSB: command bytes, always 2004 here
+- SS: packet length in bytes
+- XX: error code (which we want to map with the code displayed on the boiler)
+- YY: zone flags (see below)
+- 00: spacer ?
+- ZZ: specific error codes sent by the boiler but not mandatory to define an error
+=> redundant data ?
+
+
+Each bit in YY byte has a signification. The LSB seems to be always set when a zone is concerned.
+
+Here is a table with all the zone flags deducted from packet sniffing operations :
+
+| zone flags  | dec value       | bin value    |
+|:--- |:--- |:--- |
+| zone_enable | 1               | `0b00000001` |
+| z1          | 2               | `0b00000010` |
+| z2          | 4               | `0b00000100` |
+| z3          | 8               | `0b00001000` |
+| z4          | 16              | `0b00010000` |
+| z5          | 32              | `0b00100000` |
+| z6          | 64              | `0b01000000` |
+| z7          | non-functional? | `?`          |
+
+## Examples
+
+The XX and YY bytes, for a missing ambient probe on z1 (error 411) **and** z2 (error 412) will be :
+
+    XX: 0x69                <= code for "missing ambient probe" error
+    YY: zone_enable + z1 + z2 = 1 + 2 + 4 = 0x6907
+
+Thus, the minimal trigger command will be :
+
+`fe2004026907`
+
+The resolution command is the YY byte without the flags, but it's still an error related to some zones,
+so the `zone_enable` flag must be set :
+
+`fe2004026901`
+
+In fact, other bytes are present after YY such as ZZ sequence; but they are not mandatory
+to trigger and resolute errors.
+
+## Packet sniffing
+
+Steps to reverse the protocol:
+
+- Disconnect ambient probe from eBus if there is one ;
+- Set the thermoregulation type (command ids c079,c07a,c07b,c07c,c07d,c07e)
+to a mode that require it (4) for the various zones (z1 to z6) ;
+- Wait for packets in ebusd logs ;
+- Switch the thermoregulation type to 0 or 1 for a zone and wait for the resolution packet
+
+```shell
+# Trigger missing ambient probe z1 (411) by switching c079 to mode 4
+~/ebusd/build/src/tools/ebusctl hex fe202003c07904
+00:44:57.863     37fe200404 69030061
+00:44:57.985     37fe200404 69030061
+00:45:27.857     37fe200404 69030061
+# Resolution by switching to mode 0
+~/ebusd/build/src/tools/ebusctl hex fe202003c07900
+00:49:15.420     37fe200403 690100
+00:49:17.620     37fe200403 690100
+00:49:27.642     37fe200403 690100
+# Trigger missing ambient probe z2 (412) by switching c07a to mode 4
+~/ebusd/build/src/tools/ebusctl hex fe202003c07a04
+00:55:03.297     37fe200404 69050062
+00:55:07.301     37fe200404 69050062
+00:55:27.314     37fe200404 69050062
+# Resolution by switching to mode 1
+~/ebusd/build/src/tools/ebusctl hex fe202003c07a01
+00:55:56.450     37fe200403 690100
+00:55:57.279     37fe200403 690100
+00:57:27.213     37fe200403 690100
+# Trigger missing ambient probe z3 (413) by switching c07b to mode 4
+~/ebusd/build/src/tools/ebusctl hex fe202003c07b04
+0:58:44.920      37fe200404 69090063
+0:58:47.124      37fe200404 69090063
+0:59:27.108      37fe200404 69090063
+# Resolution by switching to mode 1
+~/ebusd/build/src/tools/ebusctl hex fe202003c07b01
+01:00:28.030     37fe200403 690100
+01:00:37.280     37fe200403 690100
+01:01:27.235     37fe200403 690100
+```
+
+## Cumulated errors & flags discovery
+
+Trigger missing ambient probe errors for z4 + z5 + z6 + z3 + z2 + z1 via the previously showed commands.
+
+| QQZZPBSPSS | XX | YY | 00 | ZZ            | Action | Flag formula
+|:--- |:--- |:--- |:--- |:--- |:--- |:--- |
+| 37fe200404 | 69 | 11 | 00 | 64            | +z4    | 0x11-0x01 = 16
+| 37fe200405 | 69 | 31 | 00 | 6465          | +z5    | 0x31-0x11 = 32
+| 37fe200406 | 69 | 71 | 00 | 646566        | +z6    | 0x71-0x31 = 64
+| 37fe200407 | 69 | 79 | 00 | 63646566      | +z3    | 0x79-0x71 = 8
+| 37fe200408 | 69 | 7d | 00 | 6263646566    | +z2    | 0x7d-0x79 = 4
+| 37fe200409 | 69 | 7f | 00 | 616263646566  | +z1    | 0x7f-0x7d = 2
+| 37fe200408 | 69 | 3f | 00 | 6162636465    | -z6    |
+| 37fe200407 | 69 | 1f | 00 | 61626364      | -z5    |
+| 37fe200406 | 69 | 0f | 00 | 616263        | -z4    |
+| 37fe200405 | 69 | 07 | 00 | 6162          | -z3    |
+| 37fe200404 | 69 | 03 | 00 | 61            | -z2    |
+| 37fe200403 | 69 | 01 | 00 |               | -z1    |
+
+
+## Bruteforce the errors to discover their corresponding codes
+
+Just use the interactive script [here](./tools/bruteforce_errors.py);
+It can be adapted with the displayed expected codes from the boiler documentation.
+
+
+
 # Handshake procedure
 
 TODO: help needed
