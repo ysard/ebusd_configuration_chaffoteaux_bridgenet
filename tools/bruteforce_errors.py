@@ -236,12 +236,12 @@ def compare_with_expected_errors(error_codes):
         See :meth:`load_results`.
     """
     # Get only human readable codes
-    error_codes = set(list(zip(*error_codes))[1]) if error_codes else set()
+    reported_code = set(list(zip(*error_codes))[1]) if error_codes else set()
 
-    missing_codes = sorted(EXPECTED_ERRORS - error_codes)
+    missing_codes = sorted(EXPECTED_ERRORS - reported_code)
     print("Missing codes:\n", missing_codes)
 
-    excess_codes = sorted(error_codes - EXPECTED_ERRORS)
+    excess_codes = sorted(reported_code - EXPECTED_ERRORS)
     print("Excess codes:\n", excess_codes)
 
 
