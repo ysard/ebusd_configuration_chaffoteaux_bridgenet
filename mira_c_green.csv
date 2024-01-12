@@ -206,3 +206,7 @@ r,broadcast,accept_telegrams_z3_fixed_temp_2010,Accept telegrams for z3_fixed_te
 w,easy_control_bus,z1_room_temp,Z1 Room temperature,70,fe,2010,7118,,s,SIN,10,°C,,01 ?,s,IGN,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 # Sent every 30 seconds,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 w,easy_control_bus,z1_heat_request,Z1 Heating Request,70,fe,2010,1919,,s,BCD,0=off;1=on,,,01 ?,s,IGN,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+# Errors,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+r,broadcast,error_code,Error,37,fe,2004,,,s,error_codes,,,,zone_flag,s,UCH,00=inactive;02=active;01=zone_inactive;03=z1_active;05=z2_active;07=z1_z2_active,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
