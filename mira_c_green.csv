@@ -209,4 +209,4 @@ w,easy_control_bus,z1_heat_request,Z1 Heating Request,70,fe,2010,1919,,s,BCD,0=o
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 # Errors,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-r,broadcast,error_code,Error,37,fe,2004,,,s,error_codes,,,,zone_flag,s,UCH,00=inactive;02=active;01=zone_inactive;03=z1_active;05=z2_active;07=z1_z2_active,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+r,boiler,error_code,Error,,fe,2004,,,s,error_code,,,,zone_status,s,UCH,00=inactive;02=active;01=zone_inactive;03=z1_active;05=z2_active;07=z1_z2_active,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
