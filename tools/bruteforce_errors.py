@@ -245,6 +245,22 @@ def compare_with_expected_errors(error_codes):
     print("Excess codes:\n", excess_codes)
 
 
+def to_csv_template(error_codes):
+    """Convert the mapping to a string ready to be inserted in _templates.csv for ebusd
+
+    :param error_codes: Accept a list of known codes, that will not be tested.
+        See :meth:`load_results`.
+    """
+    if not error_codes:
+        return
+
+    d = ";".join(
+        [f"{k}={v}" for k, v in dict([(int(k, 16), v) for k, v in error_codes]).items()]
+    )
+
+    print("csv template string:\n", d)
+
+
 if __name__ == "__main__":
     # Reorder results file
     sort_results()
@@ -259,3 +275,6 @@ if __name__ == "__main__":
 
     # Reorder results file
     sort_results()
+
+    # Build sequence for _templates.csv
+    to_csv_template(load_results())
