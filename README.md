@@ -460,7 +460,7 @@ It can be adapted with the displayed expected codes from the boiler documentatio
 
 *: Zone error : variations for each zone are not displayed
 
-Missing codes for Mira C Green (not suppoted?) : '302', '305', '307'
+Missing codes for Mira C Green (not supported?) : '302', '305', '307'
 
 # Handshake procedure
 
