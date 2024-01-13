@@ -277,6 +277,7 @@ automation format_error_code:
     condition: "{{ states.counter.error_count.state|int(0) <= 0 }}"
     action:
       # Delay the sensor reset
+      # The resolution message will be visible for a sufficient length of time in the history
       - delay: "00:00:30"
       - service: python_script.set_state
         data_template:
