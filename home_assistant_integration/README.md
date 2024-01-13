@@ -72,6 +72,9 @@ From here, an additional script is mandatory ;
 `set_state.py` must be put in the `python_scripts/` directory of your HA installation.
 The script is available here: <https://github.com/xannor/hass_py_set_state>.
 
+Result:
+![](./assets/integration_errors.webp)
+
 ## Specific widgets
 
 For multiple choice inputs such as `z1_thermoreg_type` and `dhw_comfort_mode_status_w`,
