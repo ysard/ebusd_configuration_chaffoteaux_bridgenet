@@ -14,6 +14,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+# Entities with multiple choices
+# (if you don't want to let ebusd integration to send values to HA by itself)
 input_select:
   z1_thermoreg_type:
     name: Z1 Thermoregulation type
@@ -33,6 +35,97 @@ input_select:
       - "Always on"
     icon: mdi:shower-head
 
+
+automation z1_thermoreg_type:
+  # This automation script runs when a value is received via MQTT on retained topic: thermostatMode
+  # It sets the value selector on the GUI. This selector also had its own automation when the value
+  # is changed.
+  - alias: "Set Thermoregulation type selector"
+    trigger:
+      platform: mqtt
+      topic: "ebusd/boiler/z1_thermoreg_type"
+      # entity_id: input_select.z1_thermoreg_type
+    action:
+      service: input_select.select_option
+      target:
+        entity_id: input_select.z1_thermoreg_type
+      data:
+        option: >
+          {% set thermoreg_types_map = {
+            'fixed_temp': 'Fixed temp',
+            'basic_on_off': 'Basic On/Off',
+            'room_temp_only': 'Room temp only',
+            'outdoor_temp_only': 'Outdoor temp only',
+            'outdoor_and_room': 'Outdour and room temp'
+          } %}
+          {{ thermoreg_types_map.get(trigger.payload_json.thermoreg_types.value, 'basic_on_off') }}
+
+
+  # This automation script runs when the selector is changed.
+  # It publishes its value to the same MQTT topic it is also subscribed to.
+  - alias: "Set Thermoregulation type"
+    trigger:
+      platform: state
+      entity_id: input_select.z1_thermoreg_type
+    action:
+      service: mqtt.publish
+      data:
+        topic: "ebusd/boiler/z1_thermoreg_type/set"
+        payload: >
+          {% set thermoreg_types_map = {
+            'Fixed temp': 'fixed_temp',
+            'Basic On/Off': 'basic_on_off',
+            'Room temp only': 'room_temp_only',
+            'Outdoor temp only': 'outdoor_temp_only',
+            'Outdour and room temp': 'outdoor_and_room'
+           } %}
+           {{ thermoreg_types_map.get(states.input_select.z1_thermoreg_type.state, 'basic_on_off') }}
+
+
+automation dhw_comfort_mode:
+  # This automation script runs when a value is received via MQTT on retained topic
+  # It sets the value selector on the GUI. This selector also had its own automation when the value
+  # is changed.
+  - alias: "Set DHW comfort mode selector"
+    trigger:
+      platform: mqtt
+      topic: "ebusd/dhw/dhw_comfort_mode_status_w"
+      # entity_id: input_select.dhw_comfort_mode
+    action:
+      service: input_select.select_option
+      target:
+        entity_id: input_select.dhw_comfort_mode
+      data:
+        option: >
+          {% set opt_to_display_map = {
+            'off': 'Off',
+            'delayed_on': 'Delayed',
+            'always_on': 'Always on'
+          } %}
+          {{ opt_to_display_map.get(trigger.payload_json.comfort_modes.value, 'off') }}
+
+
+  # This automation script runs when the selector is changed.
+  # It publishes its value to the same MQTT topic it is also subscribed to.
+  - alias: "Set DHW comfort mode"
+    trigger:
+      platform: state
+      entity_id: input_select.dhw_comfort_mode
+    action:
+      service: mqtt.publish
+      data:
+        topic: "ebusd/dhw/dhw_comfort_mode_status_w/set"
+        payload: >
+          {% set display_to_opt_map = {
+            'Off': 'off',
+            'Delayed': 'delayed_on',
+            'Always on': 'always_on'
+           } %}
+           {{ display_to_opt_map.get(states.input_select.dhw_comfort_mode.state, 'off') }}
+
+
+# Error codes
+
 sensor:
   error_code:
     name: "Last error code"
@@ -49,6 +142,9 @@ automation format_error_code:
       platform: mqtt
       topic: "ebusd/boiler/error_code"
     action:
+      # Requirement :
+      # set_state.py must be put in the python_scripts/ directory of your HA installation.
+      # Script is here: https://github.com/xannor/hass_py_set_state
       service: python_script.set_state
       data_template:
         entity_id: sensor.error_code
@@ -150,94 +246,6 @@ automation format_error_code:
           {% set displayed_text = "{} - {} {}".format(error_text, zone_text, error_numeric_code_text) %}
 
           {{ displayed_text }}
-
-
-automation z1_thermoreg_type:
-  # This automation script runs when a value is received via MQTT on retained topic: thermostatMode
-  # It sets the value selector on the GUI. This selector also had its own automation when the value
-  # is changed.
-  - alias: "Set Thermoregulation type selector"
-    trigger:
-      platform: mqtt
-      topic: "ebusd/boiler/z1_thermoreg_type"
-      # entity_id: input_select.z1_thermoreg_type
-    action:
-      service: input_select.select_option
-      target:
-        entity_id: input_select.z1_thermoreg_type
-      data:
-        option: >
-          {% set thermoreg_types_map = {
-            'fixed_temp': 'Fixed temp',
-            'basic_on_off': 'Basic On/Off',
-            'room_temp_only': 'Room temp only',
-            'outdoor_temp_only': 'Outdoor temp only',
-            'outdoor_and_room': 'Outdour and room temp'
-          } %}
-          {{ thermoreg_types_map.get(trigger.payload_json.thermoreg_types.value, 'basic_on_off') }}
-
-
-  # This automation script runs when the selector is changed.
-  # It publishes its value to the same MQTT topic it is also subscribed to.
-  - alias: "Set Thermoregulation type"
-    trigger:
-      platform: state
-      entity_id: input_select.z1_thermoreg_type
-    action:
-      service: mqtt.publish
-      data:
-        topic: "ebusd/boiler/z1_thermoreg_type/set"
-        payload: >
-          {% set thermoreg_types_map = {
-            'Fixed temp': 'fixed_temp',
-            'Basic On/Off': 'basic_on_off',
-            'Room temp only': 'room_temp_only',
-            'Outdoor temp only': 'outdoor_temp_only',
-            'Outdour and room temp': 'outdoor_and_room'
-           } %}
-           {{ thermoreg_types_map.get(states.input_select.z1_thermoreg_type.state, 'basic_on_off') }}
-
-
-automation dhw_comfort_mode:
-  # This automation script runs when a value is received via MQTT on retained topic
-  # It sets the value selector on the GUI. This selector also had its own automation when the value
-  # is changed.
-  - alias: "Set DHW comfort mode selector"
-    trigger:
-      platform: mqtt
-      topic: "ebusd/dhw/dhw_comfort_mode_status_w"
-      # entity_id: input_select.dhw_comfort_mode
-    action:
-      service: input_select.select_option
-      target:
-        entity_id: input_select.dhw_comfort_mode
-      data:
-        option: >
-          {% set opt_to_display_map = {
-            'off': 'Off',
-            'delayed_on': 'Delayed',
-            'always_on': 'Always on'
-          } %}
-          {{ opt_to_display_map.get(trigger.payload_json.comfort_modes.value, 'off') }}
-
-
-  # This automation script runs when the selector is changed.
-  # It publishes its value to the same MQTT topic it is also subscribed to.
-  - alias: "Set DHW comfort mode"
-    trigger:
-      platform: state
-      entity_id: input_select.dhw_comfort_mode
-    action:
-      service: mqtt.publish
-      data:
-        topic: "ebusd/dhw/dhw_comfort_mode_status_w/set"
-        payload: >
-          {% set display_to_opt_map = {
-            'Off': 'off',
-            'Delayed': 'delayed_on',
-            'Always on': 'always_on'
-           } %}
-           {{ display_to_opt_map.get(states.input_select.dhw_comfort_mode.state, 'off') }}
 
 
 homeassistant:
