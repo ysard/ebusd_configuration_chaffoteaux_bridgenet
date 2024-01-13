@@ -468,7 +468,7 @@ Missing codes for Mira C Green (not supported?) : '302', '305', '307'
 
 # Handshake procedure
 
-TODO: help needed
+TODO: help needed; See Issue ysard/ebusd_configuration_chaffoteaux_bridgenet#3.
 
 
 # Help request
