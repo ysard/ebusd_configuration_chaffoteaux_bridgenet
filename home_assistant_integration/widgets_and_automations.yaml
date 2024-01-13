@@ -126,126 +126,163 @@ automation dhw_comfort_mode:
 
 # Error codes
 
+counter:
+  error_count:
+    initial: 0
+    step: 1
+
 sensor:
   error_code:
-    name: "Last error code"
+    name: "Error code"
     unique_id: error_code
     icon: mdi:alert-outline
+    state: >-
+        {{ "Nothing" }}
 
 python_scripts:
     # Activate python scripts for format_error_code automation
 
 automation format_error_code:
+  # Requirement :
+  # set_state.py must be put in the python_scripts/ directory of your HA installation.
+  # Script is here: https://github.com/xannor/hass_py_set_state
   - alias: "Format error code"
     id: format_error_code
     trigger:
       platform: mqtt
       topic: "ebusd/boiler/error_code"
     action:
-      # Requirement :
-      # set_state.py must be put in the python_scripts/ directory of your HA installation.
-      # Script is here: https://github.com/xannor/hass_py_set_state
-      service: python_script.set_state
-      data_template:
-        entity_id: sensor.error_code
-        state: >-
-          {% set error_codes_text_map = {
-            "101": "Surchauffe du circuit primaire",
-            "102": "Anomalie capteur de pression (court-circuité ou pas de signal)",
-            "1P1": "Anomalie débit chauffage",
-            "1P2": "Anomalie débit chauffage",
-            "1P3": "Anomalie débit chauffage",
-            "104": "Anomalie débit chauffage",
-            "107": "Anomalie débit chauffage",
-            "1P4": "Pression insuffisante, remplissage demandé",
-            "1P4": "Pression insuffisante, remplissage demandé",
-            "109": "Pression excessive >= 3bars",
-            "110": "Défaut sonde sortie échangeur princ.",
-            "112": "Défaut sonde entrée échangeur princ",
-            "114": "Anomalie sonde extérieure",
-            "116": "Thermostat plancher ouvert",
-            "118": "Anomalie sonde circuit primaire",
-            "103": "Anomalie débit chauffage",
-            "105": "Anomalie débit chauffage",
-            "106": "Anomalie débit chauffage",
-            "108": "Remplissage circuit chauffage demandé",
-            "111": "?",
-            "1P5": "?",
-            "1P6": "?",
-            "1P7": "?",
-            "1P8": "?",
-            "201": "Anomalie sonde sanitaire - URBIA/ SERELIA GREEN",
-            "309": "Dysfonctionnement du bloc Gaz",
-            "203": "Anomalie sonde ballon - URBIA/ SERELIA GREEN",
-            "308": "Erreur de configuration atmosphérique",
-            "205": "Anomalie sonde entrée sanitaire (solaire)",
-            "2P2": "Anti bactérie non complété (Urbia Green Evo Mod)",
-            "209": "Surchauffe ballon - URBIA/ SERELIA GREEN",
-            "301": "Anomalie afficheur EEPROM",
-            "303": "Anomalie carte principale",
-            "304": "Trop de reset effectués (> 5 pour < 15min)",
-            "306": "Anomalie carte principale",
-            "120": "?",
-            "121": "?",
-            "122": "?",
-            "123": "?",
-            "311": "?",
-            "312": "?",
-            "501": "Absence de flamme",
-            "502": "Détect. flamme vanne gaz fermée",
-            "504": "Anomalie ionisation brûleur en fonct.",
-            "5P1": "Echec première tentative allumage",
-            "5P2": "Echec seconde tentative allumage",
-            "5P3": "Décollement de flamme",
-            "5P4": "Anomalie ionisation brûleur en fonct.",
-            "601": "Anomalie débordement fumée (modèle CF)",
-            "602": "Contact de la sécurité VMC (modèle VMC)",
-            "604": "Vitesse de l'extracteur insuffisante/Anomalie tachymètre",
-            "607": "Contact pressostat fermé avec extracteur non alimenté",
-            "421": "?",
-            "610": "Surchauffe échangeur primaire ; thermofusible ouvert",
-            "612": "Anomalie sur ventilateur ; vitesse de ventilation faible pas de signal du tachymètre au démarrage",
-            "6P1": "Pas de fermeture contact du pressostat après 20s alimentation extracteur",
-            "6P2": "Défaut du pressostat lors d'un fonctionnement de l'extracteur",
-            "422": "?",
-            "510": "?",
-            "511": "?",
-            "3P9": "Prévoir entretien. Contacter SAV",
-            "620": "?",
-            "621": "?",
-            "410": "Sonde ambiance non dispo.",
-            "411": "Sonde ambiance zone z1 non dispo.",
-            "412": "Sonde ambiance zone z2 non dispo.",
-            "413": "Sonde ambiance zone z3 non dispo.",
-            "414": "Sonde ambiance zone z4 non dispo.",
-            "415": "Sonde ambiance zone z5 non dispo.",
-            "416": "Sonde ambiance zone z6 non dispo.",
-            "---": "Sonde extérieure débranchée",
-          } %}
-          {% set zone_status_map = {
-            "inactive": "Supprimée",
-            "zone_inactive": "Supprimée",
-            "active": "",
-            "z1_active": "Zone 1",
-            "z2_active": "Zone 2",
-            "z1_z2_active": "Zone 1 et 2",
-          } %}
-          {% set error_codes_map = {
-            ("410", "zone_inactive"): "",
-            ("410", "z1_active"): "(411)",
-            ("410", "z2_active"): "(412)",
-            ("410", "z1_z2_active"): "(411 & 412)",
-          } %}
-          {% set error_code_value = trigger.payload_json.error_code.value %}
-          {% set error_zone_status_value = trigger.payload_json.zone_status.value %}
+      - service: python_script.set_state
+        data_template:
+          entity_id: sensor.error_code
+          state: >-
+            {% set error_codes_text_map = {
+              "101": "Surchauffe du circuit primaire",
+              "102": "Anomalie capteur de pression (court-circuité ou pas de signal)",
+              "1P1": "Anomalie débit chauffage",
+              "1P2": "Anomalie débit chauffage",
+              "1P3": "Anomalie débit chauffage",
+              "104": "Anomalie débit chauffage",
+              "107": "Anomalie débit chauffage",
+              "1P4": "Pression insuffisante, remplissage demandé",
+              "1P4": "Pression insuffisante, remplissage demandé",
+              "109": "Pression excessive >= 3bars",
+              "110": "Défaut sonde sortie échangeur princ.",
+              "112": "Défaut sonde entrée échangeur princ",
+              "114": "Anomalie sonde extérieure",
+              "116": "Thermostat plancher ouvert",
+              "118": "Anomalie sonde circuit primaire",
+              "103": "Anomalie débit chauffage",
+              "105": "Anomalie débit chauffage",
+              "106": "Anomalie débit chauffage",
+              "108": "Remplissage circuit chauffage demandé",
+              "111": "?",
+              "1P5": "?",
+              "1P6": "?",
+              "1P7": "?",
+              "1P8": "?",
+              "201": "Anomalie sonde sanitaire - URBIA/ SERELIA GREEN",
+              "309": "Dysfonctionnement du bloc Gaz",
+              "203": "Anomalie sonde ballon - URBIA/ SERELIA GREEN",
+              "308": "Erreur de configuration atmosphérique",
+              "205": "Anomalie sonde entrée sanitaire (solaire)",
+              "2P2": "Anti bactérie non complété (Urbia Green Evo Mod)",
+              "209": "Surchauffe ballon - URBIA/ SERELIA GREEN",
+              "301": "Anomalie afficheur EEPROM",
+              "303": "Anomalie carte principale",
+              "304": "Trop de reset effectués (> 5 pour < 15min)",
+              "306": "Anomalie carte principale",
+              "120": "?",
+              "121": "?",
+              "122": "?",
+              "123": "?",
+              "311": "?",
+              "312": "?",
+              "501": "Absence de flamme",
+              "502": "Détect. flamme vanne gaz fermée",
+              "504": "Anomalie ionisation brûleur en fonct.",
+              "5P1": "Echec première tentative allumage",
+              "5P2": "Echec seconde tentative allumage",
+              "5P3": "Décollement de flamme",
+              "5P4": "Anomalie ionisation brûleur en fonct.",
+              "601": "Anomalie débordement fumée (modèle CF)",
+              "602": "Contact de la sécurité VMC (modèle VMC)",
+              "604": "Vitesse de l'extracteur insuffisante/Anomalie tachymètre",
+              "607": "Contact pressostat fermé avec extracteur non alimenté",
+              "421": "?",
+              "610": "Surchauffe échangeur primaire ; thermofusible ouvert",
+              "612": "Anomalie sur ventilateur ; vitesse de ventilation faible pas de signal du tachymètre au démarrage",
+              "6P1": "Pas de fermeture contact du pressostat après 20s alimentation extracteur",
+              "6P2": "Défaut du pressostat lors d'un fonctionnement de l'extracteur",
+              "422": "?",
+              "510": "?",
+              "511": "?",
+              "3P9": "Prévoir entretien. Contacter SAV",
+              "620": "?",
+              "621": "?",
+              "410": "Sonde ambiance non dispo.",
+              "411": "Sonde ambiance zone z1 non dispo.",
+              "412": "Sonde ambiance zone z2 non dispo.",
+              "413": "Sonde ambiance zone z3 non dispo.",
+              "414": "Sonde ambiance zone z4 non dispo.",
+              "415": "Sonde ambiance zone z5 non dispo.",
+              "416": "Sonde ambiance zone z6 non dispo.",
+              "---": "Sonde extérieure débranchée",
+            } %}
+            {% set zone_status_map = {
+              "inactive": "Deleted",
+              "zone_inactive": "Deleted",
+              "active": "",
+              "z1_active": "Zone 1",
+              "z2_active": "Zone 2",
+              "z1_z2_active": "Zone 1 et 2",
+            } %}
+            {% set error_codes_map = {
+              ("410", "zone_inactive"): "4xx",
+              ("410", "z1_active"): "411",
+              ("410", "z2_active"): "412",
+              ("410", "z1_z2_active"): "411 & 412",
+            } %}
+            {% set error_code_value = trigger.payload_json.error_code.value %}
+            {% set error_zone_status_value = trigger.payload_json.zone_status.value %}
 
-          {% set error_text = error_codes_text_map.get(error_code_value, "Inconnue") %}
-          {% set zone_text = zone_status_map.get(error_zone_status_value, "Inconnue") %}
-          {% set error_numeric_code_text = error_codes_map.get((error_code_value, error_zone_status_value), error_code_value) %}
+            {% set error_text = error_codes_text_map.get(error_code_value, "Unknown") %}
+            {% set zone_text = zone_status_map.get(error_zone_status_value, "Unknown") %}
+            {% set error_numeric_code_text = error_codes_map.get((error_code_value, error_zone_status_value), error_code_value) %}
 
-          {% set displayed_text = "{} - {} {}".format(error_text, zone_text, error_numeric_code_text) %}
+            {% set displayed_text = "{} - {} ({})".format(error_text, zone_text, error_numeric_code_text) %}
 
-          {{ displayed_text }}
+            {{ displayed_text }}
+
+      - service: counter.set_value
+        # Keep a track of the number of active errors,
+        # so we can reset the message when all of them are gone.
+        target:
+          entity_id: counter.error_count
+        data:
+          value: >-
+            {% set error_zone_status_value = trigger.payload_json.zone_status.value %}
+            {% if error_zone_status_value in ["inactive", "zone_inactive"] %}
+              {{ states.counter.error_count.state|int(0) - 1 }}
+            {% else %}
+              {{ states.counter.error_count.state|int(0) + 1 }}
+            {% endif %}
+
+  - alias: Reset error code
+    # When the counter is out, the error_code sensor is reset with a default message
+    id: reset_error_code
+    trigger:
+      platform: state
+      entity_id: counter.error_count
+    condition: "{{ states.counter.error_count.state|int(0) <= 0 }}"
+    action:
+      # Delay the sensor reset
+      - delay: "00:00:30"
+      - service: python_script.set_state
+        data_template:
+          entity_id: sensor.error_code
+          state: >-
+            {{ "Nothing" }}
 
 
 homeassistant:
