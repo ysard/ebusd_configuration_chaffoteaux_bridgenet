@@ -7,12 +7,14 @@ eBusd will take care of publishing most of the sensors with their respective rea
 
 Some bugs remain (04/2023):
 
-- impossible to specify a range for a value other than the range deduced from its type
+- impossible to specify a range for a value other than the range deduced from its type<br>
   => fixed with specific yaml statements (see above)
 - impossible to automatically represent multiple choice inputs (ex: thermoregulation type).<br>
-  => fixed with specific yaml statements (see above)
+  => fixed with specific yaml statements (see above)<br>
+  => **update (jan. 2024)**: it's possible now with a recent version of ebusd that supports "options" attribute
+  in the JSON payload sent to the MQTT server.
 - hazardous naming of entities displayed in Home Assistant.<br>
-  => essentially corrected by the `mqtt-hassio.cfg` file of this repository.
+  => essentially fixed by the `mqtt-hassio.cfg` file of this repository.
 
 ## Integration via MQTT Discovery
 
@@ -58,6 +60,17 @@ Without this, the range is deduced from the type of data (-32767;32767 for the S
 **This is done** for most entities (generic and for the zone 1 of the boiler) in the file
 `widgets_and_automations.yaml` of this repository, at the section `homeassistant/customize`.
 
+
+## Error codes from the boiler
+
+As you will see in the yaml file,
+the integration uses a basic sensor that is updated with a human readable text via an automation.
+HA doesn't allow you to modify the state of basic sensors, so you need to use the
+[python_script integration](https://www.home-assistant.io/integrations/python_script/).
+
+From here, an additional script is mandatory ;
+`set_state.py` must be put in the `python_scripts/` directory of your HA installation.
+The script is available here: <https://github.com/xannor/hass_py_set_state>.
 
 ## Specific widgets
 

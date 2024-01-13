@@ -382,6 +382,10 @@ Trigger missing ambient probe errors for z4 + z5 + z6 + z3 + z2 + z1 via the pre
 Just use the interactive script [here](./tools/bruteforce_errors.py);
 It can be adapted with the displayed expected codes from the boiler documentation.
 
+## Home Assistant integration
+
+See the Readme here: [./home_assistant_integration/](./home_assistant_integration/).
+
 ## Full error codes for Mira C Green
 
 | YY | Displayed code | Documented (x if yes) | Signification
