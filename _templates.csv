@@ -1,8 +1,9 @@
 # template name,type / templates,divider / values,unit,comment
 onoff,UCH,0=off;1=on,,
 yesno,UCH,0=no;1=yes,,
-dhw_comfort_mode,UCH,0=off;1=delayed_on;2=always_on,,
-thermoreg_type,UCH,0=fixed_temp;1=basic_on_off;2=room_temp_only;3=outdoor_temp_only;4=outdoor_and_room,,
+dhw_comfort_modes,UCH,0=off;1=delayed_on;2=always_on,,
+thermoreg_types,UCH,0=fixed_temp;1=basic_on_off;2=room_temp_only;3=outdoor_temp_only;4=outdoor_and_room,,
 boiler_status,BCD:2,1=standby;2=heating;3=heating hot water;4=water tank;5=circulating;18=heating plate exchanger;23=manual test;24=comfort;51=low water pressure;52=no flame;65=rebooting,,
+thermoreg_type,BCD,0=fixed_temp;1=basic_on_off;2=room_temp_only;3=outdoor_temp_only;4=outdoor_and_room,,
 heat_request_mode,BCD,0=off;1=time_based;2=manual;3=unset,,
 error_code,UCH,0=101;1=102;2=1P1;3=1P2;4=1P3;5=104;6=107;7=1P4;8=1P4;9=109;10=110;11=112;12=114;13=116;14=118;15=103;16=105;17=106;18=108;19=111;20=1P5;21=1P6;22=1P7;23=1P8;24=201;25=309;26=203;27=308;28=205;30=2P2;31=209;32=301;33=303;34=304;36=306;38=120;39=121;40=122;41=123;42=311;43=312;45=501;46=502;47=504;48=5P1;49=5P2;50=5P3;51=5P4;52=601;53=602;54=604;56=607;57=421;59=610;60=612;61=6P1;62=6P2;65=422;66=510;71=511;73=3P9;75=620;76=621;105=410;236=---,,

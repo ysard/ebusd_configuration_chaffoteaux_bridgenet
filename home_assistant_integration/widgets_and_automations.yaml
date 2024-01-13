@@ -174,7 +174,7 @@ automation z1_thermoreg_type:
             'outdoor_temp_only': 'Outdoor temp only',
             'outdoor_and_room': 'Outdour and room temp'
           } %}
-          {{ thermoreg_types_map.get(trigger.payload_json.thermoreg_type.value, 'basic_on_off') }}
+          {{ thermoreg_types_map.get(trigger.payload_json.thermoreg_types.value, 'basic_on_off') }}
 
 
   # This automation script runs when the selector is changed.
@@ -218,7 +218,7 @@ automation dhw_comfort_mode:
             'delayed_on': 'Delayed',
             'always_on': 'Always on'
           } %}
-          {{ opt_to_display_map.get(trigger.payload_json.dhw_comfort_mode.value, 'off') }}
+          {{ opt_to_display_map.get(trigger.payload_json.comfort_modes.value, 'off') }}
 
 
   # This automation script runs when the selector is changed.

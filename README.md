@@ -467,35 +467,6 @@ Missing codes for Mira C Green (not supported?) : '302', '305', '307'
 TODO: help needed
 
 
-# Known bugs
-
-- add boiler status patch for home assistant discovery (Issue https://github.com/john30/ebusd/discussions/1098):
-
-Home Assistant discovery is broken for now with an incorrect ebusd configuration.
-For example, the `options` attribute in the json payload is missing ; thus, the entity is not showed in HA.
-
-To patch it, you should publish this "patch" this via MQTT Explorer (software to download) in the topic
-`homeassistant/sensor/ebusd_boiler_boiler_status_boiler_status/config` :
-
-    {
-    "unique_id":"ebusd_boiler_boiler_status_boiler_status",
-    "name":"Boiler Status ",
-    "friendly_name":"Boiler Status ",
-    "device":{
-    "identifiers":"ebusd_boiler",
-    "manufacturer":"ebusd.eu",
-    "name":"ebusd boiler",
-    "via_device":"ebusd",
-    "sw_version":"22.4",
-    "suggested_area":"Heating"
-    },
-    "value_template":"{{value_json[\"boiler_status\"].value}}",
-    "state_topic":"ebusd/boiler/boiler_status",
-    "device_class":"enum",
-    "options": ["standby", "heating", "heating hot water", "water tank", "circulating", "heating plate exchanger", "manual test", "comfort", "low water pressure", "no flame", "rebooting"]
-    }
-
-
 # Help request
 
 - Handshake study of new device on the bus in order to emulate it with a custom one.
