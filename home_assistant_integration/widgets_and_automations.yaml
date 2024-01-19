@@ -263,7 +263,7 @@ automation format_error_code:
           value: >-
             {% set error_zone_status_value = trigger.payload_json.zone_status.value %}
             {% if error_zone_status_value in ["inactive", "zone_inactive"] %}
-              {{ states.counter.error_count.state|int(0) - 1 }}
+              {{ 0 if states.counter.error_count.state|int(0) == 0 else states.counter.error_count.state|int(0) - 1 }}
             {% else %}
               {{ states.counter.error_count.state|int(0) + 1 }}
             {% endif %}
@@ -274,7 +274,7 @@ automation format_error_code:
     trigger:
       platform: state
       entity_id: counter.error_count
-    condition: "{{ states.counter.error_count.state|int(0) <= 0 }}"
+    condition: "{{ states.counter.error_count.state|int(0) == 0 }}"
     action:
       # Delay the sensor reset
       # The resolution message will be visible for a sufficient length of time in the history
