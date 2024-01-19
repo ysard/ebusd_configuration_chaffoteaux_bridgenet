@@ -98,7 +98,7 @@ Check the modification:
 |:--- |:--- |:--- |
 | 2000  | cast features/read values                 |
 | 2001  | cast features/read values with additional data (allowed range of values?) | x
-| 2002  | error log + SW serial number interrogation|
+| 2002  | error log interrogation                   |
 | 2004  | error detection/disappearance             |
 | 200f  |                                           |
 | 2010  | cast features/cast data read-only values/set values* |
