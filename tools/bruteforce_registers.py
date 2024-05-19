@@ -69,7 +69,7 @@ from sys import exit
 from colorama import Fore
 
 
-EBUSCTL_BIN_PATH = "~/ebusd/build/src/tools/"
+EBUSCTL_BIN_PATH = "~/ebusd/build/src/tools/ebusctl"
 
 
 def run_command_and_check_output(register: str, expected_value="020100") -> bool:
@@ -78,7 +78,7 @@ def run_command_and_check_output(register: str, expected_value="020100") -> bool
     :return: The status of the command ; False in case of error.
     """
 
-    command = f"{EBUSCTL_BIN_PATH}ebusctl hex 3c200002{register}"
+    command = f"{EBUSCTL_BIN_PATH} hex 3c200002{register}"
     try:
         result = subprocess.run(
             command, shell=True, capture_output=True, text=True, check=True
@@ -102,7 +102,7 @@ def run_write_command_and_check_output(
     :return: The status of the command ; False in case of error.
     """
 
-    command = f"~/ebusd/build/src/tools/ebusctl hex 3c202003{register}{written_value}"
+    command = f"{EBUSCTL_BIN_PATH} hex 3c202003{register}{written_value}"
     try:
         result = subprocess.run(
             command, shell=True, capture_output=True, text=True, check=True
