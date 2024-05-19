@@ -378,10 +378,10 @@ Trigger missing ambient probe errors for z4 + z5 + z6 + z3 + z2 + z1 via the pre
 | 37fe200403 | 69 | 01 | 00 |               | -z1    |
 
 
-## Bruteforce the errors to discover their corresponding codes
+## Discovering error codes
 
-Just use the interactive script [here](./tools/bruteforce_errors.py);
-It can be adapted with the displayed expected codes from the boiler documentation.
+See: [Bruteforce the errors to discover their corresponding codes](#bruteforce-the-errors-to-discover-their-corresponding-codes).
+
 
 ## Home Assistant integration
 
@@ -466,6 +466,72 @@ See the Readme here: [./home_assistant_integration/](./home_assistant_integratio
 *: Zone error : variations for each zone are not displayed
 
 Missing codes for Mira C Green (not supported?) : '302', '305', '307'
+
+
+# Tools
+
+## Bruteforce the errors to discover their corresponding codes
+
+Just use the interactive script [here](./tools/bruteforce_errors.py).
+It can be adapted with the displayed expected codes from the boiler documentation.
+Feel free to modify the settings of the script (i.e. the variables
+EBUSCTL_BIN_PATH, LOG_FILE, EXPECTED_ERRORS).
+
+Every boiler owner should run this program to obtain the error codes for your equipment.
+These are quite specific, and this procedure remains necessary until a database is built up.
+
+* Installation (if argparse is not available):
+
+    $ pip install --user argparse
+
+* Usage:
+
+```shell
+$ ./bruteforce_errors.py -h
+usage: bruteforce_errors.py [-h] {find_errors,analysis} ...
+
+options:
+-h, --help              show this help message and exit
+
+subcommands:
+{find_errors,analysis}
+    find_errors         Broadcast errors & waits for the user to enter the
+                        code displayed on the boiler. Results are stored in
+                        the log file defined in LOG_FILE. User can skip the
+                        current code or quit at any time. Each error code is
+                        reset before the next test. If the reset is not
+                        effective, a bus reset can be triggered.
+    analysis            Display missing & extra codes vs the expected ones
+                        defined in EXPECTED_ERRORS ; Output mapped errors for
+                        ebusd config file : _templates.csv.
+
+
+$ ./bruteforce_errors.py find_errors -h
+usage: bruteforce_errors.py find_errors [-h] [-s START] [-e END]
+
+options:
+  -h, --help            show this help message and exit
+  -s START, --start START
+                        Start value for code search (0 <= val <= 255) (default: 0)
+  -e END, --end END     End value for code search (0 <= val <= 255) (default: 128)
+```
+
+For example, to analyze the results of boiler interrogation:
+```
+$ ./bruteforce_errors.py analysis
+Missing codes:
+ ['302', '305', '307', '411', '412', '413']
+Excess codes:
+ ['---', '102', '109', '111', '120', '121', ...]
+CSV template string:
+ 0=101;1=102;2=1P1;3=1P2;4=1P3;5=104;6=107;7=1P4;8=1P4;...
+```
+
+Missing codes, are expected codes from your user manual;
+excess codes are codes that are not in the user manual but are supported by the hardware.
+
+The CSV template string can be used as it is in the ebusd config file (`_templates.csv`).
+
 
 # Handshake procedure
 
