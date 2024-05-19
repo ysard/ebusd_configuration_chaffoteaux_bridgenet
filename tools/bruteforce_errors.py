@@ -23,10 +23,8 @@ import subprocess
 from time import sleep
 from pathlib import Path
 
-# pylint: disable=redefined-builtin
-from sys import exit
-
 # Custom imports
+import argparse
 from colorama import Fore
 
 
@@ -296,20 +294,79 @@ def to_csv_template(error_codes):
     return template_str
 
 
-if __name__ == "__main__":
-    # Reorder results file
-    sort_results()
+def args_to_param(args):
+    """Return argparse namespace as a dict {variable name: value}"""
+    return {k: v for k, v in vars(args).items() if k not in ("func", "verbose")}
 
-    compare_with_expected_errors(load_results())
 
-    # One or both...
+def find_errors():
+    """Broadcast errors & waits for the user to enter the code displayed on the boiler.
+    Results are stored in the log file defined in LOG_FILE.
+
+    User can skip the current code or quit at any time.
+    Each error code is reset before the next test.
+    If the reset is not effective, a bus reset can be triggered.
+    """
+    # One of the 2 following functions...
     # The important thing is that error codes must be reset
     # with compatible commands that raised them.
+    # i.e always use one or the other.
     # generate_errors(load_results(), end=128)
     generate_errors(load_results(), end=128, zone_commands=True)
 
     # Reorder results file
     sort_results()
 
-    # Build sequence for _templates.csv
+
+def analysis():
+    """Display missing & extra codes vs the expected ones defined in EXPECTED_ERRORS ;
+    Output mapped errors for ebusd config file : _templates.csv.
+    """
+    # Reorder results file
+    sort_results()
+
+    # Display missing & extra codes vs the expected ones defined in EXPECTED_ERRORS
+    compare_with_expected_errors(load_results())
+
+    # Output mapped errors for ebusd config file : _templates.csv
     to_csv_template(load_results())
+
+
+def main():
+    """Entry point and argument parser"""
+
+    def get_formatter_class(prog):
+        """Limit help width"""
+        return argparse.HelpFormatter(prog, max_help_position=80, width=80)
+
+    parser = argparse.ArgumentParser(formatter_class=get_formatter_class)
+
+    # Subparsers
+    subparsers = parser.add_subparsers(title="subcommands")
+
+    parser_bf = subparsers.add_parser(
+        "find_errors",
+        help=find_errors.__doc__,
+        formatter_class=get_formatter_class,
+    )
+    parser_bf.set_defaults(func=find_errors)
+
+    parser_analysis = subparsers.add_parser(
+        "analysis",
+        help=analysis.__doc__,
+        formatter_class=get_formatter_class,
+    )
+    parser_analysis.set_defaults(func=analysis)
+
+    # Get program args and launch associated command
+    args = parser.parse_args()
+    if "func" not in dir(args):
+        # Nor argument
+        parser.print_usage()
+        raise SystemExit(1)
+
+    args.func(**args_to_param(args))
+
+
+if __name__ == "__main__":
+    main()
