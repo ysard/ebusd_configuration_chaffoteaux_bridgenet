@@ -300,7 +300,7 @@ def args_to_param(args):
     return {k: v for k, v in vars(args).items() if k not in ("func", "verbose")}
 
 
-def find_errors():
+def find_errors(start, end, *args, **kwargs):
     """Broadcast errors & waits for the user to enter the code displayed on the boiler.
     Results are stored in the log file defined in LOG_FILE.
 
@@ -312,8 +312,8 @@ def find_errors():
     # The important thing is that error codes must be reset
     # with compatible commands that raised them.
     # i.e always use one or the other.
-    # generate_errors(load_results(), end=128)
-    generate_errors(load_results(), end=128, zone_commands=True)
+    # generate_errors(load_results(), start=start, end=end)
+    generate_errors(load_results(), start=start, end=end, zone_commands=True)
 
     # Reorder results file
     sort_results()
@@ -348,14 +348,28 @@ def main():
     parser_bf = subparsers.add_parser(
         "find_errors",
         help=find_errors.__doc__,
-        formatter_class=get_formatter_class,
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+    )
+    parser_bf.add_argument(
+        "-s",
+        "--start",
+        help="Start value for code search (0 <= val <= 255)",
+        type=int,
+        default=0,
+    )
+    parser_bf.add_argument(
+        "-e",
+        "--end",
+        help="End value for code search (0 <= val <= 255)",
+        type=int,
+        default=128,
     )
     parser_bf.set_defaults(func=find_errors)
 
     parser_analysis = subparsers.add_parser(
         "analysis",
         help=analysis.__doc__,
-        formatter_class=get_formatter_class,
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     )
     parser_analysis.set_defaults(func=analysis)
 
