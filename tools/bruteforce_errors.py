@@ -144,6 +144,7 @@ def sort_results():
     """Sort the log file content according to the hex error code
 
     .. note:: Also remove duplicates
+    .. warning:: File is modified in place
     .. todo:: Once a code is found, also remove previous attempts (skipped, error)
     """
     logfile = Path(LOG_FILE)
