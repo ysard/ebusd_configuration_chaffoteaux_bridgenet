@@ -30,7 +30,7 @@ from sys import exit
 from colorama import Fore
 
 
-EBUSCTL_BIN_PATH = "~/ebusd/build/src/tools/"
+EBUSCTL_BIN_PATH = "~/ebusd/build/src/tools/ebusctl"
 LOG_FILE = "errors_dump.log"
 EXPECTED_ERRORS = {
     # Primary circuit
@@ -68,7 +68,7 @@ def run_write_command_and_check_output(
         # Just want to send fe203400
         packet_length = ""
 
-    command = f"~/ebusd/build/src/tools/ebusctl hex fe{cmd}{packet_length}{error_code}{written_value}"
+    command = f"{EBUSCTL_BIN_PATH} hex fe{cmd}{packet_length}{error_code}{written_value}"
 
     if simulate:
         print(command)
