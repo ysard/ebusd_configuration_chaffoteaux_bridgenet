@@ -287,7 +287,7 @@ def to_csv_template(error_codes):
         [f"{k}={v}" for k, v in {(int(k, 16), v) for k, v in error_codes}.items()]
     )
 
-    print("csv template string:\n", template_str)
+    print("CSV template string:\n", template_str)
     return template_str
 
 
