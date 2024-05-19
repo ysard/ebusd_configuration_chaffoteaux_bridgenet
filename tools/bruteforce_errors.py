@@ -192,7 +192,7 @@ def generate_errors(error_codes=tuple(), start=0, end=255, zone_commands=False):
     error_codes = set(list(zip(*error_codes))[0]) if error_codes else set()
 
     for error_code in range(start, end + 1):
-        error_code = "{0:02x}".format(error_code)
+        error_code = f"{error_code:02x}"
 
         # Skip if code is already known or if it causes bus reset
         if error_code in error_codes:
@@ -284,7 +284,7 @@ def to_csv_template(error_codes):
         raise ValueError("Empty error_codes")
 
     template_str = ";".join(
-        [f"{k}={v}" for k, v in dict([(int(k, 16), v) for k, v in error_codes]).items()]
+        [f"{k}={v}" for k, v in {(int(k, 16), v) for k, v in error_codes}.items()]
     )
 
     print("csv template string:\n", template_str)
