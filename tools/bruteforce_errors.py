@@ -32,6 +32,8 @@ from colorama import Fore
 
 EBUSCTL_BIN_PATH = "~/ebusd/build/src/tools/ebusctl"
 LOG_FILE = "errors_dump.log"
+# Update this set with the expected codes from the user manual of your boiler.
+# See :meth:`compare_with_expected_errors` function.
 EXPECTED_ERRORS = {
     # Primary circuit
     "101", "103", "104", "105", "106", "107", "108", "110", "112", "114", "116", "118", "1P1", "1P2", "1P3",
@@ -58,7 +60,17 @@ def run_write_command_and_check_output(
     Ex:
         ebusctl hex fe 2004 04 ec 02
 
-    :key simulate: If True, just print the ebusctl command
+    :param error_code: Error code value (1 byte in hex format)
+    :key cmd: Command used to read a register on the boiler. (Default: 2004).
+    :key expected_value: Expected value from ebusctl program in case of success.
+    :key written_value: Value used to trigger the error. (Default: 02, i.e. Not for a zone error).
+        See :meth:`generate_errors`.
+    :key simulate: If True, just print the ebusctl command without sending it
+        on the bus. (Default: False).
+    :type error_code: <str>
+    :type cmd: <str>
+    :type expected_value: <str>
+    :type written_value: <str>
     :type simulate: <bool>
     :return: The status of the command ; False in case of error
     """
@@ -110,16 +122,16 @@ def load_results():
     """Get hex codes and human readable codes from the log file
 
     .. note:: Already known codes and codes that trigger a bus reset
-        ARE NOT loaded.
+        ARE loaded, and thus not tested if passed to :meth:`generate_errors`.
 
-    :return: List of tuples that contain the 2 codes
+    :return: List of tuples that contain the 2 codes (hex, code seen on the boiler).
     :rtype: <list <tuple <str, str>>>
     """
     if not Path(LOG_FILE).exists():
         return
 
     with open(LOG_FILE, "r", encoding="utf8") as f_d:
-        # RESET status is imported and thus, not tested
+        # RESET status is imported but not the others
         error_codes = [
             splitted[:2]
             for line in f_d.readlines()
@@ -157,14 +169,17 @@ def generate_errors(error_codes=tuple(), start=0, end=255, zone_commands=False):
     Each error code is reset before the next test.
     If the reset is not effective, a bus reset can be triggered.
 
-    :key error_codes: Accept a list of known codes, that will not be tested.
+    :key error_codes: Accept a list of known codes, that will NOT be tested.
         See :meth:`load_results`.
-    :key start: 1st byte searched. Should be >= 0
-    :key end: last byte searched. Should be <= 255
-    :key zone_commands: Zone commands have a special 2nd byte after the error code
-        which contains the zone flag. The LSB seems to be always set.
+    :key start: 1st byte value searched. Should be >= 0
+    :key end: last byte value searched. Should be <= 255
+    :key zone_commands: Zone commands have a special 2nd byte after the error
+        code which contains the zone flag (id of the zone).
         The reset of these errors is made with this byte without the zone flag.
-        Again the LSB should be obviously set.
+
+        The LSB (called zone_enable) seems to be always set for this kind of
+        commands (when enabling AND disabling zone errors).
+
     :type error_codes: <list <tuple <str>, <str>>>
     :type start: <int>
     :type end: <int>
@@ -173,6 +188,7 @@ def generate_errors(error_codes=tuple(), start=0, end=255, zone_commands=False):
     """
     assert start >= 0 and end <= 255
 
+    # Add zone_enable flag to values if required
     trigger_value = "03" if zone_commands else "02"
     reset_value = "01" if zone_commands else "00"
 
@@ -194,7 +210,7 @@ def generate_errors(error_codes=tuple(), start=0, end=255, zone_commands=False):
             dump_results(error_code, "ERROR")
             continue
 
-        ret = input("Displayed code ? [<code>/s/q] ").lower()
+        ret = input("Displayed code ? (Press Enter to skip) [<code>/s/q] ").lower()
 
         # Skipped by default
         if ret in ("s", "") or len(ret) != 3:
@@ -209,18 +225,25 @@ def generate_errors(error_codes=tuple(), start=0, end=255, zone_commands=False):
         reported_code = ret.upper()
 
         # Try to reset the error
+        # 2 packets to be sure
         run_write_command_and_check_output(error_code, written_value=reset_value)
         sleep(1)
         run_write_command_and_check_output(error_code, written_value=reset_value)
 
-        ret = input("Reset ok ? [Y/n] ").lower()
+        ret = input(
+            "Error code gone ? [Y/n]\n"
+            "Note: If this doesn't work, it doesn't prevent other errors from being tested. "
+        ).lower()
 
         if ret in ("n",):
             ret = input("Do you want to initiate a bus reset ? [Y/n] ").lower()
             if ret in ("n",):
                 continue
 
+            print("Resetting...")
             send_bus_reset()
+            # Keep the returned code, add 3rd column to indicate that the user
+            # asked a bus reset
             dump_results(error_code, reported_code, "RESET")
 
             _ = input("Reset done ? [Y/n] ").lower()
@@ -232,7 +255,11 @@ def generate_errors(error_codes=tuple(), start=0, end=255, zone_commands=False):
 def compare_with_expected_errors(error_codes):
     """Displayed missing & extra codes with respect to the expected codes
 
-    :param error_codes: Accept a list of known codes, that will not be tested.
+    .. note:: Only use human readable codes / codes as seen on the boiler.
+        See the global variable EXPECTED_ERRORS and update it with the expected
+        codes from the user manual of your boiler.
+
+    :param error_codes: Accept a list of known codes.
         See :meth:`load_results`.
     """
     # Get only human readable codes
@@ -246,19 +273,26 @@ def compare_with_expected_errors(error_codes):
 
 
 def to_csv_template(error_codes):
-    """Convert the mapping to a string ready to be inserted in _templates.csv for ebusd
+    """Convert the mapping to a string ready to be inserted in the ebusd
+    `_templates.csv` config file.
 
-    :param error_codes: Accept a list of known codes, that will not be tested.
+    Ex:
+        "0=101;2:1P1"
+
+    :param error_codes: Accept a list of known codes.
         See :meth:`load_results`.
+    :return: The template string.
+    :rtype: <str>
     """
     if not error_codes:
         return
 
-    d = ";".join(
+    template_str = ";".join(
         [f"{k}={v}" for k, v in dict([(int(k, 16), v) for k, v in error_codes]).items()]
     )
 
-    print("csv template string:\n", d)
+    print("csv template string:\n", template_str)
+    return template_str
 
 
 if __name__ == "__main__":
