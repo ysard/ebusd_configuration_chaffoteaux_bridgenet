@@ -480,9 +480,12 @@ EBUSCTL_BIN_PATH, LOG_FILE, EXPECTED_ERRORS).
 Every boiler owner should run this program to obtain the error codes for your equipment.
 These are quite specific, and this procedure remains necessary until a database is built up.
 
-* Installation (if argparse is not available):
+* Installation:
 
-    $ pip install --user argparse
+    $ pip install --user (--break-system-packages) argparse  colorama
+
+    Use --break-system-packages if you know what you are doing
+    and not working inside a virtual env.
 
 * Usage:
 
@@ -504,8 +507,8 @@ subcommands:
     analysis            Display missing & extra codes vs the expected ones
                         defined in EXPECTED_ERRORS ; Output mapped errors for
                         ebusd config file : _templates.csv.
-
-
+```
+```shell
 $ ./bruteforce_errors.py find_errors -h
 usage: bruteforce_errors.py find_errors [-h] [-s START] [-e END]
 
@@ -516,7 +519,7 @@ options:
   -e END, --end END     End value for code search (0 <= val <= 255) (default: 128)
 ```
 
-For example, to analyze the results of boiler interrogation:
+For example, to analyze the results of a boiler interrogation:
 ```
 $ ./bruteforce_errors.py analysis
 Missing codes:
@@ -527,7 +530,7 @@ CSV template string:
  0=101;1=102;2=1P1;3=1P2;4=1P3;5=104;6=107;7=1P4;8=1P4;...
 ```
 
-Missing codes, are expected codes from your user manual;
+Missing codes, are expected codes from your user manual but not found/functional ;
 excess codes are codes that are not in the user manual but are supported by the hardware.
 
 The CSV template string can be used as it is in the ebusd config file (`_templates.csv`).
