@@ -125,6 +125,10 @@ def load_results():
     :return: List of tuples that contain the 2 codes (hex, code seen on the boiler).
     :rtype: <list <tuple <str, str>>>
     """
+    if not Path(LOG_FILE).exists():
+        print("Log file doesn't exist.")
+        return
+
     with open(LOG_FILE, "r", encoding="utf8") as f_d:
         # RESET status is imported but not the others
         error_codes = [
@@ -284,7 +288,7 @@ def to_csv_template(error_codes):
         raise ValueError("Empty error_codes")
 
     template_str = ";".join(
-        [f"{k}={v}" for k, v in {(int(k, 16), v) for k, v in error_codes}.items()]
+        [f"{k}={v}" for k, v in {int(k, 16): v for k, v in error_codes}.items()]
     )
 
     print("CSV template string:\n", template_str)
