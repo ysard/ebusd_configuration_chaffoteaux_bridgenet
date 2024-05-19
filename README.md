@@ -570,12 +570,12 @@ until the boiler responds. The interactive script will help you to find the
 unique triggering register.
 
 
-* Installation (if argparse is not available):
+Installation:
 
     $ pip install --user (--break-system-packages) colorama
 
-    Use --break-system-packages if you know what you are doing
-    and not working inside a virtual env.
+Use --break-system-packages if you know what you are doing
+and not working inside a virtual env.
 
 
 # Handshake procedure
