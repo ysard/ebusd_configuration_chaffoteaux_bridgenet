@@ -536,6 +536,48 @@ excess codes are codes that are not in the user manual but are supported by the 
 The CSV template string can be used as it is in the ebusd config file (`_templates.csv`).
 
 
+## Finding registers
+
+Use the interactive script [here](./tools/bruteforce_registers.py).
+**Take the time to read the comments and adapt the script to your needs!**
+
+
+If you're looking for a register that manages an option you can read/modify
+on your boiler control panel, then this script is for you.
+
+Like *Cheat Engine*, by successive iterations and pruning, you'll be able to identify the register.
+
+The script is mainly made to search for registers like the very important `1919`,
+which is used to switch the boiler ON/OFF from a thermostat for the Mira C Green boiler.
+
+This register seems to be sent only by an eBus thermostat
+and it stays at 0 without it.
+The boiler doesn't broadcast its status.
+
+People without "smart" thermostat (i.e. people that only have a thermostat with
+dry contact connected to the TA1 pins of the boiler's motherboard)
+can't guess the register without such a bruteforce script.
+
+
+General process:
+
+- With some "read" iterations you will find registers that have changed
+(ex: Those that have a value of 0 when the boiler is off, and that have
+a value of 1 when it's on). The script can be modified to adopt another behaviour.
+
+- Then, "write" tests can be started. Multiple registers are tested
+until the boiler responds. The interactive script will help you to find the
+unique triggering register.
+
+
+* Installation (if argparse is not available):
+
+    $ pip install --user (--break-system-packages) colorama
+
+    Use --break-system-packages if you know what you are doing
+    and not working inside a virtual env.
+
+
 # Handshake procedure
 
 TODO: help needed; See Issue ysard/ebusd_configuration_chaffoteaux_bridgenet#3.
