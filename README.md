@@ -1,4 +1,4 @@
-Here you will find a configuration for the ebusd demon adapted to the Chaffoteaux boilers Mira C Green and Serelia.
+Here you will find a configuration for the ebusd demon adapted to the Chaffoteaux boilers Mira C Green, Serelia and Talia Green.
 This configuration should also be compatible with other brands of the Ariston company
 using the BridgeNet/eBus2 protocol (Elco, Ariston, etc.).
 
