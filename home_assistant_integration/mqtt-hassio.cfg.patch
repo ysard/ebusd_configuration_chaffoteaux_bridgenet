@@ -1,8 +1,8 @@
 diff --git a/contrib/etc/ebusd/mqtt-hassio.cfg b/contrib/etc/ebusd/mqtt-hassio.cfg
-index 46d770ef..4024bbba 100644
+index 921e08c2..5d4c012c 100644
 --- a/contrib/etc/ebusd/mqtt-hassio.cfg
 +++ b/contrib/etc/ebusd/mqtt-hassio.cfg
-@@ -100,14 +100,15 @@ filter-seen = 5
+@@ -102,14 +102,15 @@ filter-seen = 5
  # include only messages having a priority less than or equal to the specified value.
  #filter-priority =
  # include only messages having the specified circuit (partial match, alternatives and wildcard supported).
@@ -21,7 +21,7 @@ index 46d770ef..4024bbba 100644
  # include only messages having the specified level (partial match, alternatives and wildcard supported).
  # Note: This is a filter on top of the messages already filtered implicitly for the ebusd "mqtt" user (if any).
  # Note: Since the empty string matches all levels, an explicit check for empty string (with "^$") needs to be used for
-@@ -115,9 +116,9 @@ filter-name = status|temp|yield|count|energy|power|runtime|hours|starts|mode|cur
+@@ -117,9 +118,9 @@ filter-name = status|temp|humidity|yield|count|energy|power|runtime|hours|starts
  filter-level = ^$
  # include only messages having the specified direction ("r", "w", "u", or "uw". partial match, alternatives and wildcard supported).
  # HA integration: writable messages excluded for now
@@ -33,17 +33,17 @@ index 46d770ef..4024bbba 100644
  # include only fields having the specified name (partial match, alternatives and wildcard supported).
  #filter-field =
  # exclude fields having the specified name (partial match, alternatives and wildcard supported).
-@@ -179,7 +180,9 @@ type_switch-w-number =
+@@ -182,7 +183,9 @@ type_switch-w-number =
      number,pressure, = bar$
      number,gas, = gas*/min$
      number,humidity, = humid*%%$
 +    number,, = s|min$
-     number,, = curve,
+     number,, = curve,|curvevalue,
 +    number,, = slope
-
- # HA integration: the mapping list for numeric sensor entities by field type, name, message, and unit.
+ 
+ # HA integration: the mapping list for numeric sensor entities field type, message name+field name, and unit.
  type_switch-number =
-@@ -195,6 +198,9 @@ type_switch-number =
+@@ -198,6 +201,9 @@ type_switch-number =
      sensor,yield,total_increasing = total*,Wh$
      sensor,,total_increasing = hours|,h$
      sensor,,total_increasing = starts*,$
@@ -53,28 +53,35 @@ index 46d770ef..4024bbba 100644
      sensor,pressure,measurement = bar$
      sensor,gas,measurement = gas*/min$
      sensor,humidity,measurement = humid*%%$
-@@ -328,7 +334,8 @@ definition-topic ?= %haprefix/%type_topic/%{TOPIC}_%FIELD/config
+@@ -351,14 +357,14 @@ definition-topic ?= %haprefix/%type_topic/%{TOPIC}_%FIELD/config
  # HA integration: this is the config topic payload for HA's MQTT discovery.
  definition-payload = {
    "unique_id":"%{TOPIC}_%FIELD",
--  "name":"%name %fieldname",
+-  "name":"%name %fieldnamemult",
 +  "name":"%messagecomment %comment",
 +  "friendly_name":"%messagecomment %comment",
    "device":%circuit_part,
    "value_template":"{{value_json[\"%field\"].value}}",
    "state_topic":"%topic"%field_payload
-@@ -357,7 +364,7 @@ global_prefix = {
+  }
+ #definition-retain = 0
+ 
+-
+ # the message value topic (if other than the default). If set here, it will be replaced by the "--mqtttopic"
+ # configuration option only if that one contains at least one variable. If the the "--mqtttopic" configuration option
+ # does not contain any variable, it is taken as prefix and can be used here as well.
+@@ -380,7 +386,7 @@ global_prefix = {
    "unique_id":"%TOPIC",
    "device":%global_device,
    "state_topic":"%topic",
 -  "name":"global %name"
 +  "name":"%name"
-
+ 
  # HA integration: boolean suffix for global parts
  global_boolean_suffix = ,
-@@ -374,6 +381,12 @@ def_global-payload = %global_prefix
+@@ -397,6 +403,12 @@ def_global-payload = %global_prefix
  #def_global-retain = 0
-
+ 
  # individual global running, version, signal, uptime, updatecheck, and scan config topic, payload, and retain setting.
 +# Force expected value to be a string & strip quotes
 +# expected values : finished, running, OK
