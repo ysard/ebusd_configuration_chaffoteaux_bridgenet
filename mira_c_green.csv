@@ -128,9 +128,9 @@ r,boiler,error_code,Error,,fe,2004,,error_code,s,error_code,,,,zone_status,s,UCH
 # Every 30s,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 r,dhw,dhw_real_temp,DHW real temp,37,fe,2010,6147,,s,U3N,10,°C,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 # Conflict with dhw_real_temp,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-#r,dhw,dhw_real_temp_boiler_status,DHW real temp and boiler status,37,fe,2010,6147,dhw_real_temp,s,U3N,10,°C,,c04b,s,IGN:2,,,Boiler status,boiler_status,s,boiler_status,,,,,,,,,,,,,,,,,,,,,,,,,,
+#r,dhw,dhw_real_temp_boiler_status,DHW real temp and boiler status,37,fe,2010,6147,dhw_real_temp,s,U3N,10,°C,,_c04b,s,IGN:2,,,Boiler status,boiler_status,s,boiler_status,,,,,,,,,,,,,,,,,,,,,,,,,,
 # Every 25s,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-r,dhw,dhw_comfort_mode_status,DHW comfort mode status,37,fe,2010,d746,dhw_comfort_mode_status ,s,BCD:2,0=off;2=on,,,da46,s,IGN:2,,,unknown,da46,s,UIN,150=UKN,,,dc46,s,IGN:2,,,unknown,dc46,s,UIN,75=UKN,,,de46,s,IGN:2,,,unknown,de46,s,UIN,75=UKN,
+r,dhw,dhw_comfort_mode_status,DHW comfort mode status,37,fe,2010,d746,dhw_comfort_mode_status ,s,BCD:2,0=off;2=on,,,_da46,s,IGN:2,,,unknown,da46,s,UIN,150=UKN,,,_dc46,s,IGN:2,,,unknown,dc46,s,UIN,75=UKN,,,_de46,s,IGN:2,,,unknown,de46,s,UIN,75=UKN,
 # Every 5s,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 # About ‘boiler_status’ repeat : mandatory since we use a template (entity_id will be ebusd_boiler_boiler_status_boiler_status),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 r,boiler,boiler_status,Boiler status,37,fe,2010,c04b,boiler_status,s,boiler_status,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
@@ -141,54 +141,54 @@ r,boiler,cast_date,Date and time ; ex : 03:31;08.12.2023,37,fe,2070,,hour,s,VT
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ## Dump registers into broadcast messages,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 # Every 5s,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-r,boiler,heat_request_status_1,Heating request status z1-z4,37,fe,2010,0191,z1_heat_request_status,s,BCD:2,0=off;1=on,,,0291,s,IGN:2,,,,z2_heat_request_status,s,BCD:2,0=off;1=on,,,0391,s,IGN:2,,,,z3_heat_request_status,s,BCD:2,0=off;1=on,,,0491,s,IGN:2,,,,z4_heat_request_status,s,BCD:2,0=off;1=on,
-r,boiler,heat_request_status_2,Heating request status z5-z7,37,fe,2010,0591,z5_heat_request_status,s,BCD:2,0=off;1=on,,,0691,s,IGN:2,,,,z6_heat_request_status,s,BCD:2,0=off;1=on,,,0791,s,IGN:2,,,,z7_heat_request_status,s,BCD:2,0=off;1=on,,,,,,,,,,,,,
+r,boiler,heat_request_status_1,Heating request status z1-z4,37,fe,2010,0191,z1_heat_request_status,s,BCD:2,0=off;1=on,,,_0291,s,IGN:2,,,,z2_heat_request_status,s,BCD:2,0=off;1=on,,,_0391,s,IGN:2,,,,z3_heat_request_status,s,BCD:2,0=off;1=on,,,_0491,s,IGN:2,,,,z4_heat_request_status,s,BCD:2,0=off;1=on,
+r,boiler,heat_request_status_2,Heating request status z5-z7,37,fe,2010,0591,z5_heat_request_status,s,BCD:2,0=off;1=on,,,_0691,s,IGN:2,,,,z6_heat_request_status,s,BCD:2,0=off;1=on,,,_0791,s,IGN:2,,,,z7_heat_request_status,s,BCD:2,0=off;1=on,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 # Every 25s,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-r,boiler,hot_water_target_temp_1,Water computed target temp z1-z3,37,fe,2010,6197,z1_target_temp,s,S3N,10,°C,,6297,s,IGN:2,,,,z2_target_temp,s,S3N,10,°C,,6397,s,IGN:2,,,,z3_target_temp,s,S3N,10,°C,,,,,,,,,,,,
-r,boiler,hot_water_target_temp_2,Water computed target temp z4-z6,37,fe,2010,6497,z4_target_temp,s,S3N,10,°C,,6497,s,IGN:2,,,,z5_target_temp,s,S3N,10,°C,,6697,s,IGN:2,,,,z6_target_temp,s,S3N,10,°C,,,,,,,,,,,,
+r,boiler,hot_water_target_temp_1,Water computed target temp z1-z3,37,fe,2010,6197,z1_target_temp,s,S3N,10,°C,,_6297,s,IGN:2,,,,z2_target_temp,s,S3N,10,°C,,_6397,s,IGN:2,,,,z3_target_temp,s,S3N,10,°C,,,,,,,,,,,,
+r,boiler,hot_water_target_temp_2,Water computed target temp z4-z6,37,fe,2010,6497,z4_target_temp,s,S3N,10,°C,,_6497,s,IGN:2,,,,z5_target_temp,s,S3N,10,°C,,_6697,s,IGN:2,,,,z6_target_temp,s,S3N,10,°C,,,,,,,,,,,,
 r,boiler,hot_water_target_temp_3,Water computed target temp z7,37,fe,2010,6797,z7_target_temp,s,S3N,10,°C,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 # Every 30min,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-r,boiler,dump_panel,Heating status,37,fe,2020,0120,heating_status,s,BCD,0=off;1=on,,,0220,s,IGN:2,,,DHW heating status,dhw_status,s,BCD,0=off;1=on,,,0520,s,IGN:2,,,SRA status,sra_status,s,BCD,0=off;1=on,,,0b20,s,IGN:2,,,DHW Thermal Cleansing Function,dhw_thermal_cleansing_mode_status,s,BCD,0=off;1=on,
+r,boiler,dump_panel,Heating status,37,fe,2020,0120,heating_status,s,BCD,0=off;1=on,,,_0220,s,IGN:2,,,DHW heating status,dhw_status,s,BCD,0=off;1=on,,,_0520,s,IGN:2,,,SRA status,sra_status,s,BCD,0=off;1=on,,,_0b20,s,IGN:2,,,DHW Thermal Cleansing Function,dhw_thermal_cleansing_mode_status,s,BCD,0=off;1=on,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-r,boiler,thermoregulation_1,Thermoregulation type z1-z4,37,fe,2020,c079,z1_thermoreg_type,s,thermoreg_type,,,,c07a,s,IGN:2,,,Z2 Thermoregulation type,z2_thermoreg_type,s,thermoreg_type,,,,c07b,s,IGN:2,,,Z3 Thermoregulation type,z3_thermoreg_type,s,thermoreg_type,,,,c07c,s,IGN:2,,,Z4 Thermoregulation type,z4_thermoreg_type,s,thermoreg_type,,
-r,boiler,thermoregulation_2,Thermoregulation type z5-z7 ; Room temp influence z1,37,fe,2020,c07d,z5_thermoreg_type,s,thermoreg_type,,,,c07e,s,IGN:2,,,Z6 Thermoregulation type,z6_thermoreg_type,s,thermoreg_type,,,,c07f,s,IGN:2,,,Z7 Thermoregulation type,z7_thermoreg_type,s,thermoreg_type,,,,c279,s,IGN:2,,,Z1 Room temp influence,z1_room_temp_infl,s,UCH,,
-r,boiler,thermoregulation_3,Room temp influence z2-z5,37,fe,2020,c27a,z2_room_temp_infl,s,UCH,,,,c27b,s,IGN:2,,,Z3 Room temp influence,z3_room_temp_infl,s,UCH,,,,c27c,s,IGN:2,,,Z4 Room temp influence,z4_room_temp_infl,s,UCH,,,,c27d,s,IGN:2,,,Z5 Room temp influence,z5_room_temp_infl,s,UCH,,
-r,boiler,thermoregulation_4,Room temp influence z6-z7 ; Heating request mode z1-z2,37,fe,2020,c27e,z6_room_temp_infl,s,UCH,,,,c27f,s,IGN:2,,,Z7 Room temp influence,z7_room_temp_infl,s,UCH,,,,c679,s,IGN:2,,,Z1 Heating request mode,z1_heat_request_mode,s,heat_request_mode,,,,c67a,s,IGN:2,,,Z2 Heating request mode,z2_heat_request_mode,s,heat_request_mode,,
-r,boiler,thermoregulation_5,Heating request mode z3-z6,37,fe,2020,c67b,z3_heat_request_mode,s,heat_request_mode,,,,c67c,s,IGN:2,,,Z4 Heating request mode,z4_heat_request_mode,s,heat_request_mode,,,,c67d,s,IGN:2,,,Z5 Heating request mode,z5_heat_request_mode,s,heat_request_mode,,,,c67e,s,IGN:2,,,Z6 Heating request mode,z6_heat_request_mode,s,heat_request_mode,,
-#r,boiler,thermoregulation_6,Heating request mode z7 ; ?,37,fe,2020,c67f,z7_heat_request_mode,s,heat_request_mode,,,,c979,s,IGN:2,,,Z1,,s,UCH,,,,c97a,s,IGN:2,,,Z2,,s,UCH,,,,c97b,s,IGN:2,,,Z3,,s,UCH,,
-#r,boiler,thermoregulation_7,Z4,37,fe,2020,c97c,,s,UCH,,,,c97d,s,IGN:2,,,Z5,,s,UCH,,,,c97e,s,IGN:2,,,Z6,,s,UCH,,,,c97f,s,IGN:2,,,Z7,,s,UCH,,
+r,boiler,thermoregulation_1,Thermoregulation type z1-z4,37,fe,2020,c079,z1_thermoreg_type,s,thermoreg_type,,,,_c07a,s,IGN:2,,,Z2 Thermoregulation type,z2_thermoreg_type,s,thermoreg_type,,,,_c07b,s,IGN:2,,,Z3 Thermoregulation type,z3_thermoreg_type,s,thermoreg_type,,,,_c07c,s,IGN:2,,,Z4 Thermoregulation type,z4_thermoreg_type,s,thermoreg_type,,
+r,boiler,thermoregulation_2,Thermoregulation type z5-z7 ; Room temp influence z1,37,fe,2020,c07d,z5_thermoreg_type,s,thermoreg_type,,,,_c07e,s,IGN:2,,,Z6 Thermoregulation type,z6_thermoreg_type,s,thermoreg_type,,,,_c07f,s,IGN:2,,,Z7 Thermoregulation type,z7_thermoreg_type,s,thermoreg_type,,,,_c279,s,IGN:2,,,Z1 Room temp influence,z1_room_temp_infl,s,UCH,,
+r,boiler,thermoregulation_3,Room temp influence z2-z5,37,fe,2020,c27a,z2_room_temp_infl,s,UCH,,,,_c27b,s,IGN:2,,,Z3 Room temp influence,z3_room_temp_infl,s,UCH,,,,_c27c,s,IGN:2,,,Z4 Room temp influence,z4_room_temp_infl,s,UCH,,,,_c27d,s,IGN:2,,,Z5 Room temp influence,z5_room_temp_infl,s,UCH,,
+r,boiler,thermoregulation_4,Room temp influence z6-z7 ; Heating request mode z1-z2,37,fe,2020,c27e,z6_room_temp_infl,s,UCH,,,,_c27f,s,IGN:2,,,Z7 Room temp influence,z7_room_temp_infl,s,UCH,,,,_c679,s,IGN:2,,,Z1 Heating request mode,z1_heat_request_mode,s,heat_request_mode,,,,_c67a,s,IGN:2,,,Z2 Heating request mode,z2_heat_request_mode,s,heat_request_mode,,
+r,boiler,thermoregulation_5,Heating request mode z3-z6,37,fe,2020,c67b,z3_heat_request_mode,s,heat_request_mode,,,,_c67c,s,IGN:2,,,Z4 Heating request mode,z4_heat_request_mode,s,heat_request_mode,,,,_c67d,s,IGN:2,,,Z5 Heating request mode,z5_heat_request_mode,s,heat_request_mode,,,,_c67e,s,IGN:2,,,Z6 Heating request mode,z6_heat_request_mode,s,heat_request_mode,,
+#r,boiler,thermoregulation_6,Heating request mode z7 ; ?,37,fe,2020,c67f,z7_heat_request_mode,s,heat_request_mode,,,,_c979,s,IGN:2,,,Z1,,s,UCH,,,,_c97a,s,IGN:2,,,Z2,,s,UCH,,,,_c97b,s,IGN:2,,,Z3,,s,UCH,,
+#r,boiler,thermoregulation_7,Z4,37,fe,2020,c97c,,s,UCH,,,,_c97d,s,IGN:2,,,Z5,,s,UCH,,,,_c97e,s,IGN:2,,,Z6,,s,UCH,,,,_c97f,s,IGN:2,,,Z7,,s,UCH,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-r,boiler,heat_temp_ranges_1,Temp range z1-z4,37,fe,2020,0081,z1_heat_temp_range,s,BCD,0=high;1=low,,,0082,s,IGN:2,,,Z2 Temp range,z2_heat_temp_range,s,BCD,0=high;1=low,,,0083,s,IGN:2,,,Z3 Temp range,z3_heat_temp_range,s,BCD,0=high;1=low,,,0084,s,IGN:2,,,Z4 Temp range,z4_heat_temp_range,s,BCD,0=high;1=low,
-r,boiler,heat_temp_ranges_2,Temp range z5-z7,37,fe,2020,0085,z5_heat_temp_range,s,BCD,0=high;1=low,,,0086,s,IGN:2,,,Z6 Temp range,z6_heat_temp_range,s,BCD,0=high;1=low,,,0087,s,IGN:2,,,Z7 Temp range,z7_heat_temp_range,s,BCD,0=high;1=low,,,,,,,,,,,,,
+r,boiler,heat_temp_ranges_1,Temp range z1-z4,37,fe,2020,0081,z1_heat_temp_range,s,BCD,0=high;1=low,,,_0082,s,IGN:2,,,Z2 Temp range,z2_heat_temp_range,s,BCD,0=high;1=low,,,_0083,s,IGN:2,,,Z3 Temp range,z3_heat_temp_range,s,BCD,0=high;1=low,,,_0084,s,IGN:2,,,Z4 Temp range,z4_heat_temp_range,s,BCD,0=high;1=low,
+r,boiler,heat_temp_ranges_2,Temp range z5-z7,37,fe,2020,0085,z5_heat_temp_range,s,BCD,0=high;1=low,,,_0086,s,IGN:2,,,Z6 Temp range,z6_heat_temp_range,s,BCD,0=high;1=low,,,_0087,s,IGN:2,,,Z7 Temp range,z7_heat_temp_range,s,BCD,0=high;1=low,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-r,boiler,dump_zones_1,Max water temp z1-z4,37,fe,2020,6071,z1_water_max_temp,s,SIN,10,°C,,6072,s,IGN:2,,,Z2 Max water temp,z2_water_max_temp,s,SIN,10,°C,,6073,s,IGN:2,,,Z3 Max water temp,z3_water_max_temp,s,SIN,10,°C,,6074,s,IGN:2,,,Z4 Max water temp,z4_water_max_temp,s,SIN,10,°C
-r,boiler,dump_zones_2,Max water temp z5-z7 ; Min water temp z1,37,fe,2020,6075,z5_water_max_temp,s,SIN,10,°C,,6076,s,IGN:2,,,Z6 Max water temp,z6_water_max_temp,s,SIN,10,°C,,6077,s,IGN:2,,,Z7 Max water temp,z7_water_max_temp,s,SIN,10,°C,,6171,s,IGN:2,,,Z1 Min water temp,z1_water_min_temp,s,SIN,10,°C
-r,boiler,dump_zones_3,Min water temp z2-z5,37,fe,2020,6172,z2_water_min_temp,s,SIN,10,°C,,6173,s,IGN:2,,,Z3 Min water temp,z3_water_min_temp,s,SIN,10,°C,,6174,s,IGN:2,,,Z4 Min water temp,z4_water_min_temp,s,SIN,10,°C,,6175,s,IGN:2,,,Z5 Min water temp,z5_water_min_temp,s,SIN,10,°C
-r,boiler,dump_zones_4,Min water temp z6-z7 ; Day temperature z1-z2,37,fe,2020,6176,z6_water_min_temp,s,SIN,10,°C,,6177,s,IGN:2,,,Z7 Min water temp,z7_water_min_temp,s,SIN,10,°C,,6271,s,IGN:2,,,Z1 Day temperature,z1_day_temp,s,SIN,10,°C,,6272,s,IGN:2,,,Z2 Day temperature,z2_day_temp,s,SIN,10,°C
-r,boiler,dump_zones_5,Day temperature z3-z6,37,fe,2020,6273,z3_day_temp,s,SIN,10,°C,,6274,s,IGN:2,,,Z4 Day temperature,z4_day_temp,s,SIN,10,°C,,6275,s,IGN:2,,,Z5 Day temperature,z5_day_temp,s,SIN,10,°C,,6276,s,IGN:2,,,Z6 Day temperature,z6_day_temp,s,SIN,10,°C
-r,boiler,dump_zones_6,Day temperature z7 ; Night temperature z1-z3,37,fe,2020,6277,z7_day_temp,s,SIN,10,°C,,6371,s,IGN:2,,,Z1 Night temperature,z1_night_temp,s,SIN,10,°C,,6372,s,IGN:2,,,Z2 Night temperature,z2_night_temp,s,SIN,10,°C,,6373,s,IGN:2,,,Z3 Night temperature,z3_night_temp,s,SIN,10,°C
-r,boiler,dump_zones_7,Night temperature z4-z7,37,fe,2020,6374,z4_night_temp,s,SIN,10,°C,,6173,s,IGN:2,,,Z5 Night temperature,z5_night_temp,s,SIN,10,°C,,6376,s,IGN:2,,,Z6 Night temperature,z6_night_temp,s,SIN,10,°C,,6377,s,IGN:2,,,Z7 Night temperature,z7_night_temp,s,SIN,10,°C
-r,boiler,dump_zones_8,Thermoregulation offset z1-z4,37,fe,2020,6471,z1_thermoreg_offset,s,SIN,10,°C,,6472,s,IGN:2,,,Z2 Thermoregulation offset,z2_thermoreg_offset,s,SIN,10,°C,,6473,s,IGN:2,,,Z3 Thermoregulation offset,z3_thermoreg_offset,s,SIN,10,°C,,6474,s,IGN:2,,,Z4 Thermoregulation offset,z4_thermoreg_offset,s,SIN,10,°C
-r,boiler,dump_zones_9,Thermoregulation offset z5-z7 ; Fixed temp z1,37,fe,2020,6475,z5_thermoreg_offset,s,SIN,10,°C,,6476,s,IGN:2,,,Z6 Thermoregulation offset,z6_thermoreg_offset,s,SIN,10,°C,,6477,s,IGN:2,,,Z7 Thermoregulation offset,z7_thermoreg_offset,s,SIN,10,°C,,6571,s,IGN:2,,,Z1 Fixed temp,z1_fixed_temp,s,SIN,10,°C
-r,boiler,dump_zones_10,Fixed temp z2-z5,37,fe,2020,6572,z2_fixed_temp,s,SIN,10,°C,,6573,s,IGN:2,,,Z3 Fixed temp,z3_fixed_temp,s,SIN,10,°C,,6574,s,IGN:2,,,Z4 Fixed temp,z4_fixed_temp,s,SIN,10,°C,,6575,s,IGN:2,,,Z5 Fixed temp,z5_fixed_temp,s,SIN,10,°C
-#r,boiler,dump_zones_11,Fixed temp z6-z7,37,fe,2020,6576,z6_fixed_temp,s,SIN,10,°C,,6577,s,IGN:2,,,Z7 Fixed temp,z7_fixed_temp,s,SIN,10,°C,,6671,s,IGN:2,,,,,s,SIN,10,°C,,6672,s,IGN:2,,,,,s,SIN,10,°C
-#r,boiler,dump_zones_12,,37,fe,2020,6673,,s,SIN,10,°C,,6674,s,IGN:2,,,,,s,SIN,10,°C,,6675,s,IGN:2,,,,,s,SIN,10,°C,,6676,s,IGN:2,,,,,s,SIN,10,°C
-#r,boiler,dump_zones_13,,37,fe,2020,6677,,s,SIN,10,°C,,6771,s,IGN:2,,,,,s,SIN,10,°C,,6772,s,IGN:2,,,,,s,SIN,10,°C,,6773,s,IGN:2,,,,,s,SIN,10,°C
-#r,boiler,dump_zones_14,,37,fe,2020,6774,,s,SIN,10,°C,,6775,s,IGN:2,,,,,s,SIN,10,°C,,6776,s,IGN:2,,,,,s,SIN,10,°C,,6777,s,IGN:2,,,,,s,SIN,10,°C
-#r,boiler,dump_zones_15,,37,fe,2020,6971,,s,SIN,10,°C,,6972,s,IGN:2,,,,,s,SIN,10,°C,,6973,s,IGN:2,,,,,s,SIN,10,°C,,6974,s,IGN:2,,,,,s,SIN,10,°C
-#r,boiler,dump_zones_16,,37,fe,2020,6975,,s,SIN,10,°C,,6976,s,IGN:2,,,,,s,SIN,10,°C,,6977,s,IGN:2,,,,,s,SIN,10,°C,,6a71,s,IGN:2,,,Z1 Thermoregulation slope,z1_thermoreg_slope,s,UIN,100,
-r,boiler,dump_zones_17,Thermoregulation slope z2-z5,37,fe,2020,6a72,z2_thermoreg_slope,s,UIN,100,,,6a73,s,IGN:2,,,Z3 Thermoregulation slope,z3_thermoreg_slope,s,UIN,100,,,6a74,s,IGN:2,,,Z4 Thermoregulation slope,z4_thermoreg_slope,s,UIN,100,,,6a75,s,IGN:2,,,Z5 Thermoregulation slope,z5_thermoreg_slope,s,UIN,100,
-#r,boiler,dump_zones_18,Thermoregulation slope z6-z7 ;,37,fe,2020,6a76,z6_thermoreg_slope,s,UIN,100,,,6a77,s,IGN:2,,,Z7 Thermoregulation slope,z7_thermoreg_slope,s,UIN,100,,,6b71,s,IGN:2,,,,,s,SIN,10,°C,,6b72,s,IGN:2,,,,,s,SIN,10,°C
-#r,boiler,dump_zones_19,,37,fe,2020,6b73,,s,SIN,10,°C,,6b74,s,IGN:2,,,,,s,SIN,10,°C,,6b75,s,IGN:2,,,,,s,SIN,10,°C,,6b76,s,IGN:2,,,,,s,SIN,10,°C
-#r,boiler,dump_zones_20,,37,fe,2020,6b77,,s,SIN,10,°C,,6c71,s,IGN:2,,,,,s,SIN,10,°C,,6c72,s,IGN:2,,,,,s,SIN,10,°C,,6c73,s,IGN:2,,,,,s,SIN,10,°C
-#r,boiler,dump_zones_21,,37,fe,2020,6c74,,s,SIN,10,°C,,6c75,s,IGN:2,,,,,s,SIN,10,°C,,6c76,s,IGN:2,,,,,s,SIN,10,°C,,6c77,s,IGN:2,,,,,s,SIN,10,°C
+r,boiler,dump_zones_1,Max water temp z1-z4,37,fe,2020,6071,z1_water_max_temp,s,SIN,10,°C,,_6072,s,IGN:2,,,Z2 Max water temp,z2_water_max_temp,s,SIN,10,°C,,_6073,s,IGN:2,,,Z3 Max water temp,z3_water_max_temp,s,SIN,10,°C,,_6074,s,IGN:2,,,Z4 Max water temp,z4_water_max_temp,s,SIN,10,°C
+r,boiler,dump_zones_2,Max water temp z5-z7 ; Min water temp z1,37,fe,2020,6075,z5_water_max_temp,s,SIN,10,°C,,_6076,s,IGN:2,,,Z6 Max water temp,z6_water_max_temp,s,SIN,10,°C,,_6077,s,IGN:2,,,Z7 Max water temp,z7_water_max_temp,s,SIN,10,°C,,_6171,s,IGN:2,,,Z1 Min water temp,z1_water_min_temp,s,SIN,10,°C
+r,boiler,dump_zones_3,Min water temp z2-z5,37,fe,2020,6172,z2_water_min_temp,s,SIN,10,°C,,_6173,s,IGN:2,,,Z3 Min water temp,z3_water_min_temp,s,SIN,10,°C,,_6174,s,IGN:2,,,Z4 Min water temp,z4_water_min_temp,s,SIN,10,°C,,_6175,s,IGN:2,,,Z5 Min water temp,z5_water_min_temp,s,SIN,10,°C
+r,boiler,dump_zones_4,Min water temp z6-z7 ; Day temperature z1-z2,37,fe,2020,6176,z6_water_min_temp,s,SIN,10,°C,,_6177,s,IGN:2,,,Z7 Min water temp,z7_water_min_temp,s,SIN,10,°C,,_6271,s,IGN:2,,,Z1 Day temperature,z1_day_temp,s,SIN,10,°C,,_6272,s,IGN:2,,,Z2 Day temperature,z2_day_temp,s,SIN,10,°C
+r,boiler,dump_zones_5,Day temperature z3-z6,37,fe,2020,6273,z3_day_temp,s,SIN,10,°C,,_6274,s,IGN:2,,,Z4 Day temperature,z4_day_temp,s,SIN,10,°C,,_6275,s,IGN:2,,,Z5 Day temperature,z5_day_temp,s,SIN,10,°C,,_6276,s,IGN:2,,,Z6 Day temperature,z6_day_temp,s,SIN,10,°C
+r,boiler,dump_zones_6,Day temperature z7 ; Night temperature z1-z3,37,fe,2020,6277,z7_day_temp,s,SIN,10,°C,,_6371,s,IGN:2,,,Z1 Night temperature,z1_night_temp,s,SIN,10,°C,,_6372,s,IGN:2,,,Z2 Night temperature,z2_night_temp,s,SIN,10,°C,,_6373,s,IGN:2,,,Z3 Night temperature,z3_night_temp,s,SIN,10,°C
+r,boiler,dump_zones_7,Night temperature z4-z7,37,fe,2020,6374,z4_night_temp,s,SIN,10,°C,,_6173,s,IGN:2,,,Z5 Night temperature,z5_night_temp,s,SIN,10,°C,,_6376,s,IGN:2,,,Z6 Night temperature,z6_night_temp,s,SIN,10,°C,,_6377,s,IGN:2,,,Z7 Night temperature,z7_night_temp,s,SIN,10,°C
+r,boiler,dump_zones_8,Thermoregulation offset z1-z4,37,fe,2020,6471,z1_thermoreg_offset,s,SIN,10,°C,,_6472,s,IGN:2,,,Z2 Thermoregulation offset,z2_thermoreg_offset,s,SIN,10,°C,,_6473,s,IGN:2,,,Z3 Thermoregulation offset,z3_thermoreg_offset,s,SIN,10,°C,,_6474,s,IGN:2,,,Z4 Thermoregulation offset,z4_thermoreg_offset,s,SIN,10,°C
+r,boiler,dump_zones_9,Thermoregulation offset z5-z7 ; Fixed temp z1,37,fe,2020,6475,z5_thermoreg_offset,s,SIN,10,°C,,_6476,s,IGN:2,,,Z6 Thermoregulation offset,z6_thermoreg_offset,s,SIN,10,°C,,_6477,s,IGN:2,,,Z7 Thermoregulation offset,z7_thermoreg_offset,s,SIN,10,°C,,_6571,s,IGN:2,,,Z1 Fixed temp,z1_fixed_temp,s,SIN,10,°C
+r,boiler,dump_zones_10,Fixed temp z2-z5,37,fe,2020,6572,z2_fixed_temp,s,SIN,10,°C,,_6573,s,IGN:2,,,Z3 Fixed temp,z3_fixed_temp,s,SIN,10,°C,,_6574,s,IGN:2,,,Z4 Fixed temp,z4_fixed_temp,s,SIN,10,°C,,_6575,s,IGN:2,,,Z5 Fixed temp,z5_fixed_temp,s,SIN,10,°C
+#r,boiler,dump_zones_11,Fixed temp z6-z7,37,fe,2020,6576,z6_fixed_temp,s,SIN,10,°C,,_6577,s,IGN:2,,,Z7 Fixed temp,z7_fixed_temp,s,SIN,10,°C,,_6671,s,IGN:2,,,,,s,SIN,10,°C,,_6672,s,IGN:2,,,,,s,SIN,10,°C
+#r,boiler,dump_zones_12,,37,fe,2020,6673,,s,SIN,10,°C,,_6674,s,IGN:2,,,,,s,SIN,10,°C,,_6675,s,IGN:2,,,,,s,SIN,10,°C,,_6676,s,IGN:2,,,,,s,SIN,10,°C
+#r,boiler,dump_zones_13,,37,fe,2020,6677,,s,SIN,10,°C,,_6771,s,IGN:2,,,,,s,SIN,10,°C,,_6772,s,IGN:2,,,,,s,SIN,10,°C,,_6773,s,IGN:2,,,,,s,SIN,10,°C
+#r,boiler,dump_zones_14,,37,fe,2020,6774,,s,SIN,10,°C,,_6775,s,IGN:2,,,,,s,SIN,10,°C,,_6776,s,IGN:2,,,,,s,SIN,10,°C,,_6777,s,IGN:2,,,,,s,SIN,10,°C
+#r,boiler,dump_zones_15,,37,fe,2020,6971,,s,SIN,10,°C,,_6972,s,IGN:2,,,,,s,SIN,10,°C,,_6973,s,IGN:2,,,,,s,SIN,10,°C,,_6974,s,IGN:2,,,,,s,SIN,10,°C
+#r,boiler,dump_zones_16,,37,fe,2020,6975,,s,SIN,10,°C,,_6976,s,IGN:2,,,,,s,SIN,10,°C,,_6977,s,IGN:2,,,,,s,SIN,10,°C,,_6a71,s,IGN:2,,,Z1 Thermoregulation slope,z1_thermoreg_slope,s,UIN,100,
+r,boiler,dump_zones_17,Thermoregulation slope z2-z5,37,fe,2020,6a72,z2_thermoreg_slope,s,UIN,100,,,_6a73,s,IGN:2,,,Z3 Thermoregulation slope,z3_thermoreg_slope,s,UIN,100,,,_6a74,s,IGN:2,,,Z4 Thermoregulation slope,z4_thermoreg_slope,s,UIN,100,,,_6a75,s,IGN:2,,,Z5 Thermoregulation slope,z5_thermoreg_slope,s,UIN,100,
+#r,boiler,dump_zones_18,Thermoregulation slope z6-z7 ;,37,fe,2020,6a76,z6_thermoreg_slope,s,UIN,100,,,_6a77,s,IGN:2,,,Z7 Thermoregulation slope,z7_thermoreg_slope,s,UIN,100,,,_6b71,s,IGN:2,,,,,s,SIN,10,°C,,_6b72,s,IGN:2,,,,,s,SIN,10,°C
+#r,boiler,dump_zones_19,,37,fe,2020,6b73,,s,SIN,10,°C,,_6b74,s,IGN:2,,,,,s,SIN,10,°C,,_6b75,s,IGN:2,,,,,s,SIN,10,°C,,_6b76,s,IGN:2,,,,,s,SIN,10,°C
+#r,boiler,dump_zones_20,,37,fe,2020,6b77,,s,SIN,10,°C,,_6c71,s,IGN:2,,,,,s,SIN,10,°C,,_6c72,s,IGN:2,,,,,s,SIN,10,°C,,_6c73,s,IGN:2,,,,,s,SIN,10,°C
+#r,boiler,dump_zones_21,,37,fe,2020,6c74,,s,SIN,10,°C,,_6c75,s,IGN:2,,,,,s,SIN,10,°C,,_6c76,s,IGN:2,,,,,s,SIN,10,°C,,_6c77,s,IGN:2,,,,,s,SIN,10,°C
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 r,boiler,timer_prog_1_day_part_1,Timer Program part 1,37,fe,2051,0007,day_part_1,s,HEX:12,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
@@ -245,24 +245,24 @@ r,broadcast,accept_telegrams_z3_fixed_temp_2010,Accept telegrams for z3_fixed_te
 # Easy Control Bus Zone 1: master/slave : 70/75,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 # Sent every minute : See cast_slave_addr message,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 # Sent every 10 minutes,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-#r,,,,70,fe,200f,6997,Always c800=20°C ?,s,SIN,10,°C,?,02,s,IGN,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+#r,,,,70,fe,200f,6997,Always c800=20°C ?,s,SIN,10,°C,?,_02,s,IGN,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 # Sent every 2 minutes,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-w,easy_control_bus,z1_room_temp,Z1 Room temperature,70,fe,2010,7118,,s,SIN,10,°C,Zone number,01,s,IGN,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+w,easy_control_bus,z1_room_temp,Z1 Room temperature,70,fe,2010,7118,,s,SIN,10,°C,Zone number,_01,s,IGN,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 # Sent every 30 seconds,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-w,easy_control_bus,z1_heat_request,Z1 Heating Request,70,fe,2010,1919,,s,BCD,0=off;1=on,,Zone number,01,s,IGN,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+w,easy_control_bus,z1_heat_request,Z1 Heating Request,70,fe,2010,1919,,s,BCD,0=off;1=on,,Zone number,_01,s,IGN,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 # Easy Control Bus Zone 2: master/slave : f0/f5,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 # Sent every minute : See cast_slave_addr message,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 # Sent every 2 minutes,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-w,easy_control_bus,z2_room_temp,Z2 Room temperature,f0,fe,2010,7218,,s,SIN,10,°C,Zone number,02,s,IGN,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+w,easy_control_bus,z2_room_temp,Z2 Room temperature,f0,fe,2010,7218,,s,SIN,10,°C,Zone number,_02,s,IGN,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 # Sent every 30 seconds,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-w,easy_control_bus,z2_heat_request,Z2 Heating Request,f0,fe,2010,1a19,,s,BCD,0=off;1=on,,Zone number,02,s,IGN,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+w,easy_control_bus,z2_heat_request,Z2 Heating Request,f0,fe,2010,1a19,,s,BCD,0=off;1=on,,Zone number,_02,s,IGN,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 # Easy Control Bus Zone 3: master/slave : 01/06,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 # Sent every minute : See cast_slave_addr message,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 # Sent every 2 minutes,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-w,easy_control_bus,z3_room_temp,Z3 Room temperature,01,fe,2010,7318,,s,SIN,10,°C,Zone number,03,s,IGN,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+w,easy_control_bus,z3_room_temp,Z3 Room temperature,01,fe,2010,7318,,s,SIN,10,°C,Zone number,_03,s,IGN,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 # Sent every 30 seconds,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-w,easy_control_bus,z3_heat_request,Z3 Heating Request,01,fe,2010,1b19,,s,BCD,0=off;1=on,,Zone number,03,s,IGN,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+w,easy_control_bus,z3_heat_request,Z3 Heating Request,01,fe,2010,1b19,,s,BCD,0=off;1=on,,Zone number,_03,s,IGN,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
