@@ -240,7 +240,7 @@ Note: In case of multiple values, there is 1 value per zone (z1, z2, etc.).
 
 *: Yes, the boiler life time value is accessible in read AND write modes...
 
-### Protocol of Timer programs
+## Protocol of Timer programs
 
 - packets are emitted every minute
 - there are 14 different packets
@@ -658,3 +658,8 @@ TODO: help needed; See Issue ysard/ebusd_configuration_chaffoteaux_bridgenet#3.
 - https://github.com/komw/ariston-bus-bridgenet-ebusd
 - https://github.com/john30/ebusd-configuration/issues/103
 - https://github.com/john30/ebusd-configuration/issues/27
+
+
+## :book: License
+
+Released under the GPL (General Public License).
