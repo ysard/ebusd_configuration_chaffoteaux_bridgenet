@@ -16,6 +16,38 @@ Hardware related information is at: [./hardware_reversing/](./hardware_reversing
 Any help in filling in the gaps is **VERY** welcome.
 
 
+## Table of Contents
+ <details>
+<summary>Open Contents</summary>
+
+   - [:book: Foreword](#book-foreword)
+   - [:bank: Donations](#bank-donations)
+   - [Official documentation](#official-documentation)
+   - [How to install it ?](#how-to-install-it-)
+   - [How to install Home Assistant integration ?](#how-to-install-home-assistant-integration-)
+   - [How to use it ?](#how-to-use-it-)
+   - [Protocol description](#protocol-description)
+     - [Primary & secondary command bytes (PBSB)](#primary--secondary-command-bytes-pbsb)
+     - [Command IDs](#command-ids)
+   - [Protocol for the errors](#protocol-for-the-errors)
+     - [Overall packet structure](#overall-packet-structure)
+     - [Examples](#examples)
+     - [Packet sniffing](#packet-sniffing)
+     - [Cumulated errors & flags discovery](#cumulated-errors--flags-discovery)
+     - [Discovering error codes](#discovering-error-codes)
+     - [Home Assistant integration](#home-assistant-integration)
+     - [Full error codes for Mira C Green](#full-error-codes-for-mira-c-green)
+   - [Tools](#tools)
+     - [Bruteforce the errors to discover their corresponding codes](#bruteforce-the-errors-to-discover-their-corresponding-codes)
+     - [Finding registers](#finding-registers)
+   - [Handshake procedure](#handshake-procedure)
+     - [Help request](#help-request)
+   - [Other repositories & inspirations](#other-repositories--inspirations)
+   - [:book: License](#book-license)
+
+</details>
+
+
 ## :book: Foreword
 
 In an ethical world we wouldn't have to spend so much time trying to reverse this kind of proprietary protocols.
