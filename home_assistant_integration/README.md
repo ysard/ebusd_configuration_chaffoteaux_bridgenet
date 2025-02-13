@@ -1,9 +1,13 @@
 # How to install Home Assistant integration ?
 
-The goal is to have a complete control of the device on solutions like Home Asssitant.I assume that you have a working installation of an MQTT server like Mosquitto
-or have it installed as an addon to Home Assistant.
-
+The goal is to have a complete control of the device on solutions like Home Asssitant.
 eBusd will take care of publishing most of the sensors with their respective read/write status.
+
+I assume that you have a working installation of an MQTT server like Mosquitto,
+or have it installed as an addon to Home Assistant.
+If you compiled ebusd yourself, make sure the `libmosquitto-dev` was installed before
+the compilation. If not, the support of MQTT will be disabled by default.
+
 
 Some bugs remain (04/2023):
 
@@ -16,7 +20,24 @@ Some bugs remain (04/2023):
 - hazardous naming of entities displayed in Home Assistant.<br>
   => essentially fixed by the `mqtt-hassio.cfg` file of this repository.
 
+
 ## Integration via MQTT Discovery
+
+> **Note**
+>
+> Since I don't want to maintain it, it is not planned to publish my full version of the `mqtt-hassio.cfg` file.
+>
+> So **I only publish a patch in the repository** to apply to the file you have.
+> However, the final file (not necessary up to date) **is uploaded** in the
+> [releases page](https://github.com/ysard/ebusd_configuration_chaffoteaux_bridgenet/releases).
+>
+> To find out what this patch contains and the reason for the changes, I **strongly suggest** to study
+> the commits of this repository with the tag `[ebusd_HA]`.
+
+The default path of `mqtt-hassio.cfg` should be: `/etc/ebusd/mqtt-hassio.cfg`.
+
+This file supports some specific rules created for this particular brand of boiler
+(the filtering of the entities to be published on the MQTT server is based on regexes).
 
 Command to enable MQTT integration of ebusd:
 
@@ -24,22 +45,6 @@ Command to enable MQTT integration of ebusd:
     --mqtthost 127.0.0.1 --mqttport 1883 --mqttuser=<mqtt_user> --mqttpass=<password> --mqttjson \
     --pollinterval=10 \
     --mqttint=/path_to_your_mqtt_config_file/mqtt-hassio.cfg
-
-The default `.cfg` should be at `/etc/ebusd/mqtt-hassio.cfg`.
-
-This file supports some specific rules created for this particular brand of boiler
-(the filtering of the entities to be published on the MQTT server is based on regexes).
-
-> **Note**
->
-> Since I don't want to maintain it, it is not planned to publish my full version of the `mqtt-hassio.cfg` file.
->
-> So **I only publish a patch in the repository** to apply to the file you have.
-> However, the final file (not necessary up to date) may be uploaded in the
-> [releases page](https://github.com/ysard/ebusd_configuration_chaffoteaux_bridgenet/releases).
->
-> To find out what this patch contains and the reason for the changes, I **strongly suggest** to study
-> the commits of this repository with the tag `[ebusd_HA]`.
 
 
 ### Build `mqtt-hassio.cfg` from the sources
