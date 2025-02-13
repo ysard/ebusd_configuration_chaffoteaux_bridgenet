@@ -295,6 +295,11 @@ homeassistant:
       max: 60
       step: 0.1
 
+    number.ebusd_dhw_dhw_antifreeze_temp:
+      min: 0.2
+      max: 15
+      step: 0.1
+
     number.ebusd_boiler_ext_temp_offset:
       # Setting 249
       min: -3
