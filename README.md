@@ -26,6 +26,20 @@ to go with manufacturers who respect your right to repair/modify what you own wi
 And you would be wise to do so.
 
 
+## :bank: Donations
+
+This project took a **LOT** of time in reverse engineering, making the integration with Home Assistant,
+including documentation & tests.
+If it has been useful to you in any way, saving you time and hopefully energy or money for your home,
+you can consider the following **donation links** or at least **add a star to the project**.
+Any participation is appreciated because it means that the time invested was not in vain.
+
+[![Donate](https://liberapay.com/assets/widgets/donate.svg)](https://liberapay.com/Ysard/donate)
+
+![](https://img.shields.io/badge/Bitcoin-000000?style=for-the-badge&logo=bitcoin&logoColor=yellow)
+
+1EB6dc6YULzHR4TMqLi5fomZ6wmdP3N5cW
+
 ## Official documentation
 
 Some links to understand the interest of these data and their organization.
