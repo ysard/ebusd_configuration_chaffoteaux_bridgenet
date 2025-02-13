@@ -16,7 +16,7 @@ Hardware related information is at: [./hardware_reversing/](./hardware_reversing
 Any help in filling in the gaps is **VERY** welcome.
 
 
-# Foreword
+## :book: Foreword
 
 In an ethical world we wouldn't have to spend so much time trying to reverse this kind of proprietary protocols.
 If you don't think it's appropriate, if you don't have the energy to do this tedious/time-consuming/<insert anything here> work,
@@ -26,7 +26,7 @@ to go with manufacturers who respect your right to repair/modify what you own wi
 And you would be wise to do so.
 
 
-# Official documentation
+## Official documentation
 
 Some links to understand the interest of these data and their organization.
 
@@ -36,7 +36,7 @@ Some links to understand the interest of these data and their organization.
 - [Field-templates](https://github.com/john30/ebusd/wiki/4.4.-Field-templates)
 
 
-# How to install it ?
+## How to install it ?
 
 Put the `.csv` files into a directory, then launch `ebusd` with `--configpath` argument.
 
@@ -51,12 +51,12 @@ Monitor unknown messages:
     watch -n 3 -d ./build/src/tools/ebusctl grab result
 
 
-# How to install Home Assistant integration ?
+## How to install Home Assistant integration ?
 
 See the Readme here: [./home_assistant_integration/](./home_assistant_integration/).
 
 
-# How to use it ?
+## How to use it ?
 
 Here is a quick usage example. Keep in mind that `read` queries return cached values by default (see `-m` setting of ebusctl).
 Raw hex queries are not concerned by caching issues.
@@ -90,9 +90,9 @@ Check the modification:
     49.4;58.0;58.0
 
 
-# Protocol description
+## Protocol description
 
-## Primary & secondary command bytes (PBSB)
+### Primary & secondary command bytes (PBSB)
 
 | PBSB  | Signification                             | Uncertain
 |:--- |:--- |:--- |
@@ -121,7 +121,7 @@ settings change counter, computed target temp, heat request status).
 
 **: Timer programs protocol is described below
 
-## Command IDs
+### Command IDs
 
 Note: Naming is subject to change.
 Note: In case of multiple values, there is 1 value per zone (z1, z2, etc.).
@@ -193,7 +193,7 @@ Note: In case of multiple values, there is 1 value per zone (z1, z2, etc.).
 
 *: Yes, the boiler life time value is accessible in read AND write modes...
 
-## Protocol of Timer programs
+### Protocol of Timer programs
 
 - packets are emitted every minute
 - there are 14 different packets
@@ -236,7 +236,7 @@ Default prog
 000000000000000000000000    => no heating
 ```
 
-# Protocol for the errors
+## Protocol for the errors
 
 - Appearance/disappearance packets always go through 3 repetitions.
 - The order of appearance plays no role since they can be deleted in any order.
@@ -262,7 +262,7 @@ However, to remove it, you need to use its resolution command :
     ~/ebusd/build/src/tools/ebusctl hex fe200403690100
 
 
-## Overall packet structure:
+### Overall packet structure:
 
 Any packet error consists of:
 
@@ -296,7 +296,7 @@ Here is a table with all the zone flags deducted from packet sniffing operations
 | z6          | 64              | `0b01000000` |
 | z7          | non-functional? | `?`          |
 
-## Examples
+### Examples
 
 The XX and YY bytes, for a missing ambient probe on z1 (error 411) **and** z2 (error 412) will be :
 
@@ -315,7 +315,7 @@ so the `zone_enable` flag must be set :
 In fact, other bytes are present after YY such as ZZ sequence; but they are not mandatory
 to trigger and resolute errors.
 
-## Packet sniffing
+### Packet sniffing
 
 Steps to reverse the protocol:
 
@@ -358,7 +358,7 @@ to a mode that require it (4) for the various zones (z1 to z6) ;
 01:01:27.235     37fe200403 690100
 ```
 
-## Cumulated errors & flags discovery
+### Cumulated errors & flags discovery
 
 Trigger missing ambient probe errors for z4 + z5 + z6 + z3 + z2 + z1 via the previously showed commands.
 
@@ -378,16 +378,16 @@ Trigger missing ambient probe errors for z4 + z5 + z6 + z3 + z2 + z1 via the pre
 | 37fe200403 | 69 | 01 | 00 |               | -z1    |
 
 
-## Discovering error codes
+### Discovering error codes
 
 See: [Bruteforce the errors to discover their corresponding codes](#bruteforce-the-errors-to-discover-their-corresponding-codes).
 
 
-## Home Assistant integration
+### Home Assistant integration
 
 See the Readme here: [./home_assistant_integration/](./home_assistant_integration/).
 
-## Full error codes for Mira C Green
+### Full error codes for Mira C Green
 
 | YY | Displayed code | Documented (x if yes) | Signification
 |:--- |:--- |:--- |:--- |
@@ -468,9 +468,9 @@ See the Readme here: [./home_assistant_integration/](./home_assistant_integratio
 Missing codes for Mira C Green (not supported?) : '302', '305', '307'
 
 
-# Tools
+## Tools
 
-## Bruteforce the errors to discover their corresponding codes
+### Bruteforce the errors to discover their corresponding codes
 
 Just use the interactive script [here](./tools/bruteforce_errors.py).
 It can be adapted with the displayed expected codes from the boiler documentation.
@@ -536,7 +536,7 @@ excess codes are codes that are not in the user manual but are supported by the 
 The CSV template string can be used as it is in the ebusd config file (`_templates.csv`).
 
 
-## Finding registers
+### Finding registers
 
 Use the interactive script [here](./tools/bruteforce_registers.py).
 **Take the time to read the comments and adapt the script to your needs!**
@@ -578,12 +578,12 @@ Use --break-system-packages if you know what you are doing
 and not working inside a virtual env.
 
 
-# Handshake procedure
+## Handshake procedure
 
 TODO: help needed; See Issue ysard/ebusd_configuration_chaffoteaux_bridgenet#3.
 
 
-# Help request
+## Help request
 
 - Handshake study of new device on the bus in order to emulate it with a custom one.
 - Packet dissections for missing ids. For example:
@@ -605,7 +605,7 @@ TODO: help needed; See Issue ysard/ebusd_configuration_chaffoteaux_bridgenet#3.
             ^z4     ^z5     ^z6 ??  ^z7 ??
 ```
 
-# Other repositories & inspirations
+## Other repositories & inspirations
 
 - https://github.com/wrongisthenewright/ebusd-configuration-ariston-bridgenet
 - https://github.com/komw/ariston-bus-bridgenet-ebusd
