@@ -29,6 +29,7 @@ Any help in filling in the gaps is **VERY** welcome.
    - [Protocol description](#protocol-description)
      - [Primary & secondary command bytes (PBSB)](#primary--secondary-command-bytes-pbsb)
      - [Command IDs](#command-ids)
+   - [Protocol of Timer programs](#protocol-of-timer-programs)
    - [Protocol for the errors](#protocol-for-the-errors)
      - [Overall packet structure](#overall-packet-structure)
      - [Examples](#examples)
