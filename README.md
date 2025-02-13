@@ -157,6 +157,7 @@ Note: In case of multiple values, there is 1 value per zone (z1, z2, etc.).
 | **Domestic Hot Water (DHW) related commands**
 | DHW comfort mode            	    | `c028`                                |                               | 250
 | DHW water target temp             | `6126`                                |                               | 200
+| DHW water antifreeze temp [0.2;15]| `6426`                                |                               |
 | DHW water real temp               | `6147`                                |                               |
 | DHW comfort zones                 | `d746`                                |                               | 250
 | ?                                 | `da46`                                |                               |
