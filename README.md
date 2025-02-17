@@ -225,6 +225,14 @@ Note: In case of multiple values, there is 1 value per zone (z1, z2, etc.).
 | room temp                         | `7118,7218,7318,7418,7518,7618,7718`  |                               |
 | heating in progress               | `0c19`                                |                               |
 | burner heat life time             | `4bd1`                                |                               | 810
+| **SAV Menu**                      |                                       |                               |
+| gas valve modulation type         | `????`                                |                               | 221
+| boiler type                       | `c428`                                |                               | 228
+| nominal power                     | `6829`                                |                               | 229
+| maximal DHW power                 | `6229`                                |                               | 232
+| minimal power                     | `6429`                                |                               | 233
+| maximal power                     | `6329`                                |                               | 234
+| pressure monitoring device        | `c328`                                |                               | 247
 | **Unknown**
 |                                   | `6047`                                |                               |
 |                                   | `6d26`                                |                               |
