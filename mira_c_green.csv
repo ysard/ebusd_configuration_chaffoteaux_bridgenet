@@ -31,6 +31,7 @@ r9,boiler,error_slot_9,Error Slot 9 (last error),,3c,2002,0400,,s,error_code,,,7
 ## DHW settings,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 r1,dhw,dhw_status,DHW heating status,,3c,2000,0220,,s,IGN:1,,,field value = dict key for HA integration,onoff,s,onoff,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 r3,dhw,dhw_target_temp,DHW target temp,,3c,2000,6126,,s,IGN:1,,,field value = dict key for HA integration,,s,SIN,10,°C,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+r,dhw,dhw_tank_temp,DHW external tank temp,70,3c,2001,7747,,s,U3N,10,°C,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 r,dhw,dhw_antifreeze_temp,DHW antifreeze temp,,3c,2000,6426,,s,IGN:1,,,field value = dict key for HA integration,,s,SIN,10,°C,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 r1,dhw,dhw_comfort_mode_status_w,DHW comfort mode,,3c,2000,c028,,s,IGN:1,,,field value = dict key for HA integration,dhw_comfort_mode,s,dhw_comfort_mode,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 r,dhw,celectic_status,Celectic status,,3c,2000,0f20,,s,IGN:1,,,field value = dict key for HA integration,onoff,s,onoff,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
