@@ -37,6 +37,7 @@ Any help in filling in the gaps is **VERY** welcome.
      - [Cumulated errors & flags discovery](#cumulated-errors--flags-discovery)
      - [Discovering error codes](#discovering-error-codes)
      - [Home Assistant integration](#home-assistant-integration)
+     - [FAQ : Well known errors about errors](#faq--well-known-errors-about-errors)
      - [Full error codes for Mira C Green](#full-error-codes-for-mira-c-green)
    - [Tools](#tools)
      - [Bruteforce the errors to discover their corresponding codes](#bruteforce-the-errors-to-discover-their-corresponding-codes)
