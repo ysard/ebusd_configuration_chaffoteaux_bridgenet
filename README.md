@@ -444,6 +444,18 @@ See: [Bruteforce the errors to discover their corresponding codes](#bruteforce-t
 
 See the Readme here: [./home_assistant_integration/](./home_assistant_integration/).
 
+
+### FAQ : Well known errors about errors
+
+- `[update error] unable to parse poll-read boiler error_slot_9 from 313c2002020400 / 0b1200ff347f0f1f1f3f0100: ERR: argument value out of valid range`
+
+    It occurs when the datetime is not set on the boiler (`7f 0f 1f 1f3f` is the default data for empty year, month, day, time).
+
+- `[update error] unable to parse poll-read boiler error_slot_9 from 313c2002020400 / 00: ERR: invalid position`
+
+  It occurs when the history of errors is empty.
+
+
 ### Full error codes for Mira C Green
 
 | YY | Displayed code | Documented (x if yes) | Signification
