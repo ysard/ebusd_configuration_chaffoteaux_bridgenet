@@ -309,14 +309,14 @@ error `0x0c`, code `114`, which is displayed this time.
 - The minimal trigger command is made of the error code, followed by the default byte + a flag value.
 - You can generate/replay errors by broadcasting them, not just by touching the hardware
 (which is very useful for reversing).
-In this way, the following command will generate a `411` error (z1 missing ambient probe)
+In this way, the following command will generate a `411` error (z1, missing ambient probe)
 on the boiler display :
 
-    ~/ebusd/build/src/tools/ebusctl hex fe20040469030061
+        ~/ebusd/build/src/tools/ebusctl hex fe 2004 04 69 03 0061
 
-However, to remove it, you need to use its resolution command :
+  However, to remove it, you need to use its resolution command :
 
-    ~/ebusd/build/src/tools/ebusctl hex fe200403690100
+        ~/ebusd/build/src/tools/ebusctl hex fe 2004 03 69 01 00
 
 
 ### Overall packet structure:
