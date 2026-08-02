@@ -29,6 +29,7 @@ Any help in filling in the gaps is **VERY** welcome.
    - [Protocol description](#protocol-description)
      - [Primary & secondary command bytes (PBSB)](#primary--secondary-command-bytes-pbsb)
      - [Command IDs](#command-ids)
+   - [Protocol for the 2001 commands](#protocol-for-the-2001-commands)
    - [Protocol of Timer programs](#protocol-of-timer-programs)
    - [Protocol for the errors](#protocol-for-the-errors)
      - [Overall packet structure](#overall-packet-structure)
@@ -145,7 +146,7 @@ Check the modification:
 | PBSB  | Signification                             | Uncertain
 |:--- |:--- |:--- |
 | 2000  | cast features/read values                 |
-| 2001  | cast features/read values with additional data (allowed range of values?) | x
+| 2001  | cast features/read values with allowed range of values as additional data† |
 | 2002  | error log interrogation                   |
 | 2004  | error detection/disappearance             |
 | 200f  |                                           |
@@ -168,6 +169,9 @@ settings change counter, computed target temp, heat request status).
 2020 commands may be for values that can be modified on the device and accepted by another.
 
 **: Timer programs protocol is described below
+
+†: The 2001 commands are used to retrieve the value as well as the permitted value range `[min;max]`.
+See the [Protocol for the 2001 commands](#protocol-for-the-2001-commands) section below.
 
 ### Command IDs
 
@@ -250,6 +254,33 @@ Note: In case of multiple values, there is 1 value per zone (z1, z2, etc.).
 
 
 *: Yes, the boiler life time value is accessible in read AND write modes...
+
+## Protocol for the 2001 commands
+
+The 2001 commands are used to retrieve the value as well as the permitted value range `[min;max]`.
+The range values ​​have the same byte-length as the obtained data and are in little-endian format.
+
+Example, query the Minimal Water Temperature (`6171`):
+
+    $ ebusctl hex 3c2001 02 6171
+    0685015e01f401
+
+Let's unpack the data in Python:
+
+  ```python
+  >>> from struct import unpack
+  >>> unpack("<bhhh", unhexlify("0685015e01f401"))
+  (6, 389, 350, 500)
+  ```
+
+Thus:
+
+  - 6: The number of bytes for the 3 next fields;
+  - 38.9°C: Current temperature set point;
+  - 35.0°C: Minimal set point that can be set;
+  - 50.0°C: Maximal set point that can be set, according to the current Maximal Water Temperature (`6071`) set point.
+
+Thanks to @iamberni for [extended validation](https://github.com/wrongisthenewright/ebusd-configuration-ariston-bridgenet/issues/42#issuecomment-5158763489).
 
 ## Protocol of Timer programs
 
