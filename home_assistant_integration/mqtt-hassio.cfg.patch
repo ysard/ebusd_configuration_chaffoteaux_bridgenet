@@ -1,8 +1,6 @@
-diff --git a/contrib/etc/ebusd/mqtt-hassio.cfg b/contrib/etc/ebusd/mqtt-hassio.cfg
-index 921e08c2..5d4c012c 100644
---- a/contrib/etc/ebusd/mqtt-hassio.cfg
-+++ b/contrib/etc/ebusd/mqtt-hassio.cfg
-@@ -102,14 +102,15 @@ filter-seen = 5
+--- mqtt-hassio.cfg.orig	2026-01-19 06:55:32.944269700 +0100
++++ mqtt-hassio.cfg	2026-10-23 23:40:43.056714800 +0200
+@@ -102,14 +102,15 @@
  # include only messages having a priority less than or equal to the specified value.
  #filter-priority =
  # include only messages having the specified circuit (partial match, alternatives and wildcard supported).
@@ -21,7 +19,7 @@ index 921e08c2..5d4c012c 100644
  # include only messages having the specified level (partial match, alternatives and wildcard supported).
  # Note: This is a filter on top of the messages already filtered implicitly for the ebusd "mqtt" user (if any).
  # Note: Since the empty string matches all levels, an explicit check for empty string (with "^$") needs to be used for
-@@ -117,9 +118,9 @@ filter-name = status|temp|humidity|yield|count|energy|power|runtime|hours|starts
+@@ -117,9 +118,9 @@
  filter-level = ^$
  # include only messages having the specified direction ("r", "w", "u", or "uw". partial match, alternatives and wildcard supported).
  # HA integration: writable messages excluded for now
@@ -33,7 +31,15 @@ index 921e08c2..5d4c012c 100644
  # include only fields having the specified name (partial match, alternatives and wildcard supported).
  #filter-field =
  # exclude fields having the specified name (partial match, alternatives and wildcard supported).
-@@ -182,7 +183,9 @@ type_switch-w-number =
+@@ -175,6 +176,7 @@
+     number,temperature, = temp|,°C$
+     number,temperature, = temp|,K$
+     number,, = integral|,°min$
++    number,, = power_pct*%%$
+     number,power_factor, = power*%%
+     number,power, = power|,kW$|,W$
+     number,voltage, = volt|,V$
+@@ -182,13 +184,16 @@
      number,pressure, = bar$
      number,gas, = gas*/min$
      number,humidity, = humid*%%$
@@ -43,7 +49,14 @@ index 921e08c2..5d4c012c 100644
  
  # HA integration: the mapping list for numeric sensor entities field type, message name+field name, and unit.
  type_switch-number =
-@@ -198,6 +201,9 @@ type_switch-number =
+     sensor,,total_increasing = poweron|count,|countvalue,
+     sensor,temperature,measurement = temp|,°C$
+     sensor,temperature,measurement = temp|,K$
++    sensor,,measurement = power_pct*%%$
+     sensor,power_factor,measurement = power*%%
+     sensor,power,measurement = power|,kW$|,W$
+     sensor,voltage,measurement = volt|,V$
+@@ -198,6 +203,9 @@
      sensor,yield,total_increasing = total*,Wh$
      sensor,,total_increasing = hours|,h$
      sensor,,total_increasing = starts*,$
@@ -53,7 +66,7 @@ index 921e08c2..5d4c012c 100644
      sensor,pressure,measurement = bar$
      sensor,gas,measurement = gas*/min$
      sensor,humidity,measurement = humid*%%$
-@@ -351,14 +357,14 @@ definition-topic ?= %haprefix/%type_topic/%{TOPIC}_%FIELD/config
+@@ -351,14 +359,14 @@
  # HA integration: this is the config topic payload for HA's MQTT discovery.
  definition-payload = {
    "unique_id":"%{TOPIC}_%FIELD",
@@ -70,7 +83,7 @@ index 921e08c2..5d4c012c 100644
  # the message value topic (if other than the default). If set here, it will be replaced by the "--mqtttopic"
  # configuration option only if that one contains at least one variable. If the the "--mqtttopic" configuration option
  # does not contain any variable, it is taken as prefix and can be used here as well.
-@@ -380,7 +386,7 @@ global_prefix = {
+@@ -380,7 +388,7 @@
    "unique_id":"%TOPIC",
    "device":%global_device,
    "state_topic":"%topic",
@@ -79,7 +92,7 @@ index 921e08c2..5d4c012c 100644
  
  # HA integration: boolean suffix for global parts
  global_boolean_suffix = ,
-@@ -397,6 +403,12 @@ def_global-payload = %global_prefix
+@@ -397,6 +405,12 @@
  #def_global-retain = 0
  
  # individual global running, version, signal, uptime, updatecheck, and scan config topic, payload, and retain setting.
