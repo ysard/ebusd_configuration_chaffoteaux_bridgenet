@@ -1,0 +1,65 @@
+# This file contains additional widgets for the integration of ebusd widgets in HomeAssistant.
+# Copyright (C) 2023-2026 ysard <ysard@users.noreply.github.com>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+# Copy/paste to the file `automations.yaml`
+- id: auto_reset_dhw_comfort
+  alias: "Automatic DHW Comfort"
+  description: "Stop the 'always on' mode after 15 min without any use or 20 min after the last usage"
+  mode: restart
+
+  trigger:
+    # Trigger 1 : End of usage
+    - platform: state
+      entity_id: sensor.ebusd_boiler_boiler_status_boiler_status
+      from: "heating hot water"
+      id: end_usage
+
+    # Trigger 2 : Manual activation of the mode "Always on"
+    - platform: state
+      entity_id: input_select.dhw_comfort_mode
+      to: "Always on"
+      id: manual_activation
+
+  condition:
+    - condition: state
+      entity_id: input_select.dhw_comfort_mode
+      state: "Always on"
+
+  action:
+    # The delay is chosen according to the trigger
+    - choose:
+        - conditions:
+            - condition: trigger
+              id: end_usage
+          sequence:
+            - delay: "00:20:00"
+
+        - conditions:
+            - condition: trigger
+              id: manual_activation
+          sequence:
+            - delay: "00:15:00"
+
+    # Last minute security (do not act if water is in use)
+    - condition: template
+      value_template: "{{ states('sensor.ebusd_boiler_boiler_status_boiler_status') != 'heating hot water' }}"
+
+    # Comfort mode off
+    - action: input_select.select_option
+      target:
+        entity_id: input_select.dhw_comfort_mode
+      data:
+        option: "Off"
