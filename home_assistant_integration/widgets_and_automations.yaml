@@ -1,5 +1,5 @@
 # This file contains additional widgets for the integration of ebusd widgets in HomeAssistant.
-# Copyright (C) 2023-2024 ysard <ysard@users.noreply.github.com>
+# Copyright (C) 2023-2026 ysard <ysard@users.noreply.github.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -123,8 +123,7 @@ automation dhw_comfort_mode:
            } %}
            {{ display_to_opt_map.get(states.input_select.dhw_comfort_mode.state, 'off') }}
 
-
-# Error codes
+## Error codes ################################################################
 
 counter:
   error_count:
@@ -140,12 +139,12 @@ sensor:
         {{ "Nothing" }}
 
 python_scripts:
-    # Activate python scripts for format_error_code automation
+    # Activate Python scripts for the `format_error_code` automation
 
 automation format_error_code:
   # Requirement :
-  # set_state.py must be put in the python_scripts/ directory of your HA installation.
-  # Script is here: https://github.com/xannor/hass_py_set_state
+  # `set_state.py` must be put in the `python_scripts/` directory of your HA installation.
+  # `set_state.py` can be found here: https://github.com/xannor/hass_py_set_state
   - alias: "Format error code"
     id: format_error_code
     trigger:
@@ -285,6 +284,7 @@ automation format_error_code:
           state: >-
             {{ "Nothing" }}
 
+## Customization of the entities ##############################################
 
 homeassistant:
   # Set min/max intervals of entities sent by ebusd daemon through MQTT Discovery
